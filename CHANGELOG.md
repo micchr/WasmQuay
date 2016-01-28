@@ -10,3 +10,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **`wasmquay-core`** — zero-dependency Rust library:
+  - LEB128 / byte reader (`leb`) with unsigned & signed variable-length ints.
+  - WebAssembly core binary decoder (`wasm`): header, section table, import,
