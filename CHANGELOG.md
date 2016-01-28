@@ -18,3 +18,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   - WIT-like manifest reader (`wit`) for a documented interface subset.
   - Capability classifier and explicit policy evaluator (`policy`) covering the
     `fs`, `env`, `clock`, `network`, `random`, `stdio` and `unknown` domains,
+    with deny-by-default and per-domain resource allow-lists.
+  - Substitutability comparison (`compat`) between two components.
+  - Stable, versioned JSON/text report serialization (`report`) with a
