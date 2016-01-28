@@ -16,3 +16,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
     export and custom `name` section decoding. Total (never panics on bad
     input).
   - WIT-like manifest reader (`wit`) for a documented interface subset.
+  - Capability classifier and explicit policy evaluator (`policy`) covering the
+    `fs`, `env`, `clock`, `network`, `random`, `stdio` and `unknown` domains,
