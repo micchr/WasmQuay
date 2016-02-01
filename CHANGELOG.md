@@ -21,3 +21,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
     with deny-by-default and per-domain resource allow-lists.
   - Substitutability comparison (`compat`) between two components.
   - Stable, versioned JSON/text report serialization (`report`) with a
+    hand-written ordered JSON emitter (`json`).
+  - A matching binary *encoder* (`fixture`) for deterministic test fixtures.
+- **`wasmquay` CLI** — `inspect`, `caps`, `policy`, `compat`, `manifest` and
