@@ -24,3 +24,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
     hand-written ordered JSON emitter (`json`).
   - A matching binary *encoder* (`fixture`) for deterministic test fixtures.
 - **`wasmquay` CLI** — `inspect`, `caps`, `policy`, `compat`, `manifest` and
+  `gen-fixtures` subcommands with `--json`/`--pretty` output and CI-friendly
+  exit codes.
