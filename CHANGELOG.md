@@ -26,3 +26,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - **`wasmquay` CLI** — `inspect`, `caps`, `policy`, `compat`, `manifest` and
   `gen-fixtures` subcommands with `--json`/`--pretty` output and CI-friendly
   exit codes.
+- **`wasmquay-explorer`** — TypeScript library + `wasmquay-explore` CLI that
+  consumes the JSON reports and produces capability surfaces, weighted risk
+  scores/bands and policy reconciliation findings. Compiles offline with a
