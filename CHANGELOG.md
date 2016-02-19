@@ -29,3 +29,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - **`wasmquay-explorer`** — TypeScript library + `wasmquay-explore` CLI that
   consumes the JSON reports and produces capability surfaces, weighted risk
   scores/bands and policy reconciliation findings. Compiles offline with a
+  stock `tsc` (no `@types/node` required).
+- Binary fixtures (generated) and example policy/manifest files.
+- Documentation: `docs/FORMAT.md` (normative formats), two original animated
