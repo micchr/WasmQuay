@@ -32,3 +32,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   stock `tsc` (no `@types/node` required).
 - Binary fixtures (generated) and example policy/manifest files.
 - Documentation: `docs/FORMAT.md` (normative formats), two original animated
+  SVGs, README, LICENSE and CI workflow.
+- Test suites: 43 Rust tests (unit + integration + doctest) and 12 TypeScript
