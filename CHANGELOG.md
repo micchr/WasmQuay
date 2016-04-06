@@ -34,3 +34,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Documentation: `docs/FORMAT.md` (normative formats), two original animated
   SVGs, README, LICENSE and CI workflow.
 - Test suites: 43 Rust tests (unit + integration + doctest) and 12 TypeScript
+  tests, all passing.
+
+### Notes
