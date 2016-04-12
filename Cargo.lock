@@ -5,3 +5,4 @@ version = 3
 [[package]]
 name = "wasmquay-cli"
 version = "0.1.0"
+dependencies = [
