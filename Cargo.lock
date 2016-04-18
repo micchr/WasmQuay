@@ -6,3 +6,4 @@ version = 3
 name = "wasmquay-cli"
 version = "0.1.0"
 dependencies = [
+ "wasmquay-core",
