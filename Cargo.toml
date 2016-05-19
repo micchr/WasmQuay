@@ -2,3 +2,5 @@
 resolver = "2"
 members = [
     "crates/wasmquay-core",
+    "crates/wasmquay-cli",
+]
