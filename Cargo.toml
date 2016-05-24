@@ -4,3 +4,4 @@ members = [
     "crates/wasmquay-core",
     "crates/wasmquay-cli",
 ]
+
