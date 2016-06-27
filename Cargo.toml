@@ -12,3 +12,5 @@ rust-version = "1.74"
 license = "MIT"
 repository = "https://github.com/micchr/wasmquay"
 authors = ["wasmquay contributors"]
+description = "Offline WebAssembly component inspection and capability-policy toolkit"
+
