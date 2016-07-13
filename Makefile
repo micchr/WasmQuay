@@ -10,3 +10,6 @@ FIXTURES_DIR ?= fixtures
 .PHONY: all build test rust-build rust-test rust-fmt rust-clippy \
         ts-build ts-test fixtures examples clean help
 
+all: build test ## Build and test everything
+
+help: ## Show this help
