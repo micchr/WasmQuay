@@ -17,3 +17,6 @@ help: ## Show this help
 		awk 'BEGIN{FS=":.*?## "}{printf "  %-14s %s\n", $$1, $$2}'
 
 build: rust-build ts-build ## Build Rust workspace and TS explorer
+
+test: rust-test ts-test ## Run all tests
+
