@@ -20,3 +20,6 @@ build: rust-build ts-build ## Build Rust workspace and TS explorer
 
 test: rust-test ts-test ## Run all tests
 
+## --- Rust -------------------------------------------------------------
+
+rust-build: ## Build the Rust workspace (release)
