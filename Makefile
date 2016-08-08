@@ -27,3 +27,6 @@ rust-build: ## Build the Rust workspace (release)
 
 rust-test: ## Run Rust unit + integration + doc tests
 	$(CARGO) test
+
+rust-fmt: ## Check Rust formatting
+	$(CARGO) fmt --all -- --check
