@@ -33,3 +33,7 @@ rust-fmt: ## Check Rust formatting
 
 rust-clippy: ## Lint with clippy (deny warnings)
 	$(CARGO) clippy --all-targets -- -D warnings
+
+## --- TypeScript -------------------------------------------------------
+
+ts-build: ## Compile the TypeScript explorer
