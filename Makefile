@@ -40,3 +40,6 @@ ts-build: ## Compile the TypeScript explorer
 	cd explorer && $(NPM) run build
 
 ts-test: ## Type-check and run the explorer tests (offline, no install)
+	cd explorer && $(NPM) test
+
+## --- Fixtures & examples ---------------------------------------------
