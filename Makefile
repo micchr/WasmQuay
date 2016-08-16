@@ -37,3 +37,6 @@ rust-clippy: ## Lint with clippy (deny warnings)
 ## --- TypeScript -------------------------------------------------------
 
 ts-build: ## Compile the TypeScript explorer
+	cd explorer && $(NPM) run build
+
+ts-test: ## Type-check and run the explorer tests (offline, no install)
