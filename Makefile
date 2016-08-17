@@ -43,3 +43,7 @@ ts-test: ## Type-check and run the explorer tests (offline, no install)
 	cd explorer && $(NPM) test
 
 ## --- Fixtures & examples ---------------------------------------------
+
+fixtures: rust-build ## (Re)generate the binary .wasm fixtures
+	./target/release/wasmquay gen-fixtures $(FIXTURES_DIR)
+
