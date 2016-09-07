@@ -68,3 +68,16 @@ against a policy you write in plain text.
 
 > ### ⚠️ Scope & honesty
 > wasmquay **does not execute, instantiate, or sandbox** WebAssembly. It is not
+> a runtime and makes no runtime-enforcement claims. When the docs say
+> "enforce", they mean *analyze against a stated policy at inspection time* —
+> the kind of check you run in CI, not an interception layer around a live
+> module. Everything it reports is derived from bytes on disk. That honesty is a
+> feature: the analysis is deterministic, offline, and auditable.
+
+What it genuinely does, verified by its own test suite:
+
+- **Decodes** the WebAssembly core binary format: the `\0asm` header, the
+  section table (ids/offsets/sizes), the import and export sections, and the
+  custom `name` section (module + function names).
+- **Classifies** every host import into `fs · env · clock · network · random ·
+  stdio · unknown`, covering both WASI preview1 function names and preview2 /
