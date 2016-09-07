@@ -56,3 +56,15 @@ component that reaches for a capability its policy forbids fails the build.
 
 ## `0x01` — What this actually is (and is not)
 
+wasmquay is a **static analyzer** for the WebAssembly ecosystem. It answers one
+question well: *what can this component do to the outside world, and is that
+allowed?*
+
+A WebAssembly module is a sealed box. The only way it can touch a filesystem,
+open a socket, read the clock, or learn the time of day is through the host
+functions it **imports**. wasmquay decodes those imports straight from the
+binary, buckets each one into a capability **domain**, and checks the result
+against a policy you write in plain text.
+
+> ### ⚠️ Scope & honesty
+> wasmquay **does not execute, instantiate, or sandbox** WebAssembly. It is not
