@@ -94,3 +94,16 @@ What it genuinely does, verified by its own test suite:
 ## `0x02` — Architecture
 
 ```text
+        ┌──────────────────────── RUST (std-only) ─────────────────────────┐
+        │                                                                   │
+  .wasm │   leb ──▶ wasm ──▶ policy ──▶ compat                              │
+  ──────┼─▶ ┌─────┐  ┌────┐  ┌──────┐  ┌──────┐        ┌──────────┐         │
+  .wit  │   │bytes│  │decode│ │classify││diff │  ──────▶│  report  │─┐       │
+  ──────┼─▶ │+LEB │  │hdr/  │ │fs/env/ ││expo │        │ json/txt │ │       │
+  .pol  │   │     │  │sect/ │ │clock/  ││caps │        └──────────┘ │       │
+  ──────┼─▶ └─────┘  │imp/  │ │net/... │└──────┘             ▲       │       │
+        │            │exp/  │ └──────┘                       │       │       │
+        │            │name  │              fixture ──────────┘       │       │
+        │            └──────┘              (binary encoder)          │       │
+        └────────────────────────────────────────────────────────────┼──────┘
+                                                                       │ JSON
