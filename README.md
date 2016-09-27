@@ -107,3 +107,16 @@ What it genuinely does, verified by its own test suite:
         │            └──────┘              (binary encoder)          │       │
         └────────────────────────────────────────────────────────────┼──────┘
                                                                        │ JSON
+        ┌──────────────────── TYPESCRIPT (tsc-only) ───────────────────▼──────┐
+        │   parse (schema guards) ──▶ analyze (risk + reconcile) ──▶ render    │
+        │                          wasmquay-explore CLI                        │
+        └───────────────────────────────────────────────────────────────────┘
+```
+
+| Crate / package        | Role                                                             |
+|------------------------|------------------------------------------------------------------|
+| `wasmquay-core`        | The engine: decoding, classification, policy, compat, JSON.      |
+| `wasmquay-cli`         | The `wasmquay` binary and its subcommands.                       |
+| `wasmquay-explorer`    | TypeScript library + `wasmquay-explore` CLI over the JSON reports.|
+
+Both language halves are **dependency-free at runtime**. The Rust workspace
