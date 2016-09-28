@@ -145,3 +145,16 @@ $ npm run build                 # tsc -> dist/
 $ npm test                      # tsc -> dist-test/ + node --test  (12 tests)
 ```
 
+Or drive both sides through the `Makefile`:
+
+```console
+$ make build      # rust-build + ts-build
+$ make test       # rust-test  + ts-test
+$ make fixtures   # regenerate the .wasm fixtures
+$ make examples   # produce example JSON reports and analyze them
+$ make help       # list every target
+```
+
+---
+
+## `0x04` — The command surface
