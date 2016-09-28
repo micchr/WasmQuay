@@ -132,3 +132,16 @@ without downloading `@types/node`).
 
 ## `0x03` — Install & build
 
+Requirements: a stable Rust toolchain (≥ 1.74) and Node.js (≥ 20). Nothing else.
+
+```console
+# Rust workspace — the whole thing compiles offline.
+$ cargo build --release
+$ cargo test                    # 43 tests: unit + integration + doctest
+
+# TypeScript explorer.
+$ cd explorer
+$ npm run build                 # tsc -> dist/
+$ npm test                      # tsc -> dist-test/ + node --test  (12 tests)
+```
+
