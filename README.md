@@ -197,3 +197,15 @@ $ ./target/release/wasmquay inspect fixtures/clock-service.wasm --pretty
     { "domain": "fs",    "requirements": [ { "source": "wasi_snapshot_preview1", "detail": "fd_write" } ] },
     { "domain": "clock", "requirements": [ { "source": "wasi_snapshot_preview1", "detail": "clock_time_get" } ] }
   ]
+}
+```
+
+Every offset and size above is read from the actual bytes — you can seek to
+`offset` in the file and find exactly that section payload.
+
+### `caps` — just the capability surface
+
+```console
+$ ./target/release/wasmquay caps fixtures/fs-component.wasm
+fs       wasi:filesystem/types :: read-via-stream
+clock    wasi:clocks/wall-clock :: now
