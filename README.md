@@ -158,3 +158,16 @@ $ make help       # list every target
 ---
 
 ## `0x04` — The command surface
+
+```text
+wasmquay <COMMAND> [ARGS] [--json] [--pretty]
+
+  inspect <file.wasm>                 decode header/sections/imports/exports
+  caps <file.wasm>                    list classified capability requirements
+  policy <file.wasm> <policy.pol>     evaluate a module against a policy
+  compat <baseline.wasm> <cand.wasm>  compare two modules for compatibility
+  manifest <file.wit>                 parse a WIT-like interface manifest
+  gen-fixtures <dir>                  write the bundled .wasm fixtures
+```
+
+Exit codes are CI-shaped: `0` ok/compliant/compatible · `1` usage · `2`
