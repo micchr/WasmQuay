@@ -184,3 +184,16 @@ $ ./target/release/wasmquay inspect fixtures/clock-service.wasm --pretty
   "sections": [
     { "id": 2, "name": "import", "custom_name": null, "offset": 10, "size": 89 },
     { "id": 7, "name": "export", "custom_name": null, "offset": 101, "size": 7 },
+    { "id": 0, "name": "custom", "custom_name": "name", "offset": 110, "size": 29 }
+  ],
+  "imports": [
+    { "module": "wasi_snapshot_preview1", "field": "clock_time_get", "kind": "func" },
+    { "module": "wasi_snapshot_preview1", "field": "fd_write", "kind": "func" },
+    { "module": "env", "field": "memory", "kind": "memory" }
+  ],
+  "exports": [ { "field": "run", "kind": "func", "index": 0 } ],
+  "names": [ { "index": 0, "name": "run" } ],
+  "capabilities": [
+    { "domain": "fs",    "requirements": [ { "source": "wasi_snapshot_preview1", "detail": "fd_write" } ] },
+    { "domain": "clock", "requirements": [ { "source": "wasi_snapshot_preview1", "detail": "clock_time_get" } ] }
+  ]
