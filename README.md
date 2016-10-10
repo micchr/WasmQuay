@@ -209,3 +209,16 @@ Every offset and size above is read from the actual bytes — you can seek to
 $ ./target/release/wasmquay caps fixtures/fs-component.wasm
 fs       wasi:filesystem/types :: read-via-stream
 clock    wasi:clocks/wall-clock :: now
+```
+
+Note the different import style: `fs-component.wasm` imports **component-model
+interface paths** (`wasi:filesystem/types`) rather than preview1 function
+names — wasmquay classifies both.
+
+### `policy` — gate it
+
+```console
+$ cat examples/sandbox-strict.pol
+policy "sandbox-strict"
+default deny
+allow clock
