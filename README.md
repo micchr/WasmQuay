@@ -248,3 +248,16 @@ compat clock-service.wasm <- net-service.wasm: BREAKING
   ! new capability required: network via wasi_snapshot_preview1
 ```
 
+`net-service` keeps every export `clock-service` had, so exports are fine — but
+it *adds* a network requirement. A host that safely ran the clock service might
+not be prepared to grant sockets, so the swap is flagged **BREAKING**.
+
+The reverse direction is compatible (dropping a capability never breaks a host):
+
+```console
+$ ./target/release/wasmquay compat fixtures/net-service.wasm fixtures/clock-service.wasm
+compat net-service.wasm <- clock-service.wasm: COMPATIBLE
+```
+
+### `manifest` — read a WIT-like world
+
