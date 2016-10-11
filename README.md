@@ -235,3 +235,16 @@ policy 'sandbox-strict': COMPLIANT
 $ ./target/release/wasmquay policy fixtures/net-service.wasm examples/sandbox-strict.pol ; echo "exit=$?"
 policy 'sandbox-strict': VIOLATION
   [allow] fs       (1 reqs)
+  [allow] clock    (1 reqs)
+  [DENY ] network  (2 reqs)
+exit=3
+```
+
+### `compat` — is it a safe swap?
+
+```console
+$ ./target/release/wasmquay compat fixtures/clock-service.wasm fixtures/net-service.wasm
+compat clock-service.wasm <- net-service.wasm: BREAKING
+  ! new capability required: network via wasi_snapshot_preview1
+```
+
