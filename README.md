@@ -286,3 +286,16 @@ $ ./target/release/wasmquay policy fixtures/net-service.wasm examples/sandbox-st
 $ node explorer/dist/cli.js surface net.json pol.json
 ▚ net-service.wasm (net-service)
   risk: ● HIGH (score 22.9)
+  imports=5 exports=1
+  capabilities:
+    • network  x2  — can open sockets / exfiltrate data
+    • fs       x1  — can read or modify files
+    • clock    x1  — can read wall/monotonic clocks
+
+policy 'sandbox-strict': VIOLATION
+  ✓ [ok] 'fs' required and allowed
+  ✓ [ok] 'clock' required and allowed
+  ✗ [violation] 'network' is required but denied by policy 'sandbox-strict' — can open sockets / exfiltrate data
+```
+
+Rank several components by static risk:
