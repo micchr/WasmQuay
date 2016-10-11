@@ -261,3 +261,15 @@ compat net-service.wasm <- clock-service.wasm: COMPATIBLE
 
 ### `manifest` — read a WIT-like world
 
+```console
+$ ./target/release/wasmquay manifest examples/image-pipeline.wit
+package: acme:image-pipeline@1.4.0
+world processor (3 imports, 2 exports)
+world thumbnailer (1 imports, 1 exports)
+classified capability domains:
+  clock    wasi:clocks/wall-clock
+  fs       wasi:filesystem/types
+  stdio    wasi:io/streams
+```
+
+---
