@@ -325,3 +325,15 @@ if (surface.hasUnknown) {
 console.log(`${surface.source}: ${surface.band} (score ${surface.score})`);
 ```
 
+---
+
+## `0x06` — Capability classification, at a glance
+
+| Import shape                                   | Domain     | Rationale                        |
+|------------------------------------------------|------------|----------------------------------|
+| `preview1` `fd_*`, `path_*`                    | `fs`       | file & directory I/O             |
+| `preview1` `environ_*`, `args_*`               | `env`      | ambient environment / argv       |
+| `preview1` `clock_*`                           | `clock`    | wall / monotonic time            |
+| `preview1` `sock_*`                            | `network`  | sockets                          |
+| `preview1` `random_get`                        | `random`   | randomness source                |
+| `wasi:filesystem/*`                            | `fs`       | component-model filesystem       |
