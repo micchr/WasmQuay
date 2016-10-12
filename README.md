@@ -337,3 +337,16 @@ console.log(`${surface.source}: ${surface.band} (score ${surface.score})`);
 | `preview1` `sock_*`                            | `network`  | sockets                          |
 | `preview1` `random_get`                        | `random`   | randomness source                |
 | `wasi:filesystem/*`                            | `fs`       | component-model filesystem       |
+| `wasi:cli/*`                                   | `env`      | environment + args               |
+| `wasi:clocks/*`                                | `clock`    | component-model clocks           |
+| `wasi:sockets/*`                               | `network`  | component-model sockets          |
+| `wasi:random/*`                                | `random`   | component-model randomness       |
+| `wasi:io/*`                                    | `stdio`    | streams                          |
+| *anything else*                                | `unknown`  | **unrecognized host — untrusted**|
+
+Memory/table/global imports are data plumbing and are **not** treated as
+capabilities. An `unknown` import always violates a deny-by-default policy —
+wasmquay never silently ignores a host dependency it can't name.
+
+The full grammar for every format (WIT-like manifest, `.pol` policy, and all
+four JSON schemas) is specified in **[`docs/FORMAT.md`](docs/FORMAT.md)**.
