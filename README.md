@@ -299,3 +299,16 @@ policy 'sandbox-strict': VIOLATION
 ```
 
 Rank several components by static risk:
+
+```console
+$ node explorer/dist/cli.js rank net.json clock.json
+capability risk ranking (highest first):
+  1. net-service.wasm         HIGH      score=22.9
+  2. clock-service.wasm       ELEVATED  score=10
+```
+
+The risk score weights domains by blast radius (`network`/`unknown` = 5,
+`fs` = 4, `env` = 2, `clock`/`random`/`stdio` = 1) and scales sub-linearly with
+how many distinct entry points a domain has, so one chatty domain can't drown
+out the signal. The exact weights and bands live in
+[`explorer/src/analyze.ts`](explorer/src/analyze.ts).
