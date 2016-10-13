@@ -363,3 +363,16 @@ byte-for-byte any time:
 $ ./target/release/wasmquay gen-fixtures fixtures
 ```
 
+Because the encoder writes the same grammar the decoder reads, the round-trip
+`build → parse` is itself an end-to-end test of the format code
+(`fixture::tests::round_trips_through_parser`).
+
+| Fixture                | Shape                                                          |
+|------------------------|----------------------------------------------------------------|
+| `clock-service.wasm`   | clock + stdio + fs (well-behaved worker)                       |
+| `net-service.wasm`     | clock service **plus** sockets (networked variant)             |
+| `fs-component.wasm`    | component-model preview2 interface imports                     |
+| `opaque-host.wasm`     | imports an unrecognized host → classified `unknown`            |
+
+---
+
