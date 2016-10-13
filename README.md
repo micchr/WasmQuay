@@ -350,3 +350,16 @@ wasmquay never silently ignores a host dependency it can't name.
 
 The full grammar for every format (WIT-like manifest, `.pol` policy, and all
 four JSON schemas) is specified in **[`docs/FORMAT.md`](docs/FORMAT.md)**.
+
+---
+
+## `0x07` — Fixtures
+
+The repository ships four deterministic binary fixtures under `fixtures/`, and
+the exact encoder that produced them (`wasmquay-core::fixture`). Regenerate them
+byte-for-byte any time:
+
+```console
+$ ./target/release/wasmquay gen-fixtures fixtures
+```
+
