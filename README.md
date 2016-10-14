@@ -376,3 +376,16 @@ Because the encoder writes the same grammar the decoder reads, the round-trip
 
 ---
 
+## `0x08` — Testing & CI
+
+```console
+$ cargo test
+    test result: ok. 4 passed;  0 failed;   # wasmquay-cli
+    test result: ok. 38 passed; 0 failed;   # wasmquay-core
+    test result: ok. 1 passed;  0 failed;   # doctest
+
+$ cd explorer && npm test
+    ℹ tests 12
+    ℹ pass 12
+    ℹ fail 0
+```
