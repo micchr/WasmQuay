@@ -1,2 +1,3 @@
 [package]
 name = "wasmquay-core"
+version.workspace = true
