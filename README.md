@@ -389,3 +389,15 @@ $ cd explorer && npm test
     ℹ pass 12
     ℹ fail 0
 ```
+
+CI (`.github/workflows/ci.yml`) runs three jobs: the Rust matrix
+(fmt + clippy `-D warnings` + build + test on Linux/macOS/Windows), the
+TypeScript job (typecheck + build + test), and a **cross-language integration**
+job that pipes a real Rust-generated report into the TypeScript explorer.
+
+The whole codebase is `cargo fmt` clean and passes `cargo clippy -D warnings`,
+and the core crate compiles with `#![forbid(unsafe_code)]`.
+
+---
+
+## `0x09` — Layout
