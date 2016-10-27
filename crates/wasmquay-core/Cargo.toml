@@ -7,3 +7,4 @@ license.workspace = true
 repository.workspace = true
 authors.workspace = true
 description = "Core parsing, capability policy and JSON serialization for the wasmquay toolkit"
+
