@@ -12,3 +12,4 @@ description = "Core parsing, capability policy and JSON serialization for the wa
 name = "wasmquay_core"
 path = "src/lib.rs"
 
+# Intentionally zero external dependencies: the whole crate is std-only so it
