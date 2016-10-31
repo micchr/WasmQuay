@@ -11,3 +11,4 @@ description = "Core parsing, capability policy and JSON serialization for the wa
 [lib]
 name = "wasmquay_core"
 path = "src/lib.rs"
+
