@@ -37,3 +37,15 @@ impl Change {
 
 /// A single export difference.
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ExportDiff {
+    /// Whether the export was added or removed.
+    pub change: Change,
+    /// The export name.
+    pub name: String,
+    /// The export kind slug.
+    pub kind: String,
+}
+
+/// A single capability (import domain) difference.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CapabilityDiff {
