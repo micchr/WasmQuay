@@ -60,3 +60,15 @@ pub struct CapabilityDiff {
 /// The full compatibility report between a baseline and a candidate.
 #[derive(Debug, Clone)]
 pub struct Compatibility {
+    /// The baseline component's label.
+    pub baseline_name: String,
+    /// The candidate component's label.
+    pub candidate_name: String,
+    /// Differences in the export surface.
+    pub export_diffs: Vec<ExportDiff>,
+    /// Differences in the capability surface.
+    pub capability_diffs: Vec<CapabilityDiff>,
+}
+
+impl Compatibility {
+    /// The candidate is a safe drop-in replacement when:
