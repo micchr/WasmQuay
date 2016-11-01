@@ -72,3 +72,15 @@ pub struct Compatibility {
 
 impl Compatibility {
     /// The candidate is a safe drop-in replacement when:
+    ///   * no export was removed, and
+    ///   * no *new* capability domain was added.
+    pub fn is_compatible(&self) -> bool {
+        let export_ok = !self
+            .export_diffs
+            .iter()
+            .any(|d| d.change == Change::Removed);
+        let cap_ok = !self
+            .capability_diffs
+            .iter()
+            .any(|d| d.change == Change::Added);
+        export_ok && cap_ok
