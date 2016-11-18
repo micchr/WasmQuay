@@ -84,3 +84,14 @@ impl Compatibility {
             .iter()
             .any(|d| d.change == Change::Added);
         export_ok && cap_ok
+    }
+
+    /// A short list of the reasons the candidate is *not* compatible.
+    pub fn breaking_reasons(&self) -> Vec<String> {
+        let mut reasons = Vec::new();
+        for d in &self.export_diffs {
+            if d.change == Change::Removed {
+                reasons.push(format!("export removed: {} ({})", d.name, d.kind));
+            }
+        }
+        for d in &self.capability_diffs {
