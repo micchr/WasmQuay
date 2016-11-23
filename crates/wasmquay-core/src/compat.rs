@@ -95,3 +95,15 @@ impl Compatibility {
             }
         }
         for d in &self.capability_diffs {
+            if d.change == Change::Added {
+                reasons.push(format!(
+                    "new capability required: {} via {}",
+                    d.domain.slug(),
+                    d.source
+                ));
+            }
+        }
+        reasons
+    }
+}
+
