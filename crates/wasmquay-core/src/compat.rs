@@ -107,3 +107,14 @@ impl Compatibility {
     }
 }
 
+fn export_key(e: &Export) -> (String, String) {
+    (e.field.clone(), e.kind.slug())
+}
+
+/// Compare two parsed modules for substitutability.
+pub fn compare_modules(
+    baseline: &Module,
+    baseline_name: &str,
+    candidate: &Module,
+    candidate_name: &str,
+) -> Compatibility {
