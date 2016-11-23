@@ -118,3 +118,15 @@ pub fn compare_modules(
     candidate: &Module,
     candidate_name: &str,
 ) -> Compatibility {
+    let export_diffs = diff_exports(&baseline.exports, &candidate.exports);
+    let base_reqs = requirements_from_module(baseline);
+    let cand_reqs = requirements_from_module(candidate);
+    let capability_diffs = diff_capabilities(&base_reqs, &cand_reqs);
+
+    Compatibility {
+        baseline_name: baseline_name.to_string(),
+        candidate_name: candidate_name.to_string(),
+        export_diffs,
+        capability_diffs,
+    }
+}
