@@ -141,3 +141,15 @@ fn diff_exports(baseline: &[Export], candidate: &[Export]) -> Vec<ExportDiff> {
             diffs.push(ExportDiff {
                 change: Change::Removed,
                 name: name.clone(),
+                kind: kind.clone(),
+            });
+        }
+    }
+    for (name, kind) in &cand_keys {
+        if !base_keys.iter().any(|k| k == &(name.clone(), kind.clone())) {
+            diffs.push(ExportDiff {
+                change: Change::Added,
+                name: name.clone(),
+                kind: kind.clone(),
+            });
+        }
