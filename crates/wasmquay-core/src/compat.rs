@@ -153,3 +153,14 @@ fn diff_exports(baseline: &[Export], candidate: &[Export]) -> Vec<ExportDiff> {
                 kind: kind.clone(),
             });
         }
+    }
+    diffs.sort_by_key(|d| (d.name.clone(), d.kind.clone()));
+    diffs
+}
+
+/// Compare capability requirements at the (domain, source) granularity.
+fn diff_capabilities(baseline: &[Requirement], candidate: &[Requirement]) -> Vec<CapabilityDiff> {
+    let base_set: Vec<(Domain, String)> = dedup(
+        baseline
+            .iter()
+            .map(|r| (r.domain, r.source.clone()))
