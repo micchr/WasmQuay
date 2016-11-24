@@ -130,3 +130,14 @@ pub fn compare_modules(
         capability_diffs,
     }
 }
+
+fn diff_exports(baseline: &[Export], candidate: &[Export]) -> Vec<ExportDiff> {
+    let base_keys: Vec<(String, String)> = baseline.iter().map(export_key).collect();
+    let cand_keys: Vec<(String, String)> = candidate.iter().map(export_key).collect();
+
+    let mut diffs = Vec::new();
+    for (name, kind) in &base_keys {
+        if !cand_keys.iter().any(|k| k == &(name.clone(), kind.clone())) {
+            diffs.push(ExportDiff {
+                change: Change::Removed,
+                name: name.clone(),
