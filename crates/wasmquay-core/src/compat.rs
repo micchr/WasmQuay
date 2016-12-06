@@ -176,3 +176,15 @@ fn diff_capabilities(baseline: &[Requirement], candidate: &[Requirement]) -> Vec
     let mut diffs = Vec::new();
     for (domain, source) in &cand_set {
         if !base_set.iter().any(|(d, s)| d == domain && s == source) {
+            diffs.push(CapabilityDiff {
+                change: Change::Added,
+                domain: *domain,
+                source: source.clone(),
+            });
+        }
+    }
+    for (domain, source) in &base_set {
+        if !cand_set.iter().any(|(d, s)| d == domain && s == source) {
+            diffs.push(CapabilityDiff {
+                change: Change::Removed,
+                domain: *domain,
