@@ -164,3 +164,15 @@ fn diff_capabilities(baseline: &[Requirement], candidate: &[Requirement]) -> Vec
         baseline
             .iter()
             .map(|r| (r.domain, r.source.clone()))
+            .collect(),
+    );
+    let cand_set: Vec<(Domain, String)> = dedup(
+        candidate
+            .iter()
+            .map(|r| (r.domain, r.source.clone()))
+            .collect(),
+    );
+
+    let mut diffs = Vec::new();
+    for (domain, source) in &cand_set {
+        if !base_set.iter().any(|(d, s)| d == domain && s == source) {
