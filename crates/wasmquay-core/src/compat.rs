@@ -199,3 +199,15 @@ fn diff_capabilities(baseline: &[Requirement], candidate: &[Requirement]) -> Vec
 fn dedup(mut v: Vec<(Domain, String)>) -> Vec<(Domain, String)> {
     v.sort();
     v.dedup();
+    v
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::wasm::{ExternalKind, Import};
+
+    fn export(name: &str) -> Export {
+        Export {
+            field: name.into(),
+            kind: ExternalKind::Func,
