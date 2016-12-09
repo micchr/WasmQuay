@@ -188,3 +188,14 @@ fn diff_capabilities(baseline: &[Requirement], candidate: &[Requirement]) -> Vec
             diffs.push(CapabilityDiff {
                 change: Change::Removed,
                 domain: *domain,
+                source: source.clone(),
+            });
+        }
+    }
+    diffs.sort_by_key(|d| (d.domain, d.source.clone()));
+    diffs
+}
+
+fn dedup(mut v: Vec<(Domain, String)>) -> Vec<(Domain, String)> {
+    v.sort();
+    v.dedup();
