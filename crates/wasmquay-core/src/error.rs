@@ -14,3 +14,9 @@ pub enum ErrorKind {
     UnexpectedEof,
     /// A magic number, version or section id was not what the spec requires.
     BadMagic,
+    /// A LEB128 integer was malformed (too long / overflowing).
+    BadLeb128,
+    /// A UTF-8 name inside the module was not valid UTF-8.
+    BadUtf8,
+    /// A section or subsection declared a size that does not line up.
+    MalformedSection,
