@@ -20,3 +20,9 @@ pub enum ErrorKind {
     BadUtf8,
     /// A section or subsection declared a size that does not line up.
     MalformedSection,
+    /// A manifest (WIT-like or policy) could not be parsed.
+    BadManifest,
+    /// An input/output error while reading a file.
+    Io,
+}
+
