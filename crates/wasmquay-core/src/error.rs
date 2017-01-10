@@ -26,3 +26,9 @@ pub enum ErrorKind {
     Io,
 }
 
+impl ErrorKind {
+    /// A stable, lower-case slug for the kind. Emitted in JSON reports.
+    pub fn slug(self) -> &'static str {
+        match self {
+            ErrorKind::UnexpectedEof => "unexpected-eof",
+            ErrorKind::BadMagic => "bad-magic",
