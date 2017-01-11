@@ -32,3 +32,8 @@ impl ErrorKind {
         match self {
             ErrorKind::UnexpectedEof => "unexpected-eof",
             ErrorKind::BadMagic => "bad-magic",
+            ErrorKind::BadLeb128 => "bad-leb128",
+            ErrorKind::BadUtf8 => "bad-utf8",
+            ErrorKind::MalformedSection => "malformed-section",
+            ErrorKind::BadManifest => "bad-manifest",
+            ErrorKind::Io => "io",
