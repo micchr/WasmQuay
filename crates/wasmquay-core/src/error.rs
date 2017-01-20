@@ -49,3 +49,9 @@ pub struct Error {
     message: String,
     offset: Option<usize>,
 }
+
+impl Error {
+    /// Build an error with a message.
+    pub fn new(kind: ErrorKind, message: impl Into<String>) -> Self {
+        Error {
+            kind,
