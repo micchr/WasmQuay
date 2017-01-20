@@ -61,3 +61,9 @@ impl Error {
     }
 
     /// Build an error that points at a byte offset.
+    pub fn at(kind: ErrorKind, message: impl Into<String>, offset: usize) -> Self {
+        Error {
+            kind,
+            message: message.into(),
+            offset: Some(offset),
+        }
