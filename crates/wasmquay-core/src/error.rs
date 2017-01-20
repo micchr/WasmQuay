@@ -43,3 +43,9 @@ impl ErrorKind {
 
 /// A wasmquay error: a [`ErrorKind`] plus a descriptive message and an
 /// optional byte offset into the source that triggered it.
+#[derive(Debug, Clone)]
+pub struct Error {
+    kind: ErrorKind,
+    message: String,
+    offset: Option<usize>,
+}
