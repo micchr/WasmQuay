@@ -73,3 +73,8 @@ impl Error {
     pub fn kind(&self) -> ErrorKind {
         self.kind
     }
+
+    /// The offset into the source, if known.
+    pub fn offset(&self) -> Option<usize> {
+        self.offset
+    }
