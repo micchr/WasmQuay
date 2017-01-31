@@ -67,3 +67,9 @@ impl Error {
             message: message.into(),
             offset: Some(offset),
         }
+    }
+
+    /// The category of this error.
+    pub fn kind(&self) -> ErrorKind {
+        self.kind
+    }
