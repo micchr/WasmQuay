@@ -38,3 +38,12 @@ impl FixtureBuilder {
     }
 
     /// Add a memory import (data plumbing, not a capability).
+    pub fn import_memory(mut self, module: &str, field: &str) -> Self {
+        self.imports
+            .push((module.to_string(), field.to_string(), ExternalKind::Memory));
+        self
+    }
+
+    /// Add a function export.
+    pub fn export_func(mut self, field: &str, index: u32) -> Self {
+        self.exports
