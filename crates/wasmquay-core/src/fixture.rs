@@ -57,3 +57,12 @@ impl FixtureBuilder {
         self
     }
 
+    /// Encode the module to a byte vector.
+    pub fn build(&self) -> Vec<u8> {
+        let mut out = Vec::new();
+        out.extend_from_slice(&WASM_MAGIC);
+        out.extend_from_slice(&1u32.to_le_bytes());
+
+        if !self.imports.is_empty() {
+            let body = self.encode_import_section();
+            emit_section(&mut out, 2, &body);
