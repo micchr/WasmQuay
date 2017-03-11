@@ -66,3 +66,12 @@ impl FixtureBuilder {
         if !self.imports.is_empty() {
             let body = self.encode_import_section();
             emit_section(&mut out, 2, &body);
+        }
+        if !self.exports.is_empty() {
+            let body = self.encode_export_section();
+            emit_section(&mut out, 7, &body);
+        }
+        if self.module_name.is_some() || !self.function_names.is_empty() {
+            let body = self.encode_name_section();
+            emit_section(&mut out, 0, &body);
+        }
