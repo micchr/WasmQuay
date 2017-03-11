@@ -47,3 +47,13 @@ impl FixtureBuilder {
     /// Add a function export.
     pub fn export_func(mut self, field: &str, index: u32) -> Self {
         self.exports
+            .push((field.to_string(), ExternalKind::Func, index));
+        self
+    }
+
+    /// Add a function-name mapping for the custom `name` section.
+    pub fn function_name(mut self, index: u32, name: &str) -> Self {
+        self.function_names.push((index, name.to_string()));
+        self
+    }
+
