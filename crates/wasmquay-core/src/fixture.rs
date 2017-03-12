@@ -75,3 +75,13 @@ impl FixtureBuilder {
             let body = self.encode_name_section();
             emit_section(&mut out, 0, &body);
         }
+
+        out
+    }
+
+    fn encode_import_section(&self) -> Vec<u8> {
+        let mut body = Vec::new();
+        write_uleb(&mut body, self.imports.len() as u64);
+        for (module, field, kind) in &self.imports {
+            write_name(&mut body, module);
+            write_name(&mut body, field);
