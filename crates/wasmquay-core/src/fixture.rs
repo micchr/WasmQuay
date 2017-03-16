@@ -122,3 +122,13 @@ impl FixtureBuilder {
                 ExternalKind::Table => 0x01,
                 ExternalKind::Memory => 0x02,
                 ExternalKind::Global => 0x03,
+                ExternalKind::Other(b) => *b,
+            };
+            body.push(kb);
+            write_uleb(&mut body, *index as u64);
+        }
+        body
+    }
+
+    fn encode_name_section(&self) -> Vec<u8> {
+        let mut body = Vec::new();
