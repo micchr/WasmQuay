@@ -113,3 +113,12 @@ impl FixtureBuilder {
     }
 
     fn encode_export_section(&self) -> Vec<u8> {
+        let mut body = Vec::new();
+        write_uleb(&mut body, self.exports.len() as u64);
+        for (field, kind, index) in &self.exports {
+            write_name(&mut body, field);
+            let kb = match kind {
+                ExternalKind::Func => 0x00,
+                ExternalKind::Table => 0x01,
+                ExternalKind::Memory => 0x02,
+                ExternalKind::Global => 0x03,
