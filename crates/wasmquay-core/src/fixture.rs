@@ -85,3 +85,12 @@ impl FixtureBuilder {
         for (module, field, kind) in &self.imports {
             write_name(&mut body, module);
             write_name(&mut body, field);
+            match kind {
+                ExternalKind::Func => {
+                    body.push(0x00);
+                    write_uleb(&mut body, 0); // typeidx 0
+                }
+                ExternalKind::Memory => {
+                    body.push(0x02);
+                    body.push(0x00); // limits flags: min only
+                    write_uleb(&mut body, 1); // min 1 page
