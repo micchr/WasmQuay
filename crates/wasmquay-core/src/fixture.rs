@@ -160,3 +160,12 @@ fn emit_section(out: &mut Vec<u8>, id: u8, body: &[u8]) {
     write_uleb(out, body.len() as u64);
     out.extend_from_slice(body);
 }
+
+fn write_uleb(out: &mut Vec<u8>, mut value: u64) {
+    loop {
+        let mut byte = (value & 0x7f) as u8;
+        value >>= 7;
+        if value != 0 {
+            byte |= 0x80;
+        }
+        out.push(byte);
