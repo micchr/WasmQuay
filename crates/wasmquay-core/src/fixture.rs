@@ -150,3 +150,13 @@ impl FixtureBuilder {
             body.push(0x01); // subsection: function names
             write_uleb(&mut body, sub.len() as u64);
             body.extend_from_slice(&sub);
+        }
+        body
+    }
+}
+
+fn emit_section(out: &mut Vec<u8>, id: u8, body: &[u8]) {
+    out.push(id);
+    write_uleb(out, body.len() as u64);
+    out.extend_from_slice(body);
+}
