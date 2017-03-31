@@ -169,3 +169,12 @@ fn write_uleb(out: &mut Vec<u8>, mut value: u64) {
             byte |= 0x80;
         }
         out.push(byte);
+        if value == 0 {
+            break;
+        }
+    }
+}
+
+fn write_name(out: &mut Vec<u8>, name: &str) {
+    write_uleb(out, name.len() as u64);
+    out.extend_from_slice(name.as_bytes());
