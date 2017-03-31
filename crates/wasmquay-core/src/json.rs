@@ -25,3 +25,12 @@ pub enum Json {
     /// An object with insertion-ordered key/value pairs.
     Obj(Vec<(String, Json)>),
 }
+
+impl Json {
+    /// Convenience constructor for a string value.
+    pub fn s(v: impl Into<String>) -> Json {
+        Json::Str(v.into())
+    }
+
+    /// Convenience constructor for an unsigned integer value.
+    pub fn u(v: u64) -> Json {
