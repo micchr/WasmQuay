@@ -16,3 +16,12 @@ pub enum Json {
     Null,
     /// A boolean.
     Bool(bool),
+    /// All numbers are stored as `f64`; integers up to 2^53 round-trip exactly.
+    Num(f64),
+    /// A UTF-8 string.
+    Str(String),
+    /// An ordered array.
+    Arr(Vec<Json>),
+    /// An object with insertion-ordered key/value pairs.
+    Obj(Vec<(String, Json)>),
+}
