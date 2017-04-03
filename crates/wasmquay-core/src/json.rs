@@ -44,3 +44,12 @@ impl Json {
 
     /// Build an array from a vector of strings.
     pub fn str_arr<I: IntoIterator<Item = String>>(items: I) -> Json {
+        Json::Arr(items.into_iter().map(Json::Str).collect())
+    }
+
+    /// Serialize compactly (no whitespace).
+    pub fn to_compact(&self) -> String {
+        let mut out = String::new();
+        self.write(&mut out, None, 0);
+        out
+    }
