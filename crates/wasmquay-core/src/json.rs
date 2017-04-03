@@ -34,3 +34,13 @@ impl Json {
 
     /// Convenience constructor for an unsigned integer value.
     pub fn u(v: u64) -> Json {
+        Json::Num(v as f64)
+    }
+
+    /// Build an object from key/value pairs, preserving order.
+    pub fn obj(pairs: Vec<(&str, Json)>) -> Json {
+        Json::Obj(pairs.into_iter().map(|(k, v)| (k.to_string(), v)).collect())
+    }
+
+    /// Build an array from a vector of strings.
+    pub fn str_arr<I: IntoIterator<Item = String>>(items: I) -> Json {
