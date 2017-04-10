@@ -62,3 +62,12 @@ impl Json {
     }
 
     fn write(&self, out: &mut String, indent: Option<usize>, depth: usize) {
+        match self {
+            Json::Null => out.push_str("null"),
+            Json::Bool(b) => out.push_str(if *b { "true" } else { "false" }),
+            Json::Num(n) => write_number(out, *n),
+            Json::Str(s) => write_json_string(out, s),
+            Json::Arr(items) => {
+                if items.is_empty() {
+                    out.push_str("[]");
+                    return;
