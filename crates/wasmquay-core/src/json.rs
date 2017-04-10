@@ -53,3 +53,12 @@ impl Json {
         self.write(&mut out, None, 0);
         out
     }
+
+    /// Serialize with two-space indentation.
+    pub fn to_pretty(&self) -> String {
+        let mut out = String::new();
+        self.write(&mut out, Some(2), 0);
+        out
+    }
+
+    fn write(&self, out: &mut String, indent: Option<usize>, depth: usize) {
