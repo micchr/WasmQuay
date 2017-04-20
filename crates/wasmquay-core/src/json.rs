@@ -71,3 +71,12 @@ impl Json {
                 if items.is_empty() {
                     out.push_str("[]");
                     return;
+                }
+                out.push('[');
+                for (i, item) in items.iter().enumerate() {
+                    if i > 0 {
+                        out.push(',');
+                    }
+                    newline_indent(out, indent, depth + 1);
+                    item.write(out, indent, depth + 1);
+                }
