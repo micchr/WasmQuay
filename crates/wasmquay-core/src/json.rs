@@ -125,3 +125,12 @@ fn write_number(out: &mut String, n: f64) {
             let _ = write!(out, "{}", n);
         }
     } else {
+        // JSON has no NaN/Infinity; emit null to keep output valid.
+        out.push_str("null");
+    }
+}
+
+fn write_json_string(out: &mut String, s: &str) {
+    out.push('"');
+    for ch in s.chars() {
+        match ch {
