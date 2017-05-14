@@ -107,3 +107,12 @@ impl Json {
         }
     }
 }
+
+fn newline_indent(out: &mut String, indent: Option<usize>, depth: usize) {
+    if let Some(step) = indent {
+        out.push('\n');
+        for _ in 0..(step * depth) {
+            out.push(' ');
+        }
+    }
+}
