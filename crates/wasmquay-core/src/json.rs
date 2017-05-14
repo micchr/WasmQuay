@@ -116,3 +116,12 @@ fn newline_indent(out: &mut String, indent: Option<usize>, depth: usize) {
         }
     }
 }
+
+fn write_number(out: &mut String, n: f64) {
+    if n.is_finite() {
+        if n.fract() == 0.0 && n.abs() < 9.007_199_254_740_992e15 {
+            let _ = write!(out, "{}", n as i64);
+        } else {
+            let _ = write!(out, "{}", n);
+        }
+    } else {
