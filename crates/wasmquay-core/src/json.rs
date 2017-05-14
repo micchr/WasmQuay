@@ -98,3 +98,12 @@ impl Json {
                     out.push(':');
                     if indent.is_some() {
                         out.push(' ');
+                    }
+                    v.write(out, indent, depth + 1);
+                }
+                newline_indent(out, indent, depth);
+                out.push('}');
+            }
+        }
+    }
+}
