@@ -143,3 +143,12 @@ fn write_json_string(out: &mut String, s: &str) {
             '\u{0c}' => out.push_str("\\f"),
             c if (c as u32) < 0x20 => {
                 let _ = write!(out, "\\u{:04x}", c as u32);
+            }
+            c => out.push(c),
+        }
+    }
+    out.push('"');
+}
+
+#[cfg(test)]
+mod tests {
