@@ -26,3 +26,12 @@ impl<'a> Reader<'a> {
     }
 
     /// Number of bytes remaining.
+    pub fn remaining(&self) -> usize {
+        self.data.len().saturating_sub(self.pos)
+    }
+
+    /// True when the cursor has consumed all input.
+    pub fn is_empty(&self) -> bool {
+        self.pos >= self.data.len()
+    }
+
