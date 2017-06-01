@@ -17,3 +17,12 @@ pub struct Reader<'a> {
 impl<'a> Reader<'a> {
     /// Create a reader over `data`, positioned at offset 0.
     pub fn new(data: &'a [u8]) -> Self {
+        Reader { data, pos: 0 }
+    }
+
+    /// Current absolute byte offset.
+    pub fn position(&self) -> usize {
+        self.pos
+    }
+
+    /// Number of bytes remaining.
