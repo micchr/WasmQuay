@@ -35,3 +35,13 @@ impl<'a> Reader<'a> {
         self.pos >= self.data.len()
     }
 
+    /// Read a single byte.
+    pub fn u8(&mut self) -> Result<u8> {
+        if self.pos >= self.data.len() {
+            return Err(Error::at(
+                ErrorKind::UnexpectedEof,
+                "expected a byte",
+                self.pos,
+            ));
+        }
+        let b = self.data[self.pos];
