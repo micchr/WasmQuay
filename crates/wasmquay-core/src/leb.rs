@@ -54,3 +54,12 @@ impl<'a> Reader<'a> {
         let bytes = self.take(4)?;
         Ok(u32::from_le_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]))
     }
+
+    /// Borrow the next `n` bytes and advance.
+    pub fn take(&mut self, n: usize) -> Result<&'a [u8]> {
+        let end = self
+            .pos
+            .checked_add(n)
+            .ok_or_else(|| Error::at(ErrorKind::MalformedSection, "length overflow", self.pos))?;
+        if end > self.data.len() {
+            return Err(Error::at(
