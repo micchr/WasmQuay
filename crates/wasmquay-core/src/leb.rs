@@ -73,3 +73,12 @@ impl<'a> Reader<'a> {
         Ok(slice)
     }
 
+    /// Skip `n` bytes.
+    pub fn skip(&mut self, n: usize) -> Result<()> {
+        self.take(n).map(|_| ())
+    }
+
+    /// Decode an unsigned LEB128 integer (max 64 bits).
+    pub fn uleb128(&mut self) -> Result<u64> {
+        let start = self.pos;
+        let mut result: u64 = 0;
