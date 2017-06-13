@@ -63,3 +63,13 @@ impl<'a> Reader<'a> {
             .ok_or_else(|| Error::at(ErrorKind::MalformedSection, "length overflow", self.pos))?;
         if end > self.data.len() {
             return Err(Error::at(
+                ErrorKind::UnexpectedEof,
+                format!("wanted {} bytes, {} remain", n, self.remaining()),
+                self.pos,
+            ));
+        }
+        let slice = &self.data[self.pos..end];
+        self.pos = end;
+        Ok(slice)
+    }
+
