@@ -91,3 +91,13 @@ impl<'a> Reader<'a> {
             let low = (byte & 0x7f) as u64;
             // Guard against bits that would overflow the 64-bit accumulator.
             if shift == 63 && low > 1 {
+                return Err(Error::at(ErrorKind::BadLeb128, "uleb128 overflow", start));
+            }
+            result |= low << shift;
+            if byte & 0x80 == 0 {
+                break;
+            }
+            shift += 7;
+        }
+        Ok(result)
+    }
