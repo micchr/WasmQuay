@@ -101,3 +101,12 @@ impl<'a> Reader<'a> {
         }
         Ok(result)
     }
+
+    /// Decode an unsigned LEB128 integer that must fit in a `u32`.
+    pub fn uleb128_u32(&mut self) -> Result<u32> {
+        let v = self.uleb128()?;
+        u32::try_from(v).map_err(|_| Error::at(ErrorKind::BadLeb128, "value exceeds u32", self.pos))
+    }
+
+    /// Decode a signed LEB128 integer (max 64 bits).
+    pub fn sleb128(&mut self) -> Result<i64> {
