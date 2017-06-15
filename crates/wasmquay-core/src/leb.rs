@@ -119,3 +119,13 @@ impl<'a> Reader<'a> {
                 return Err(Error::at(ErrorKind::BadLeb128, "sleb128 too long", start));
             }
             result |= ((byte & 0x7f) as i64) << shift;
+            shift += 7;
+            if byte & 0x80 == 0 {
+                // Sign-extend if the sign bit of the last group is set.
+                if shift < 64 && (byte & 0x40) != 0 {
+                    result |= -1i64 << shift;
+                }
+                break;
+            }
+        }
+        Ok(result)
