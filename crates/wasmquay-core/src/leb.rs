@@ -110,3 +110,12 @@ impl<'a> Reader<'a> {
 
     /// Decode a signed LEB128 integer (max 64 bits).
     pub fn sleb128(&mut self) -> Result<i64> {
+        let start = self.pos;
+        let mut result: i64 = 0;
+        let mut shift: u32 = 0;
+        loop {
+            let byte = self.u8()?;
+            if shift >= 64 {
+                return Err(Error::at(ErrorKind::BadLeb128, "sleb128 too long", start));
+            }
+            result |= ((byte & 0x7f) as i64) << shift;
