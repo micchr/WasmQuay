@@ -129,3 +129,12 @@ impl<'a> Reader<'a> {
             }
         }
         Ok(result)
+    }
+
+    /// Read a LEB128 length prefix followed by that many UTF-8 bytes.
+    pub fn name(&mut self) -> Result<String> {
+        let len = self.uleb128_u32()? as usize;
+        let start = self.pos;
+        let bytes = self.take(len)?;
+        std::str::from_utf8(bytes)
+            .map(|s| s.to_string())
