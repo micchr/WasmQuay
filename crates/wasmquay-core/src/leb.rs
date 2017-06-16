@@ -147,3 +147,12 @@ mod tests {
     use super::*;
 
     #[test]
+    fn uleb128_multibyte() {
+        // 624485 == 0xE5 0x8E 0x26
+        let mut r = Reader::new(&[0xE5, 0x8E, 0x26]);
+        assert_eq!(r.uleb128().unwrap(), 624485);
+        assert!(r.is_empty());
+    }
+
+    #[test]
+    fn sleb128_negative() {
