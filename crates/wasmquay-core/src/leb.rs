@@ -156,3 +156,13 @@ mod tests {
 
     #[test]
     fn sleb128_negative() {
+        // -123456 encodes as 0xC0 0xBB 0x78
+        let mut r = Reader::new(&[0xC0, 0xBB, 0x78]);
+        assert_eq!(r.sleb128().unwrap(), -123456);
+    }
+
+    #[test]
+    fn sleb128_small_negative() {
+        let mut r = Reader::new(&[0x7f]); // -1
+        assert_eq!(r.sleb128().unwrap(), -1);
+    }
