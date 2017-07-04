@@ -14,3 +14,8 @@
 //! 6. [`report`] — stable JSON/text serialization consumed downstream.
 //! 7. [`fixture`] — a matching binary *encoder* for deterministic test data.
 //!
+//! ## Scope & honesty
+//!
+//! wasmquay performs **static inspection and policy analysis**. It decodes the
+//! binary and reasons about the capability surface a component declares through
+//! its imports. It is **not** a WebAssembly runtime: it does not execute
