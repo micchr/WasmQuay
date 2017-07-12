@@ -30,3 +30,9 @@
 //!
 //! // Synthesize a module that imports a clock and a socket.
 //! let bytes = FixtureBuilder::new()
+//!     .module_name("svc")
+//!     .import_func("wasi_snapshot_preview1", "clock_time_get")
+//!     .import_func("wasi_snapshot_preview1", "sock_recv")
+//!     .export_func("run", 0)
+//!     .build();
+//!
