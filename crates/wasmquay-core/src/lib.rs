@@ -19,3 +19,9 @@
 //! wasmquay performs **static inspection and policy analysis**. It decodes the
 //! binary and reasons about the capability surface a component declares through
 //! its imports. It is **not** a WebAssembly runtime: it does not execute
+//! modules, instantiate them, or enforce capabilities at run time. Where the
+//! documentation talks about "enforcement" it means *analysis against a stated
+//! policy*, not sandbox interception.
+//!
+//! ## Example
+//!
