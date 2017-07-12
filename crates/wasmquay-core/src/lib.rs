@@ -47,3 +47,8 @@
 //! assert!(eval.violations().contains(&policy::Domain::Network));
 //!
 //! let json = report::evaluation_json(&eval).to_pretty();
+//! assert!(json.contains("\"network\""));
+//! ```
+
+#![forbid(unsafe_code)]
+#![warn(missing_docs)]
