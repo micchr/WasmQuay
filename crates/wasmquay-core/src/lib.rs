@@ -36,3 +36,8 @@
 //!     .export_func("run", 0)
 //!     .build();
 //!
+//! let module = wasm::parse(&bytes).unwrap();
+//! let reqs = policy::requirements_from_module(&module);
+//!
+//! // Evaluate against a deny-by-default policy that only allows the clock.
+//! let pol = policy::Policy::parse("policy \"p\"\ndefault deny\nallow clock\n").unwrap();
