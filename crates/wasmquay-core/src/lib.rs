@@ -25,3 +25,8 @@
 //!
 //! ## Example
 //!
+//! ```
+//! use wasmquay_core::{fixture::FixtureBuilder, wasm, policy, report};
+//!
+//! // Synthesize a module that imports a clock and a socket.
+//! let bytes = FixtureBuilder::new()
