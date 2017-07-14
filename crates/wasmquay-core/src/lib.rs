@@ -52,3 +52,9 @@
 
 #![forbid(unsafe_code)]
 #![warn(missing_docs)]
+
+pub mod compat;
+pub mod error;
+pub mod fixture;
+pub mod json;
+pub mod leb;
