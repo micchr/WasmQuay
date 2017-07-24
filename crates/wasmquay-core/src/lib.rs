@@ -63,3 +63,9 @@ pub mod report;
 pub mod wasm;
 pub mod wit;
 
+pub use error::{Error, ErrorKind, Result};
+
+/// The crate version, from Cargo.
+pub const VERSION: &str = env!("CARGO_PKG_VERSION");
+
+#[cfg(test)]
