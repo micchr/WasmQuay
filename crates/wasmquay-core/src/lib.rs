@@ -58,3 +58,8 @@ pub mod error;
 pub mod fixture;
 pub mod json;
 pub mod leb;
+pub mod policy;
+pub mod report;
+pub mod wasm;
+pub mod wit;
+
