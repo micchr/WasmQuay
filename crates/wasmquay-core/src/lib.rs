@@ -74,3 +74,8 @@ mod integration {
 
     /// End-to-end: build -> parse -> classify -> policy -> compat -> json.
     #[test]
+    fn full_pipeline() {
+        let a = fixture::FixtureBuilder::new()
+            .module_name("a")
+            .import_func("wasi_snapshot_preview1", "clock_time_get")
+            .export_func("run", 0)
