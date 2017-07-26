@@ -79,3 +79,9 @@ mod integration {
             .module_name("a")
             .import_func("wasi_snapshot_preview1", "clock_time_get")
             .export_func("run", 0)
+            .build();
+        let b = fixture::FixtureBuilder::new()
+            .module_name("b")
+            .import_func("wasi_snapshot_preview1", "clock_time_get")
+            .import_func("wasi_snapshot_preview1", "sock_recv")
+            .export_func("run", 0)
