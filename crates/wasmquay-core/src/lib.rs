@@ -69,3 +69,8 @@ pub use error::{Error, ErrorKind, Result};
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[cfg(test)]
+mod integration {
+    use super::*;
+
+    /// End-to-end: build -> parse -> classify -> policy -> compat -> json.
+    #[test]
