@@ -61,3 +61,19 @@ impl Domain {
 
     /// Parse a domain from its slug.
     pub fn from_slug(s: &str) -> Option<Domain> {
+        Some(match s {
+            "fs" => Domain::Filesystem,
+            "env" => Domain::Environment,
+            "clock" => Domain::Clock,
+            "network" | "net" => Domain::Network,
+            "random" | "rand" => Domain::Random,
+            "stdio" => Domain::Stdio,
+            "unknown" => Domain::Unknown,
+            _ => return None,
+        })
+    }
+}
+
+/// A single classified capability requirement.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Requirement {
