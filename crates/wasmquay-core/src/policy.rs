@@ -46,3 +46,18 @@ impl Domain {
         Domain::Stdio,
     ];
 
+    /// Stable slug for reports and policy files.
+    pub fn slug(self) -> &'static str {
+        match self {
+            Domain::Filesystem => "fs",
+            Domain::Environment => "env",
+            Domain::Clock => "clock",
+            Domain::Network => "network",
+            Domain::Random => "random",
+            Domain::Stdio => "stdio",
+            Domain::Unknown => "unknown",
+        }
+    }
+
+    /// Parse a domain from its slug.
+    pub fn from_slug(s: &str) -> Option<Domain> {
