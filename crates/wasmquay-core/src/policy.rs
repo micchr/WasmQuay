@@ -77,3 +77,18 @@ impl Domain {
 /// A single classified capability requirement.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Requirement {
+    /// The classified capability domain.
+    pub domain: Domain,
+    /// The originating import module namespace / interface path.
+    pub source: String,
+    /// The specific symbol / function that triggered the classification.
+    pub detail: String,
+}
+
+/// Classify a WASI preview1 function name into a domain, if recognized.
+fn classify_preview1(func: &str) -> Option<Domain> {
+    let d = if func.starts_with("fd_") || func.starts_with("path_") {
+        // fd_read/fd_write on stdio fds cannot be distinguished statically, so
+        // generic fd_* / path_* are treated as filesystem access.
+        Domain::Filesystem
+    } else if func.starts_with("environ_") || func.starts_with("args_") {
