@@ -92,3 +92,18 @@ fn classify_preview1(func: &str) -> Option<Domain> {
         // generic fd_* / path_* are treated as filesystem access.
         Domain::Filesystem
     } else if func.starts_with("environ_") || func.starts_with("args_") {
+        Domain::Environment
+    } else if func.starts_with("clock_") {
+        Domain::Clock
+    } else if func.starts_with("sock_") {
+        Domain::Network
+    } else if func == "random_get" {
+        Domain::Random
+    } else {
+        return None;
+    };
+    Some(d)
+}
+
+/// Classify a preview2 / component interface path into a domain.
+fn classify_interface(path: &str) -> Option<Domain> {
