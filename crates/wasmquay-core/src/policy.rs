@@ -107,3 +107,18 @@ fn classify_preview1(func: &str) -> Option<Domain> {
 
 /// Classify a preview2 / component interface path into a domain.
 fn classify_interface(path: &str) -> Option<Domain> {
+    // Paths look like `wasi:filesystem/types` or `wasi:sockets/tcp`.
+    let body = path.strip_prefix("wasi:").unwrap_or(path);
+    let head = body.split(['/', '@']).next().unwrap_or(body);
+    Some(match head {
+        "filesystem" => Domain::Filesystem,
+        "cli" => Domain::Environment, // environment + args live under cli
+        "clocks" => Domain::Clock,
+        "sockets" => Domain::Network,
+        "random" => Domain::Random,
+        "io" => Domain::Stdio,
+        _ => return None,
+    })
+}
+
+/// Extract the capability requirements implied by a parsed module's imports.
