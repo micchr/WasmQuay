@@ -122,3 +122,19 @@ fn classify_interface(path: &str) -> Option<Domain> {
 }
 
 /// Extract the capability requirements implied by a parsed module's imports.
+pub fn requirements_from_module(module: &Module) -> Vec<Requirement> {
+    let mut out = Vec::new();
+    for import in &module.imports {
+        // Only function imports carry behavior; memories/tables/globals are
+        // data plumbing and do not by themselves grant host capabilities.
+        if import.kind != ExternalKind::Func {
+            continue;
+        }
+        let domain = if import.module.starts_with("wasi_snapshot_preview1")
+            || import.module == "wasi_unstable"
+        {
+            classify_preview1(&import.field).unwrap_or(Domain::Unknown)
+        } else if import.module.starts_with("wasi:") {
+            classify_interface(&import.module).unwrap_or(Domain::Unknown)
+        } else {
+            Domain::Unknown
