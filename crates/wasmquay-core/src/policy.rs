@@ -153,3 +153,18 @@ pub fn requirements_from_manifest(manifest: &Manifest) -> Vec<Requirement> {
     let mut out = Vec::new();
     for path in manifest.all_imports() {
         let domain = classify_interface(&path).unwrap_or(Domain::Unknown);
+        out.push(Requirement {
+            domain,
+            source: path.clone(),
+            detail: path,
+        });
+    }
+    out
+}
+
+/// A rule for one capability domain.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct DomainRule {
+    /// Whether the domain is permitted at all.
+    pub allow: bool,
+    /// Optional allow-list of resource tokens (e.g. path prefixes, hosts).
