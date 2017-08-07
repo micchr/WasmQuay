@@ -138,3 +138,18 @@ pub fn requirements_from_module(module: &Module) -> Vec<Requirement> {
             classify_interface(&import.module).unwrap_or(Domain::Unknown)
         } else {
             Domain::Unknown
+        };
+        out.push(Requirement {
+            domain,
+            source: import.module.clone(),
+            detail: import.field.clone(),
+        });
+    }
+    out
+}
+
+/// Extract capability requirements from a WIT-like manifest's imports.
+pub fn requirements_from_manifest(manifest: &Manifest) -> Vec<Requirement> {
+    let mut out = Vec::new();
+    for path in manifest.all_imports() {
+        let domain = classify_interface(&path).unwrap_or(Domain::Unknown);
