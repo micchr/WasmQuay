@@ -168,3 +168,19 @@ pub struct DomainRule {
     /// Whether the domain is permitted at all.
     pub allow: bool,
     /// Optional allow-list of resource tokens (e.g. path prefixes, hosts).
+    /// When empty and `allow` is true, all resources in the domain are allowed.
+    pub allow_list: Vec<String>,
+}
+
+/// An explicit capability policy: default stance plus per-domain rules.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Policy {
+    /// Policy name, for reports.
+    pub name: String,
+    /// The stance applied to any domain without an explicit rule.
+    pub default_allow: bool,
+    /// Explicit per-domain rules that override the default stance.
+    pub rules: BTreeMap<Domain, DomainRule>,
+}
+
+impl Default for Policy {
