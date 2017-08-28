@@ -184,3 +184,18 @@ pub struct Policy {
 }
 
 impl Default for Policy {
+    fn default() -> Self {
+        // Deny-by-default is the safe baseline.
+        Policy {
+            name: "default-deny".into(),
+            default_allow: false,
+            rules: BTreeMap::new(),
+        }
+    }
+}
+
+impl Policy {
+    /// Resolve the effective rule for a domain, honoring the default stance.
+    pub fn effective(&self, domain: Domain) -> DomainRule {
+        if let Some(rule) = self.rules.get(&domain) {
+            rule.clone()
