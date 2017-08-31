@@ -275,3 +275,19 @@ impl Policy {
                     format!(
                         "line {}: unknown capability domain '{}'",
                         lineno + 1,
+                        domain_str
+                    ),
+                )
+            })?;
+            policy.rules.insert(
+                domain,
+                DomainRule {
+                    allow,
+                    allow_list: list,
+                },
+            );
+        }
+        Ok(policy)
+    }
+}
+
