@@ -230,3 +230,18 @@ impl Policy {
 
             if let Some(rest) = line.strip_prefix("policy ") {
                 policy.name = rest.trim().trim_matches('"').to_string();
+                continue;
+            }
+            if let Some(rest) = line.strip_prefix("default ") {
+                policy.default_allow = match rest.trim() {
+                    "allow" => true,
+                    "deny" => false,
+                    other => {
+                        return Err(Error::new(
+                            ErrorKind::BadManifest,
+                            format!(
+                                "line {}: default must be allow|deny, got '{}'",
+                                lineno + 1,
+                                other
+                            ),
+                        ))
