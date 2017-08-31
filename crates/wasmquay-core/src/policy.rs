@@ -245,3 +245,18 @@ impl Policy {
                                 other
                             ),
                         ))
+                    }
+                };
+                continue;
+            }
+
+            let (allow, body) = if let Some(r) = line.strip_prefix("allow ") {
+                (true, r)
+            } else if let Some(r) = line.strip_prefix("deny ") {
+                (false, r)
+            } else {
+                return Err(Error::new(
+                    ErrorKind::BadManifest,
+                    format!(
+                        "line {}: unrecognized policy directive '{}'",
+                        lineno + 1,
