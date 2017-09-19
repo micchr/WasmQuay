@@ -321,3 +321,19 @@ impl DomainVerdict {
 /// The full outcome of evaluating a component's requirements against a policy.
 #[derive(Debug, Clone)]
 pub struct Evaluation {
+    /// The name of the policy that was evaluated.
+    pub policy_name: String,
+    /// One verdict per capability domain.
+    pub verdicts: Vec<DomainVerdict>,
+}
+
+impl Evaluation {
+    /// True when no required domain is denied.
+    pub fn is_compliant(&self) -> bool {
+        !self.verdicts.iter().any(|v| v.is_violation())
+    }
+
+    /// The list of domains that violate the policy.
+    pub fn violations(&self) -> Vec<Domain> {
+        self.verdicts
+            .iter()
