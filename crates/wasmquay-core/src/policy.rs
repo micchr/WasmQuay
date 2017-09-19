@@ -291,3 +291,18 @@ impl Policy {
     }
 }
 
+fn parse_list(s: &str) -> Vec<String> {
+    s.split(',')
+        .map(|t| t.trim().to_string())
+        .filter(|t| !t.is_empty())
+        .collect()
+}
+
+/// The verdict for a single domain after evaluation.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct DomainVerdict {
+    /// The capability domain this verdict concerns.
+    pub domain: Domain,
+    /// Whether the component actually requires this domain.
+    pub required: bool,
+    /// Whether the policy permits it.
