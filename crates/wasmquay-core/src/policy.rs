@@ -306,3 +306,18 @@ pub struct DomainVerdict {
     /// Whether the component actually requires this domain.
     pub required: bool,
     /// Whether the policy permits it.
+    pub allowed: bool,
+    /// The specific requirements that fed this verdict.
+    pub requirements: Vec<Requirement>,
+}
+
+impl DomainVerdict {
+    /// A violation occurs when the domain is required but not allowed.
+    pub fn is_violation(&self) -> bool {
+        self.required && !self.allowed
+    }
+}
+
+/// The full outcome of evaluating a component's requirements against a policy.
+#[derive(Debug, Clone)]
+pub struct Evaluation {
