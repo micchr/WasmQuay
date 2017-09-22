@@ -337,3 +337,18 @@ impl Evaluation {
     pub fn violations(&self) -> Vec<Domain> {
         self.verdicts
             .iter()
+            .filter(|v| v.is_violation())
+            .map(|v| v.domain)
+            .collect()
+    }
+}
+
+/// Evaluate a set of requirements against a policy.
+pub fn evaluate(requirements: &[Requirement], policy: &Policy) -> Evaluation {
+    // Group requirements by domain.
+    let mut by_domain: BTreeMap<Domain, Vec<Requirement>> = BTreeMap::new();
+    for req in requirements {
+        by_domain.entry(req.domain).or_default().push(req.clone());
+    }
+
+    let mut verdicts = Vec::new();
