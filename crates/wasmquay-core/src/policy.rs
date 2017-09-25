@@ -352,3 +352,18 @@ pub fn evaluate(requirements: &[Requirement], policy: &Policy) -> Evaluation {
     }
 
     let mut verdicts = Vec::new();
+    // Evaluate every known domain plus Unknown so the report is exhaustive.
+    let mut domains: Vec<Domain> = Domain::ALL.to_vec();
+    domains.push(Domain::Unknown);
+
+    for domain in domains {
+        let reqs = by_domain.get(&domain).cloned().unwrap_or_default();
+        let required = !reqs.is_empty();
+        let rule = policy.effective(domain);
+        // Unknown imports are only "allowed" if the policy is explicitly
+        // permissive for the unknown bucket; otherwise they always violate.
+        verdicts.push(DomainVerdict {
+            domain,
+            required,
+            allowed: rule.allow,
+            requirements: reqs,
