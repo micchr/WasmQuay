@@ -367,3 +367,19 @@ pub fn evaluate(requirements: &[Requirement], policy: &Policy) -> Evaluation {
             required,
             allowed: rule.allow,
             requirements: reqs,
+        });
+    }
+
+    Evaluation {
+        policy_name: policy.name.clone(),
+        verdicts,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::wasm::Import;
+
+    fn func_import(module: &str, field: &str) -> Import {
+        Import {
