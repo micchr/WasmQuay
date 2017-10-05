@@ -383,3 +383,18 @@ mod tests {
 
     fn func_import(module: &str, field: &str) -> Import {
         Import {
+            module: module.into(),
+            field: field.into(),
+            kind: ExternalKind::Func,
+        }
+    }
+
+    #[test]
+    fn classifies_preview1() {
+        assert_eq!(classify_preview1("fd_write"), Some(Domain::Filesystem));
+        assert_eq!(classify_preview1("path_open"), Some(Domain::Filesystem));
+        assert_eq!(classify_preview1("environ_get"), Some(Domain::Environment));
+        assert_eq!(classify_preview1("clock_time_get"), Some(Domain::Clock));
+        assert_eq!(classify_preview1("sock_recv"), Some(Domain::Network));
+        assert_eq!(classify_preview1("random_get"), Some(Domain::Random));
+        assert_eq!(classify_preview1("proc_exit"), None);
