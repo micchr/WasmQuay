@@ -398,3 +398,18 @@ mod tests {
         assert_eq!(classify_preview1("sock_recv"), Some(Domain::Network));
         assert_eq!(classify_preview1("random_get"), Some(Domain::Random));
         assert_eq!(classify_preview1("proc_exit"), None);
+    }
+
+    #[test]
+    fn classifies_interfaces() {
+        assert_eq!(
+            classify_interface("wasi:filesystem/types"),
+            Some(Domain::Filesystem)
+        );
+        assert_eq!(
+            classify_interface("wasi:sockets/tcp"),
+            Some(Domain::Network)
+        );
+        assert_eq!(
+            classify_interface("wasi:clocks/wall-clock@0.2.0"),
+            Some(Domain::Clock)
