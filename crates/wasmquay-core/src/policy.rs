@@ -413,3 +413,18 @@ mod tests {
         assert_eq!(
             classify_interface("wasi:clocks/wall-clock@0.2.0"),
             Some(Domain::Clock)
+        );
+        assert_eq!(classify_interface("acme:custom/thing"), None);
+    }
+
+    #[test]
+    fn requirements_skip_non_func_imports() {
+        let mut m = Module::default();
+        m.imports
+            .push(func_import("wasi_snapshot_preview1", "clock_time_get"));
+        m.imports.push(Import {
+            module: "env".into(),
+            field: "memory".into(),
+            kind: ExternalKind::Memory,
+        });
+        let reqs = requirements_from_module(&m);
