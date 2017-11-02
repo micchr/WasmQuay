@@ -33,3 +33,17 @@ fn header_json(module: &Module) -> Json {
         ("version", Json::u(module.version as u64)),
         ("byte_length", Json::u(module.byte_len as u64)),
         (
+            "module_name",
+            match &module.module_name {
+                Some(n) => Json::s(n.clone()),
+                None => Json::Null,
+            },
+        ),
+    ])
+}
+
+fn sections_json(module: &Module) -> Json {
+    Json::Arr(
+        module
+            .sections
+            .iter()
