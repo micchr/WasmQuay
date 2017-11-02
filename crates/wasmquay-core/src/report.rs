@@ -60,3 +60,17 @@ fn sections_json(module: &Module) -> Json {
                         },
                     ),
                     ("offset", Json::u(s.offset as u64)),
+                    ("size", Json::u(s.size as u64)),
+                ])
+            })
+            .collect(),
+    )
+}
+
+fn imports_json(module: &Module) -> Json {
+    Json::Arr(
+        module
+            .imports
+            .iter()
+            .map(|i| {
+                Json::obj(vec![
