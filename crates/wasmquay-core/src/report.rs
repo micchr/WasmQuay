@@ -47,3 +47,16 @@ fn sections_json(module: &Module) -> Json {
         module
             .sections
             .iter()
+            .map(|s| {
+                Json::obj(vec![
+                    ("id", Json::u(s.id as u64)),
+                    ("name", Json::s(s.name.clone())),
+                    (
+                        "custom_name",
+                        if s.custom_name.is_empty() {
+                            Json::Null
+                        } else {
+                            Json::s(s.custom_name.clone())
+                        },
+                    ),
+                    ("offset", Json::u(s.offset as u64)),
