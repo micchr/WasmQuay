@@ -74,3 +74,16 @@ fn imports_json(module: &Module) -> Json {
             .iter()
             .map(|i| {
                 Json::obj(vec![
+                    ("module", Json::s(i.module.clone())),
+                    ("field", Json::s(i.field.clone())),
+                    ("kind", Json::s(i.kind.slug())),
+                ])
+            })
+            .collect(),
+    )
+}
+
+fn exports_json(module: &Module) -> Json {
+    Json::Arr(
+        module
+            .exports
