@@ -87,3 +87,16 @@ fn exports_json(module: &Module) -> Json {
     Json::Arr(
         module
             .exports
+            .iter()
+            .map(|e| {
+                Json::obj(vec![
+                    ("field", Json::s(e.field.clone())),
+                    ("kind", Json::s(e.kind.slug())),
+                    ("index", Json::u(e.index as u64)),
+                ])
+            })
+            .collect(),
+    )
+}
+
+fn names_json(module: &Module) -> Json {
