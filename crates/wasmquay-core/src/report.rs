@@ -100,3 +100,17 @@ fn exports_json(module: &Module) -> Json {
 }
 
 fn names_json(module: &Module) -> Json {
+    Json::Arr(
+        module
+            .function_names
+            .iter()
+            .map(|(idx, name)| {
+                Json::obj(vec![
+                    ("index", Json::u(*idx as u64)),
+                    ("name", Json::s(name.clone())),
+                ])
+            })
+            .collect(),
+    )
+}
+
