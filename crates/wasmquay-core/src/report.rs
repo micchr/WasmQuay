@@ -114,3 +114,16 @@ fn names_json(module: &Module) -> Json {
     )
 }
 
+fn capabilities_json(requirements: &[Requirement]) -> Json {
+    // Group by domain for a compact, explorer-friendly shape.
+    let mut domains: Vec<Domain> = Domain::ALL.to_vec();
+    domains.push(Domain::Unknown);
+
+    let entries = domains
+        .into_iter()
+        .filter_map(|domain| {
+            let reqs: Vec<&Requirement> =
+                requirements.iter().filter(|r| r.domain == domain).collect();
+            if reqs.is_empty() {
+                return None;
+            }
