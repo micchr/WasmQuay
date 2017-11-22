@@ -140,3 +140,17 @@ fn capabilities_json(requirements: &[Requirement]) -> Json {
                                 ])
                             })
                             .collect(),
+                    ),
+                ),
+            ]))
+        })
+        .collect();
+
+    Json::Arr(entries)
+}
+
+/// Build the JSON document for a policy evaluation.
+pub fn evaluation_json(eval: &Evaluation) -> Json {
+    let verdicts = eval
+        .verdicts
+        .iter()
