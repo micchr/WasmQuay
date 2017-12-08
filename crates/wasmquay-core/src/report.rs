@@ -167,3 +167,17 @@ pub fn evaluation_json(eval: &Evaluation) -> Json {
                             .iter()
                             .map(|r| Json::s(format!("{} :: {}", r.source, r.detail)))
                             .collect(),
+                    ),
+                ),
+            ])
+        })
+        .collect();
+
+    Json::obj(vec![
+        ("schema", Json::s("wasmquay/policy@1")),
+        ("policy", Json::s(eval.policy_name.clone())),
+        ("compliant", Json::Bool(eval.is_compliant())),
+        (
+            "violations",
+            Json::str_arr(eval.violations().into_iter().map(|d| d.slug().to_string())),
+        ),
