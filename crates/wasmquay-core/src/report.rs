@@ -181,3 +181,16 @@ pub fn evaluation_json(eval: &Evaluation) -> Json {
             "violations",
             Json::str_arr(eval.violations().into_iter().map(|d| d.slug().to_string())),
         ),
+        ("verdicts", Json::Arr(verdicts)),
+    ])
+}
+
+/// Build the JSON document for a compatibility comparison.
+pub fn compatibility_json(compat: &Compatibility) -> Json {
+    let export_diffs = compat
+        .export_diffs
+        .iter()
+        .map(|d| {
+            Json::obj(vec![
+                ("change", Json::s(d.change.slug())),
+                ("name", Json::s(d.name.clone())),
