@@ -234,3 +234,16 @@ pub fn inspection_text(
         module.version,
         module.byte_len,
         module.sections.len()
+    ));
+    if let Some(name) = &module.module_name {
+        out.push_str(&format!("  module-name: {}\n", name));
+    }
+    out.push_str(&format!(
+        "  imports={} (funcs={}, memories={})  exports={}\n",
+        module.imports.len(),
+        module.imported_functions(),
+        module.imported_memories(),
+        module.exports.len()
+    ));
+    out.push_str("  capability domains:\n");
+    let mut printed = false;
