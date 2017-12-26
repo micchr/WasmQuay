@@ -274,3 +274,17 @@ pub fn evaluation_text(eval: &Evaluation) -> String {
             let mark = if v.is_violation() { "DENY " } else { "allow" };
             out.push_str(&format!(
                 "  [{}] {:<8} ({} reqs)\n",
+                mark,
+                v.domain.slug(),
+                v.requirements.len()
+            ));
+        }
+    }
+    out
+}
+
+/// Render a human-readable text summary of a compatibility comparison.
+pub fn compatibility_text(compat: &Compatibility) -> String {
+    let mut out = String::new();
+    out.push_str(&format!(
+        "compat {} <- {}: {}\n",
