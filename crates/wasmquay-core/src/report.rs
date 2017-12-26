@@ -221,3 +221,16 @@ pub fn compatibility_json(compat: &Compatibility) -> Json {
     ])
 }
 
+/// Render a human-readable text summary of an inspection.
+pub fn inspection_text(
+    module: &Module,
+    source_label: &str,
+    requirements: &[Requirement],
+) -> String {
+    let mut out = String::new();
+    out.push_str(&format!("wasmquay inspection :: {}\n", source_label));
+    out.push_str(&format!(
+        "  version={}  bytes={}  sections={}\n",
+        module.version,
+        module.byte_len,
+        module.sections.len()
