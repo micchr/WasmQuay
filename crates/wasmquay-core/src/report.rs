@@ -247,3 +247,17 @@ pub fn inspection_text(
     ));
     out.push_str("  capability domains:\n");
     let mut printed = false;
+    for domain in Domain::ALL.iter().chain(std::iter::once(&Domain::Unknown)) {
+        let count = requirements.iter().filter(|r| r.domain == *domain).count();
+        if count > 0 {
+            out.push_str(&format!("    - {:<8} x{}\n", domain.slug(), count));
+            printed = true;
+        }
+    }
+    if !printed {
+        out.push_str("    (none — no host imports)\n");
+    }
+    out
+}
+
+/// Render a human-readable text summary of a policy evaluation.
