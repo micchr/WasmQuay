@@ -288,3 +288,16 @@ pub fn compatibility_text(compat: &Compatibility) -> String {
     let mut out = String::new();
     out.push_str(&format!(
         "compat {} <- {}: {}\n",
+        compat.baseline_name,
+        compat.candidate_name,
+        if compat.is_compatible() {
+            "COMPATIBLE"
+        } else {
+            "BREAKING"
+        }
+    ));
+    for reason in compat.breaking_reasons() {
+        out.push_str(&format!("  ! {}\n", reason));
+    }
+    for d in &compat.export_diffs {
+        if d.change == Change::Added {
