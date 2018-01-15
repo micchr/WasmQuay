@@ -301,3 +301,16 @@ pub fn compatibility_text(compat: &Compatibility) -> String {
     }
     for d in &compat.export_diffs {
         if d.change == Change::Added {
+            out.push_str(&format!("  + export {} ({})\n", d.name, d.kind));
+        }
+    }
+    out
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::policy::{evaluate, requirements_from_module, Policy};
+    use crate::wasm::{ExternalKind, Import};
+
+    fn sample_module() -> Module {
