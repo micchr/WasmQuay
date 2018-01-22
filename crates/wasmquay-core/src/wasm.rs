@@ -83,3 +83,17 @@ pub fn section_name(id: u8) -> &'static str {
         13 => "tag",
         _ => "unknown",
     }
+}
+
+/// A decoded section header: its id, byte range and (for custom sections) name.
+#[derive(Debug, Clone)]
+pub struct SectionInfo {
+    /// The raw section id byte.
+    pub id: u8,
+    /// The standard section name for `id`.
+    pub name: String,
+    /// For a custom section, the declared custom name; otherwise empty.
+    pub custom_name: String,
+    /// Offset of the section *payload* (after id + size prefix).
+    pub offset: usize,
+    /// Size of the payload in bytes.
