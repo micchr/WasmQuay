@@ -39,3 +39,17 @@ pub enum ExternalKind {
     Global,
     /// Reserved/unknown kind byte (component-model or future extension).
     Other(u8),
+}
+
+impl ExternalKind {
+    fn from_byte(b: u8) -> ExternalKind {
+        match b {
+            0x00 => ExternalKind::Func,
+            0x01 => ExternalKind::Table,
+            0x02 => ExternalKind::Memory,
+            0x03 => ExternalKind::Global,
+            other => ExternalKind::Other(other),
+        }
+    }
+
+    /// Stable slug used in reports.
