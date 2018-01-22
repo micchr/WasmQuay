@@ -53,3 +53,18 @@ impl ExternalKind {
     }
 
     /// Stable slug used in reports.
+    pub fn slug(self) -> String {
+        match self {
+            ExternalKind::Func => "func".into(),
+            ExternalKind::Table => "table".into(),
+            ExternalKind::Memory => "memory".into(),
+            ExternalKind::Global => "global".into(),
+            ExternalKind::Other(b) => format!("other:0x{:02x}", b),
+        }
+    }
+}
+
+/// Human-readable name for a standard section id.
+pub fn section_name(id: u8) -> &'static str {
+    match id {
+        0 => "custom",
