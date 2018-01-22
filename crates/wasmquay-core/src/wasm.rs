@@ -97,3 +97,18 @@ pub struct SectionInfo {
     /// Offset of the section *payload* (after id + size prefix).
     pub offset: usize,
     /// Size of the payload in bytes.
+    pub size: usize,
+}
+
+/// A single import entry.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Import {
+    /// The import module namespace (e.g. `wasi_snapshot_preview1`).
+    pub module: String,
+    /// The imported field/function name.
+    pub field: String,
+    /// The external kind of the import.
+    pub kind: ExternalKind,
+}
+
+/// A single export entry.
