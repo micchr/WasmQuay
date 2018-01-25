@@ -112,3 +112,18 @@ pub struct Import {
 }
 
 /// A single export entry.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Export {
+    /// The exported name.
+    pub field: String,
+    /// The external kind of the export.
+    pub kind: ExternalKind,
+    /// The index into the corresponding index space.
+    pub index: u32,
+}
+
+/// The fully decoded module.
+#[derive(Debug, Clone, Default)]
+pub struct Module {
+    /// The binary format version (little-endian `u32` from the header).
+    pub version: u32,
