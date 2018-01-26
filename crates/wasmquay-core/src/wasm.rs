@@ -141,3 +141,18 @@ pub struct Module {
     pub byte_len: usize,
 }
 
+impl Module {
+    /// Count of declared function-type imports.
+    pub fn imported_functions(&self) -> usize {
+        self.imports
+            .iter()
+            .filter(|i| i.kind == ExternalKind::Func)
+            .count()
+    }
+
+    /// Count of imported memories (relevant to sandbox surface).
+    pub fn imported_memories(&self) -> usize {
+        self.imports
+            .iter()
+            .filter(|i| i.kind == ExternalKind::Memory)
+            .count()
