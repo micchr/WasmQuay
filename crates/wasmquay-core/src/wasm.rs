@@ -156,3 +156,17 @@ impl Module {
             .iter()
             .filter(|i| i.kind == ExternalKind::Memory)
             .count()
+    }
+
+    /// The distinct set of import module namespaces, sorted.
+    pub fn import_namespaces(&self) -> Vec<String> {
+        let mut ns: Vec<String> = self.imports.iter().map(|i| i.module.clone()).collect();
+        ns.sort();
+        ns.dedup();
+        ns
+    }
+}
+
+/// Parse a WebAssembly binary module from raw bytes.
+pub fn parse(data: &[u8]) -> Result<Module> {
+    let mut r = Reader::new(data);
