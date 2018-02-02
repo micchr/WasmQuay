@@ -244,3 +244,17 @@ fn decode_name_section(r: &mut Reader<'_>, module: &mut Module) -> Result<()> {
                 module.module_name = Some(sub.name()?);
             }
             1 => {
+                let count = sub.uleb128_u32()?;
+                for _ in 0..count {
+                    let idx = sub.uleb128_u32()?;
+                    let fname = sub.name()?;
+                    module.function_names.push((idx, fname));
+                }
+            }
+            // Local/label/type name subsections are skipped intentionally.
+            _ => {}
+        }
+    }
+    Ok(())
+}
+
