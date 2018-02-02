@@ -214,3 +214,18 @@ pub fn parse(data: &[u8]) -> Result<Module> {
             7 => module.exports = decode_exports(payload)?,
             // Other sections are recorded structurally but not deep-decoded.
             _ => {}
+        }
+
+        module.sections.push(info);
+    }
+
+    Ok(module)
+}
+
+fn decode_custom(payload: &[u8], info: &mut SectionInfo, module: &mut Module) -> Result<()> {
+    let mut r = Reader::new(payload);
+    let name = r.name()?;
+    info.custom_name = name.clone();
+    if name == "name" {
+        decode_name_section(&mut r, module)?;
+    }
