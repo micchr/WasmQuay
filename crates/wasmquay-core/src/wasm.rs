@@ -170,3 +170,18 @@ impl Module {
 /// Parse a WebAssembly binary module from raw bytes.
 pub fn parse(data: &[u8]) -> Result<Module> {
     let mut r = Reader::new(data);
+
+    let magic = r.take(4)?;
+    if magic != WASM_MAGIC {
+        return Err(Error::at(
+            ErrorKind::BadMagic,
+            format!("expected \\0asm magic, found {:02x?}", magic),
+            0,
+        ));
+    }
+    let version = r.u32_le()?;
+    if version == 0 {
+        return Err(Error::at(
+            ErrorKind::BadMagic,
+            "version must be non-zero",
+            4,
