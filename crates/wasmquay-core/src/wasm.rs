@@ -185,3 +185,18 @@ pub fn parse(data: &[u8]) -> Result<Module> {
             ErrorKind::BadMagic,
             "version must be non-zero",
             4,
+        ));
+    }
+
+    let mut module = Module {
+        version,
+        byte_len: data.len(),
+        ..Module::default()
+    };
+
+    while !r.is_empty() {
+        let id = r.u8()?;
+        let size = r.uleb128_u32()? as usize;
+        let payload_offset = r.position();
+        let payload = r.take(size)?;
+
