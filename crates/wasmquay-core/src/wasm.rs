@@ -273,3 +273,18 @@ fn decode_imports(payload: &[u8]) -> Result<Vec<Import>> {
             field,
             kind,
         });
+    }
+    Ok(out)
+}
+
+fn skip_import_desc(r: &mut Reader<'_>, kind: ExternalKind) -> Result<()> {
+    match kind {
+        ExternalKind::Func => {
+            // typeidx
+            let _ = r.uleb128_u32()?;
+        }
+        ExternalKind::Table => {
+            let _elem_type = r.u8()?;
+            skip_limits(r)?;
+        }
+        ExternalKind::Memory => {
