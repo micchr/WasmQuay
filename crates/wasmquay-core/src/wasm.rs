@@ -288,3 +288,17 @@ fn skip_import_desc(r: &mut Reader<'_>, kind: ExternalKind) -> Result<()> {
             skip_limits(r)?;
         }
         ExternalKind::Memory => {
+            skip_limits(r)?;
+        }
+        ExternalKind::Global => {
+            let _valtype = r.u8()?;
+            let _mutability = r.u8()?;
+        }
+        ExternalKind::Other(b) => {
+            return Err(Error::new(
+                ErrorKind::MalformedSection,
+                format!("unsupported import kind byte 0x{:02x}", b),
+            ));
+        }
+    }
+    Ok(())
