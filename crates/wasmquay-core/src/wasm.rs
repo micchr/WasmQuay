@@ -258,3 +258,18 @@ fn decode_name_section(r: &mut Reader<'_>, module: &mut Module) -> Result<()> {
     Ok(())
 }
 
+fn decode_imports(payload: &[u8]) -> Result<Vec<Import>> {
+    let mut r = Reader::new(payload);
+    let count = r.uleb128_u32()?;
+    let mut out = Vec::with_capacity(count as usize);
+    for _ in 0..count {
+        let module_name = r.name()?;
+        let field = r.name()?;
+        let kind = ExternalKind::from_byte(r.u8()?);
+        // Consume the type descriptor so the cursor stays aligned.
+        skip_import_desc(&mut r, kind)?;
+        out.push(Import {
+            module: module_name,
+            field,
+            kind,
+        });
