@@ -38,3 +38,15 @@ pub struct InterfaceRef {
 pub struct World {
     /// The world's name.
     pub name: String,
+    /// Interfaces the world imports (its host requirements).
+    pub imports: Vec<InterfaceRef>,
+    /// Interfaces the world exports (its public surface).
+    pub exports: Vec<InterfaceRef>,
+}
+
+/// A parsed manifest.
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
+pub struct Manifest {
+    /// The `package name:pkg@version` line, if present.
+    pub package: Option<String>,
+    /// The worlds declared in the manifest.
