@@ -302,3 +302,18 @@ fn skip_import_desc(r: &mut Reader<'_>, kind: ExternalKind) -> Result<()> {
         }
     }
     Ok(())
+}
+
+fn skip_limits(r: &mut Reader<'_>) -> Result<()> {
+    let flags = r.u8()?;
+    let _min = r.uleb128_u32()?;
+    if flags & 0x01 != 0 {
+        let _max = r.uleb128_u32()?;
+    }
+    Ok(())
+}
+
+fn decode_exports(payload: &[u8]) -> Result<Vec<Export>> {
+    let mut r = Reader::new(payload);
+    let count = r.uleb128_u32()?;
+    let mut out = Vec::with_capacity(count as usize);
