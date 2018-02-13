@@ -317,3 +317,18 @@ fn decode_exports(payload: &[u8]) -> Result<Vec<Export>> {
     let mut r = Reader::new(payload);
     let count = r.uleb128_u32()?;
     let mut out = Vec::with_capacity(count as usize);
+    for _ in 0..count {
+        let field = r.name()?;
+        let kind = ExternalKind::from_byte(r.u8()?);
+        let index = r.uleb128_u32()?;
+        out.push(Export { field, kind, index });
+    }
+    Ok(out)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn minimal_header() -> Vec<u8> {
+        let mut v = WASM_MAGIC.to_vec();
