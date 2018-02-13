@@ -346,3 +346,18 @@ mod tests {
     fn parses_empty_module() {
         let m = parse(&minimal_header()).unwrap();
         assert_eq!(m.version, 1);
+        assert!(m.sections.is_empty());
+    }
+
+    #[test]
+    fn parses_import_section() {
+        let mut m = minimal_header();
+        // import section id=2
+        // body: count=1, module="wasi", field="fd_write", kind=func, typeidx=0
+        let mut body = Vec::new();
+        body.push(0x01); // count
+        body.push(0x04);
+        body.extend_from_slice(b"wasi");
+        body.push(0x08);
+        body.extend_from_slice(b"fd_write");
+        body.push(0x00); // func kind
