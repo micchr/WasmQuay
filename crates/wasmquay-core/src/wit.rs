@@ -26,3 +26,15 @@ use crate::error::{Error, ErrorKind, Result};
 
 /// One `import` or `export` declaration in a world.
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct InterfaceRef {
+    /// The interface path, e.g. `wasi:filesystem/types`.
+    pub path: String,
+    /// The signature text for a `func` export, if present (after `:`).
+    pub signature: Option<String>,
+}
+
+/// A `world` block: a named set of imports and exports.
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
+pub struct World {
+    /// The world's name.
+    pub name: String,
