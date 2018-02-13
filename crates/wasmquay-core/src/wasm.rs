@@ -332,3 +332,17 @@ mod tests {
 
     fn minimal_header() -> Vec<u8> {
         let mut v = WASM_MAGIC.to_vec();
+        v.extend_from_slice(&1u32.to_le_bytes());
+        v
+    }
+
+    #[test]
+    fn rejects_bad_magic() {
+        let err = parse(&[0, 0, 0, 0, 1, 0, 0, 0]).unwrap_err();
+        assert_eq!(err.kind(), ErrorKind::BadMagic);
+    }
+
+    #[test]
+    fn parses_empty_module() {
+        let m = parse(&minimal_header()).unwrap();
+        assert_eq!(m.version, 1);
