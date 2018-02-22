@@ -50,3 +50,15 @@ pub struct Manifest {
     /// The `package name:pkg@version` line, if present.
     pub package: Option<String>,
     /// The worlds declared in the manifest.
+    pub worlds: Vec<World>,
+}
+
+impl Manifest {
+    /// All imported interface paths across every world, de-duplicated & sorted.
+    pub fn all_imports(&self) -> Vec<String> {
+        let mut v: Vec<String> = self
+            .worlds
+            .iter()
+            .flat_map(|w| w.imports.iter().map(|i| i.path.clone()))
+            .collect();
+        v.sort();
