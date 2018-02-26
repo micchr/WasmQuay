@@ -74,3 +74,14 @@ impl Manifest {
             .flat_map(|w| w.exports.iter().map(|i| i.path.clone()))
             .collect();
         v.sort();
+        v.dedup();
+        v
+    }
+}
+
+/// Parse a manifest from its textual form.
+pub fn parse(text: &str) -> Result<Manifest> {
+    let mut manifest = Manifest::default();
+    let mut current: Option<World> = None;
+
+    for (lineno, raw) in text.lines().enumerate() {
