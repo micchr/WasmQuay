@@ -62,3 +62,15 @@ impl Manifest {
             .flat_map(|w| w.imports.iter().map(|i| i.path.clone()))
             .collect();
         v.sort();
+        v.dedup();
+        v
+    }
+
+    /// All exported interface paths across every world, de-duplicated & sorted.
+    pub fn all_exports(&self) -> Vec<String> {
+        let mut v: Vec<String> = self
+            .worlds
+            .iter()
+            .flat_map(|w| w.exports.iter().map(|i| i.path.clone()))
+            .collect();
+        v.sort();
