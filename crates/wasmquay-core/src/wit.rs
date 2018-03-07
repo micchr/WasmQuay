@@ -121,3 +121,15 @@ pub fn parse(text: &str) -> Result<Manifest> {
             });
             continue;
         }
+
+        if line == "}" {
+            match current.take() {
+                Some(w) => manifest.worlds.push(w),
+                None => {
+                    return Err(Error::new(
+                        ErrorKind::BadManifest,
+                        format!("line {}: unmatched '}}'", lineno + 1),
+                    ))
+                }
+            }
+            continue;
