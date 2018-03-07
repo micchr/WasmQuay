@@ -156,3 +156,15 @@ pub fn parse(text: &str) -> Result<Manifest> {
             ErrorKind::BadManifest,
             format!("line {}: unrecognized directive '{}'", lineno + 1, line),
         ));
+    }
+
+    if let Some(w) = current.take() {
+        // A missing closing brace is tolerated; treat EOF as end of world.
+        manifest.worlds.push(w);
+    }
+
+    Ok(manifest)
+}
+
+fn push_into<F: FnOnce(&mut World)>(
+    current: &mut Option<World>,
