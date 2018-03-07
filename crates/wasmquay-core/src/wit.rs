@@ -168,3 +168,15 @@ pub fn parse(text: &str) -> Result<Manifest> {
 
 fn push_into<F: FnOnce(&mut World)>(
     current: &mut Option<World>,
+    lineno: usize,
+    f: F,
+) -> Result<()> {
+    match current.as_mut() {
+        Some(w) => {
+            f(w);
+            Ok(())
+        }
+        None => Err(Error::new(
+            ErrorKind::BadManifest,
+            format!("line {}: import/export outside of a world", lineno + 1),
+        )),
