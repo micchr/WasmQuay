@@ -109,3 +109,15 @@ pub fn parse(text: &str) -> Result<Manifest> {
                 manifest.worlds.push(w);
             }
             let name = rest.trim_end_matches('{').trim().to_string();
+            if name.is_empty() {
+                return Err(Error::new(
+                    ErrorKind::BadManifest,
+                    format!("line {}: world requires a name", lineno + 1),
+                ));
+            }
+            current = Some(World {
+                name,
+                ..World::default()
+            });
+            continue;
+        }
