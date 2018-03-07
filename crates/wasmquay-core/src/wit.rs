@@ -144,3 +144,15 @@ pub fn parse(text: &str) -> Result<Manifest> {
         if let Some(rest) = line.strip_prefix("export ") {
             let iref = parse_interface_ref(rest)?;
             push_into(&mut current, lineno, |w| w.exports.push(iref))?;
+            continue;
+        }
+
+        // Opening brace on its own line for `world name` split across lines.
+        if line == "{" && current.is_some() {
+            continue;
+        }
+
+        return Err(Error::new(
+            ErrorKind::BadManifest,
+            format!("line {}: unrecognized directive '{}'", lineno + 1, line),
+        ));
