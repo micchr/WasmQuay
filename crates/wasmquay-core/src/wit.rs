@@ -133,3 +133,14 @@ pub fn parse(text: &str) -> Result<Manifest> {
                 }
             }
             continue;
+        }
+
+        if let Some(rest) = line.strip_prefix("import ") {
+            let iref = parse_interface_ref(rest)?;
+            push_into(&mut current, lineno, |w| w.imports.push(iref))?;
+            continue;
+        }
+
+        if let Some(rest) = line.strip_prefix("export ") {
+            let iref = parse_interface_ref(rest)?;
+            push_into(&mut current, lineno, |w| w.exports.push(iref))?;
