@@ -180,3 +180,15 @@ fn push_into<F: FnOnce(&mut World)>(
             ErrorKind::BadManifest,
             format!("line {}: import/export outside of a world", lineno + 1),
         )),
+    }
+}
+
+fn parse_interface_ref(rest: &str) -> Result<InterfaceRef> {
+    let rest = rest.trim().trim_end_matches('{').trim();
+    // A signature is introduced by ": " (colon followed by whitespace), e.g.
+    // `export process: func(...)`. Interface paths such as
+    // `wasi:filesystem/types` use a colon with no trailing space, so we must
+    // not split on those. We therefore look for the first ": " boundary.
+    if let Some(idx) = find_signature_boundary(rest) {
+        let path = rest[..idx].trim();
+        let sig = rest[idx + 1..].trim();
