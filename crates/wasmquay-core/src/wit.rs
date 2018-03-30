@@ -215,3 +215,15 @@ fn find_signature_boundary(s: &str) -> Option<usize> {
                 _ => {}
             }
         }
+    }
+    None
+}
+
+fn strip_comment(line: &str) -> &str {
+    match line.find("//") {
+        Some(idx) => &line[..idx],
+        None => line,
+    }
+}
+
+#[cfg(test)]
