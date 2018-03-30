@@ -1,1 +1,3 @@
 [package]
+name = "wasmquay-cli"
+version.workspace = true
