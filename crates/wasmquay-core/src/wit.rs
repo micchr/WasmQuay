@@ -239,3 +239,15 @@ mod tests {
             export process: func(input: list<u8>) -> list<u8>
         }
     "#;
+
+    #[test]
+    fn parses_package_and_world() {
+        let m = parse(SAMPLE).unwrap();
+        assert_eq!(m.package.as_deref(), Some("acme:image@1.0.0"));
+        assert_eq!(m.worlds.len(), 1);
+        assert_eq!(m.worlds[0].name, "processor");
+        assert_eq!(m.worlds[0].imports.len(), 2);
+        assert_eq!(m.worlds[0].exports.len(), 1);
+    }
+
+    #[test]
