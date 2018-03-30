@@ -227,3 +227,15 @@ fn strip_comment(line: &str) -> &str {
 }
 
 #[cfg(test)]
+mod tests {
+    use super::*;
+
+    const SAMPLE: &str = r#"
+        package acme:image@1.0.0
+        // a comment
+        world processor {
+            import wasi:filesystem/types
+            import wasi:clocks/wall-clock
+            export process: func(input: list<u8>) -> list<u8>
+        }
+    "#;
