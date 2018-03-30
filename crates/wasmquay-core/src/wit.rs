@@ -192,3 +192,14 @@ fn parse_interface_ref(rest: &str) -> Result<InterfaceRef> {
     if let Some(idx) = find_signature_boundary(rest) {
         let path = rest[..idx].trim();
         let sig = rest[idx + 1..].trim();
+        Ok(InterfaceRef {
+            path: path.to_string(),
+            signature: Some(sig.to_string()),
+        })
+    } else {
+        Ok(InterfaceRef {
+            path: rest.to_string(),
+            signature: None,
+        })
+    }
+}
