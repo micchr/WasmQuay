@@ -8,3 +8,4 @@ repository.workspace = true
 authors.workspace = true
 description = "Command-line front end for the wasmquay WASM inspection toolkit"
 
+[[bin]]
