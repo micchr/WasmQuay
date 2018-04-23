@@ -68,3 +68,19 @@ fn main() -> ExitCode {
 
 fn run(args: &[String]) -> Result<ExitCode, String> {
     if args.is_empty() || args.iter().any(|a| a == "-h" || a == "--help") {
+        print!("{}", USAGE);
+        return Ok(ExitCode::SUCCESS);
+    }
+    if args.iter().any(|a| a == "-V" || a == "--version") {
+        println!("wasmquay {}", VERSION);
+        return Ok(ExitCode::SUCCESS);
+    }
+
+    let mut format = Format::Text;
+    let mut positional: Vec<String> = Vec::new();
+    for a in args {
+        match a.as_str() {
+            "--json" => {
+                if format == Format::Text {
+                    format = Format::Json;
+                }
