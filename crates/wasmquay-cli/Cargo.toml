@@ -11,3 +11,4 @@ description = "Command-line front end for the wasmquay WASM inspection toolkit"
 [[bin]]
 name = "wasmquay"
 path = "src/main.rs"
+
