@@ -36,3 +36,19 @@ COMMANDS:
 
 FLAGS:
     --json      Emit machine-readable JSON
+    --pretty    Pretty-print JSON (implies --json)
+    -h, --help  Show this help
+    -V, --version  Show version
+
+EXIT CODES:
+    0 ok / compliant / compatible
+    1 usage error
+    2 parse or I/O error
+    3 policy violation or incompatibility
+";
+
+/// Output format selected by global flags.
+#[derive(Clone, Copy, PartialEq)]
+enum Format {
+    Text,
+    Json,
