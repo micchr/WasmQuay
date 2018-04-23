@@ -52,3 +52,19 @@ EXIT CODES:
 enum Format {
     Text,
     Json,
+    PrettyJson,
+}
+
+fn main() -> ExitCode {
+    let args: Vec<String> = std::env::args().skip(1).collect();
+    match run(&args) {
+        Ok(code) => code,
+        Err(e) => {
+            eprintln!("error: {}", e);
+            ExitCode::from(2)
+        }
+    }
+}
+
+fn run(args: &[String]) -> Result<ExitCode, String> {
+    if args.is_empty() || args.iter().any(|a| a == "-h" || a == "--help") {
