@@ -115,3 +115,19 @@ fn read_text(path: &str) -> Result<String, String> {
     std::fs::read_to_string(path).map_err(|e| format!("cannot read '{}': {}", path, e))
 }
 
+fn label_of(path: &str) -> String {
+    Path::new(path)
+        .file_name()
+        .and_then(|s| s.to_str())
+        .unwrap_or(path)
+        .to_string()
+}
+
+fn emit_json(json: wasmquay_core::json::Json, format: Format) {
+    match format {
+        Format::PrettyJson => println!("{}", json.to_pretty()),
+        _ => println!("{}", json.to_compact()),
+    }
+}
+
+fn cmd_inspect(rest: &[String], format: Format) -> Result<ExitCode, String> {
