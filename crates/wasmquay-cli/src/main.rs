@@ -99,3 +99,19 @@ fn run(args: &[String]) -> Result<ExitCode, String> {
     match command.as_str() {
         "inspect" => cmd_inspect(rest, format),
         "caps" => cmd_caps(rest, format),
+        "policy" => cmd_policy(rest, format),
+        "compat" => cmd_compat(rest, format),
+        "manifest" => cmd_manifest(rest, format),
+        "gen-fixtures" => cmd_gen_fixtures(rest),
+        other => Err(format!("unknown command '{}'\n\n{}", other, USAGE)),
+    }
+}
+
+fn read_file(path: &str) -> Result<Vec<u8>, String> {
+    std::fs::read(path).map_err(|e| format!("cannot read '{}': {}", path, e))
+}
+
+fn read_text(path: &str) -> Result<String, String> {
+    std::fs::read_to_string(path).map_err(|e| format!("cannot read '{}': {}", path, e))
+}
+
