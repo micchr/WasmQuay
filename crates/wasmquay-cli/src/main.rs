@@ -131,3 +131,19 @@ fn emit_json(json: wasmquay_core::json::Json, format: Format) {
 }
 
 fn cmd_inspect(rest: &[String], format: Format) -> Result<ExitCode, String> {
+    let path = rest.first().ok_or_else(|| usage("inspect <file.wasm>"))?;
+    let bytes = read_file(path)?;
+    let module = wasm::parse(&bytes).map_err(|e| e.to_string())?;
+    let reqs = policy::requirements_from_module(&module);
+    let label = label_of(path);
+    match format {
+        Format::Text => print!("{}", report::inspection_text(&module, &label, &reqs)),
+        _ => emit_json(report::inspection_json(&module, &label, &reqs), format),
+    }
+    Ok(ExitCode::SUCCESS)
+}
+
+fn cmd_caps(rest: &[String], format: Format) -> Result<ExitCode, String> {
+    let path = rest.first().ok_or_else(|| usage("caps <file.wasm>"))?;
+    let bytes = read_file(path)?;
+    let module = wasm::parse(&bytes).map_err(|e| e.to_string())?;
