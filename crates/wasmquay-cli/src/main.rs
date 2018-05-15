@@ -147,3 +147,19 @@ fn cmd_caps(rest: &[String], format: Format) -> Result<ExitCode, String> {
     let path = rest.first().ok_or_else(|| usage("caps <file.wasm>"))?;
     let bytes = read_file(path)?;
     let module = wasm::parse(&bytes).map_err(|e| e.to_string())?;
+    let reqs = policy::requirements_from_module(&module);
+    match format {
+        Format::Text => {
+            if reqs.is_empty() {
+                println!("(no host imports — module is self-contained)");
+            }
+            for r in &reqs {
+                println!("{:<8} {} :: {}", r.domain.slug(), r.source, r.detail);
+            }
+        }
+        _ => emit_json(
+            report::inspection_json(&module, &label_of(path), &reqs),
+            format,
+        ),
+    }
+    Ok(ExitCode::SUCCESS)
