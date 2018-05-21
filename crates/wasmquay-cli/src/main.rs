@@ -179,3 +179,18 @@ fn cmd_policy(rest: &[String], format: Format) -> Result<ExitCode, String> {
     let eval = policy::evaluate(&reqs, &pol);
     match format {
         Format::Text => print!("{}", report::evaluation_text(&eval)),
+        _ => emit_json(report::evaluation_json(&eval), format),
+    }
+    if eval.is_compliant() {
+        Ok(ExitCode::SUCCESS)
+    } else {
+        Ok(ExitCode::from(3))
+    }
+}
+
+fn cmd_compat(rest: &[String], format: Format) -> Result<ExitCode, String> {
+    let base_path = rest
+        .first()
+        .ok_or_else(|| usage("compat <baseline.wasm> <cand.wasm>"))?;
+    let cand_path = rest
+        .get(1)
