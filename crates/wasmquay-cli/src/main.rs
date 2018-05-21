@@ -194,3 +194,19 @@ fn cmd_compat(rest: &[String], format: Format) -> Result<ExitCode, String> {
         .ok_or_else(|| usage("compat <baseline.wasm> <cand.wasm>"))?;
     let cand_path = rest
         .get(1)
+        .ok_or_else(|| usage("compat <baseline.wasm> <cand.wasm>"))?;
+    let base = wasm::parse(&read_file(base_path)?).map_err(|e| e.to_string())?;
+    let cand = wasm::parse(&read_file(cand_path)?).map_err(|e| e.to_string())?;
+    let comp = compat::compare_modules(&base, &label_of(base_path), &cand, &label_of(cand_path));
+    match format {
+        Format::Text => print!("{}", report::compatibility_text(&comp)),
+        _ => emit_json(report::compatibility_json(&comp), format),
+    }
+    if comp.is_compatible() {
+        Ok(ExitCode::SUCCESS)
+    } else {
+        Ok(ExitCode::from(3))
+    }
+}
+
+fn cmd_manifest(rest: &[String], format: Format) -> Result<ExitCode, String> {
