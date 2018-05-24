@@ -226,3 +226,19 @@ fn cmd_manifest(rest: &[String], format: Format) -> Result<ExitCode, String> {
                     world.imports.len(),
                     world.exports.len()
                 );
+            }
+            println!("classified capability domains:");
+            for r in &reqs {
+                println!("  {:<8} {}", r.domain.slug(), r.source);
+            }
+        }
+        _ => {
+            use wasmquay_core::json::Json;
+            let worlds = manifest
+                .worlds
+                .iter()
+                .map(|w| {
+                    Json::obj(vec![
+                        ("name", Json::s(w.name.clone())),
+                        (
+                            "imports",
