@@ -305,3 +305,19 @@ pub fn bundled_fixtures() -> Vec<(&'static str, Vec<u8>)> {
                 .import_func("wasi_snapshot_preview1", "clock_time_get")
                 .import_func("wasi_snapshot_preview1", "fd_write")
                 .import_memory("env", "memory")
+                .export_func("run", 0)
+                .function_name(0, "run")
+                .build(),
+        ),
+        (
+            // A networked variant: adds sockets on top of the clock service.
+            "net-service.wasm",
+            FixtureBuilder::new()
+                .module_name("net-service")
+                .import_func("wasi_snapshot_preview1", "clock_time_get")
+                .import_func("wasi_snapshot_preview1", "fd_write")
+                .import_func("wasi_snapshot_preview1", "sock_recv")
+                .import_func("wasi_snapshot_preview1", "sock_send")
+                .import_memory("env", "memory")
+                .export_func("run", 0)
+                .function_name(0, "run")
