@@ -242,3 +242,19 @@ fn cmd_manifest(rest: &[String], format: Format) -> Result<ExitCode, String> {
                         ("name", Json::s(w.name.clone())),
                         (
                             "imports",
+                            Json::str_arr(w.imports.iter().map(|i| i.path.clone())),
+                        ),
+                        (
+                            "exports",
+                            Json::str_arr(w.exports.iter().map(|i| i.path.clone())),
+                        ),
+                    ])
+                })
+                .collect();
+            let caps = reqs
+                .iter()
+                .map(|r| {
+                    Json::obj(vec![
+                        ("domain", Json::s(r.domain.slug())),
+                        ("source", Json::s(r.source.clone())),
+                    ])
