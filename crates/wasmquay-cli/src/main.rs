@@ -321,3 +321,19 @@ pub fn bundled_fixtures() -> Vec<(&'static str, Vec<u8>)> {
                 .import_memory("env", "memory")
                 .export_func("run", 0)
                 .function_name(0, "run")
+                .build(),
+        ),
+        (
+            // A component-model style module importing preview2 interfaces.
+            "fs-component.wasm",
+            FixtureBuilder::new()
+                .module_name("fs-component")
+                .import_func("wasi:filesystem/types", "read-via-stream")
+                .import_func("wasi:clocks/wall-clock", "now")
+                .export_func("process", 0)
+                .export_func("flush", 1)
+                .function_name(0, "process")
+                .build(),
+        ),
+        (
+            // A module that imports an unrecognized host — flagged as unknown.
