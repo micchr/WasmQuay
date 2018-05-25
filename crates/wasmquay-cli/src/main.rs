@@ -258,3 +258,18 @@ fn cmd_manifest(rest: &[String], format: Format) -> Result<ExitCode, String> {
                         ("domain", Json::s(r.domain.slug())),
                         ("source", Json::s(r.source.clone())),
                     ])
+                })
+                .collect();
+            let doc = Json::obj(vec![
+                ("schema", Json::s("wasmquay/manifest@1")),
+                (
+                    "package",
+                    match &manifest.package {
+                        Some(p) => Json::s(p.clone()),
+                        None => Json::Null,
+                    },
+                ),
+                ("worlds", Json::Arr(worlds)),
+                ("capabilities", Json::Arr(caps)),
+            ]);
+            emit_json(doc, format);
