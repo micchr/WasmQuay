@@ -12,3 +12,6 @@ here was produced by the tools in this repository — nothing is hand-edited.
 | `image-pipeline.wit`   | A WIT-like manifest with two worlds.                              |
 
 The binary modules live in `../fixtures/` and are regenerated with
+`wasmquay gen-fixtures`.
+
+## Captured reports (JSON)
