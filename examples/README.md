@@ -26,3 +26,6 @@ The binary modules live in `../fixtures/` and are regenerated with
 ## Try it
 
 ```sh
+# 1. Build the CLI and (re)generate the fixtures.
+cargo build --release
+./target/release/wasmquay gen-fixtures fixtures
