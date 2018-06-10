@@ -29,3 +29,7 @@ The binary modules live in `../fixtures/` and are regenerated with
 # 1. Build the CLI and (re)generate the fixtures.
 cargo build --release
 ./target/release/wasmquay gen-fixtures fixtures
+
+# 2. Evaluate the networked service against the strict sandbox policy.
+#    Exits 3 because it needs the network, which the policy denies.
+./target/release/wasmquay policy fixtures/net-service.wasm examples/sandbox-strict.pol
