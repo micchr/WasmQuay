@@ -1,0 +1,8 @@
+{
+  "schema": "wasmquay/inspection@1",
+  "source": "clock-service.wasm",
+  "header": {
+    "magic": "\\0asm",
+    "version": 1,
+    "byte_length": 139,
+    "module_name": "clock-service"
