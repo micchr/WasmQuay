@@ -6,3 +6,10 @@
     "version": 1,
     "byte_length": 139,
     "module_name": "clock-service"
+  },
+  "sections": [
+    {
+      "id": 2,
+      "name": "import",
+      "custom_name": null,
+      "offset": 10,
