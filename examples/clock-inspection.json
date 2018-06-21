@@ -13,3 +13,9 @@
       "name": "import",
       "custom_name": null,
       "offset": 10,
+      "size": 89
+    },
+    {
+      "id": 7,
+      "name": "export",
+      "custom_name": null,
