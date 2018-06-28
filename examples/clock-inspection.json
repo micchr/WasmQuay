@@ -26,3 +26,10 @@
       "id": 0,
       "name": "custom",
       "custom_name": "name",
+      "offset": 110,
+      "size": 29
+    }
+  ],
+  "imports": [
+    {
+      "module": "wasi_snapshot_preview1",
