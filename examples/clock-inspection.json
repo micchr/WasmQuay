@@ -40,3 +40,10 @@
       "module": "wasi_snapshot_preview1",
       "field": "fd_write",
       "kind": "func"
+    },
+    {
+      "module": "env",
+      "field": "memory",
+      "kind": "memory"
+    }
+  ],
