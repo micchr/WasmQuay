@@ -47,3 +47,9 @@
       "kind": "memory"
     }
   ],
+  "exports": [
+    {
+      "field": "run",
+      "kind": "func",
+      "index": 0
+    }
