@@ -1,1 +1,3 @@
 {
+  "schema": "wasmquay/compat@1",
+  "baseline": "clock-service.wasm",
