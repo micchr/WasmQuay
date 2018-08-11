@@ -2,3 +2,5 @@
   "schema": "wasmquay/compat@1",
   "baseline": "clock-service.wasm",
   "candidate": "net-service.wasm",
+  "compatible": false,
+  "breaking_reasons": [
