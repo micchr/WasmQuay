@@ -4,3 +4,4 @@
   "candidate": "net-service.wasm",
   "compatible": false,
   "breaking_reasons": [
+    "new capability required: network via wasi_snapshot_preview1"
