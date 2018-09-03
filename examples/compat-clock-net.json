@@ -7,3 +7,4 @@
     "new capability required: network via wasi_snapshot_preview1"
   ],
   "export_diffs": [],
+  "capability_diffs": [
