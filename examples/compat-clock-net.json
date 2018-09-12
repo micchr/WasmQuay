@@ -10,3 +10,5 @@
   "capability_diffs": [
     {
       "change": "added",
+      "domain": "network",
+      "source": "wasi_snapshot_preview1"
