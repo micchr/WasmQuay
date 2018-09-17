@@ -1,2 +1,3 @@
 # wasmquay capability policy — networked edge function
 #
+# An edge worker that is allowed to reach the network and read a clock,
