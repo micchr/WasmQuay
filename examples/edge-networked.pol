@@ -3,3 +3,4 @@
 # An edge worker that is allowed to reach the network and read a clock,
 # but must never touch the local filesystem or spawn unknown host calls.
 
+policy "edge-networked"
