@@ -4,3 +4,4 @@
 # but must never touch the local filesystem or spawn unknown host calls.
 
 policy "edge-networked"
+default deny
