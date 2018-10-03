@@ -1,2 +1,3 @@
 // wasmquay WIT-like interface manifest (see docs/FORMAT.md).
 // Describes an image-processing component's host requirements and surface.
+
