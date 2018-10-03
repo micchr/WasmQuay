@@ -5,3 +5,5 @@ package acme:image-pipeline@1.4.0
 
 world processor {
     // Host requirements (imports).
+    import wasi:filesystem/types
+    import wasi:clocks/wall-clock
