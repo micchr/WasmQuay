@@ -6,3 +6,4 @@
 policy "edge-networked"
 default deny
 
+allow clock
