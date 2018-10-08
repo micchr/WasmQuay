@@ -9,3 +9,4 @@ world processor {
     import wasi:clocks/wall-clock
     import wasi:io/streams
 
+    // Public surface (exports).
