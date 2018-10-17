@@ -10,3 +10,5 @@ world processor {
     import wasi:io/streams
 
     // Public surface (exports).
+    export process: func(input: list<u8>) -> list<u8>
+    export describe: func() -> string
