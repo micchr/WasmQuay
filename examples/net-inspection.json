@@ -8,3 +8,12 @@
     "module_name": "net-service"
   },
   "sections": [
+    {
+      "id": 2,
+      "name": "import",
+      "custom_name": null,
+      "offset": 11,
+      "size": 159
+    },
+    {
+      "id": 7,
