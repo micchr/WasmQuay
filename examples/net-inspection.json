@@ -1,0 +1,10 @@
+{
+  "schema": "wasmquay/inspection@1",
+  "source": "net-service.wasm",
+  "header": {
+    "magic": "\\0asm",
+    "version": 1,
+    "byte_length": 208,
+    "module_name": "net-service"
+  },
+  "sections": [
