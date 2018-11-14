@@ -25,3 +25,12 @@
     {
       "id": 0,
       "name": "custom",
+      "custom_name": "name",
+      "offset": 181,
+      "size": 27
+    }
+  ],
+  "imports": [
+    {
+      "module": "wasi_snapshot_preview1",
+      "field": "clock_time_get",
