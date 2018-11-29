@@ -52,3 +52,11 @@
       "kind": "func"
     },
     {
+      "module": "env",
+      "field": "memory",
+      "kind": "memory"
+    }
+  ],
+  "exports": [
+    {
+      "field": "run",
