@@ -60,3 +60,12 @@
   "exports": [
     {
       "field": "run",
+      "kind": "func",
+      "index": 0
+    }
+  ],
+  "names": [
+    {
+      "index": 0,
+      "name": "run"
+    }
