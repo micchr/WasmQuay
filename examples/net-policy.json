@@ -1,0 +1,6 @@
+{
+  "schema": "wasmquay/policy@1",
+  "policy": "sandbox-strict",
+  "compliant": false,
+  "violations": [
+    "network"
