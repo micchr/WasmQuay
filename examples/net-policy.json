@@ -4,3 +4,9 @@
   "compliant": false,
   "violations": [
     "network"
+  ],
+  "verdicts": [
+    {
+      "domain": "fs",
+      "required": true,
+      "allowed": true,
