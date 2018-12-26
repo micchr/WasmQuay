@@ -20,3 +20,9 @@
       "required": false,
       "allowed": false,
       "violation": false,
+      "requirements": []
+    },
+    {
+      "domain": "clock",
+      "required": true,
+      "allowed": true,
