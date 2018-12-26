@@ -15,3 +15,8 @@
         "wasi_snapshot_preview1 :: fd_write"
       ]
     },
+    {
+      "domain": "env",
+      "required": false,
+      "allowed": false,
+      "violation": false,
