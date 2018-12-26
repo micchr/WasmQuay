@@ -10,3 +10,8 @@
       "domain": "fs",
       "required": true,
       "allowed": true,
+      "violation": false,
+      "requirements": [
+        "wasi_snapshot_preview1 :: fd_write"
+      ]
+    },
