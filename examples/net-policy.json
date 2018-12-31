@@ -26,3 +26,8 @@
       "domain": "clock",
       "required": true,
       "allowed": true,
+      "violation": false,
+      "requirements": [
+        "wasi_snapshot_preview1 :: clock_time_get"
+      ]
+    },
