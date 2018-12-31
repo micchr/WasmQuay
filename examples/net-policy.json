@@ -31,3 +31,9 @@
         "wasi_snapshot_preview1 :: clock_time_get"
       ]
     },
+    {
+      "domain": "network",
+      "required": true,
+      "allowed": false,
+      "violation": true,
+      "requirements": [
