@@ -47,3 +47,9 @@
       "allowed": false,
       "violation": false,
       "requirements": []
+    },
+    {
+      "domain": "stdio",
+      "required": false,
+      "allowed": true,
+      "violation": false,
