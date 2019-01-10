@@ -42,3 +42,8 @@
       ]
     },
     {
+      "domain": "random",
+      "required": false,
+      "allowed": false,
+      "violation": false,
+      "requirements": []
