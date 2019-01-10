@@ -37,3 +37,8 @@
       "allowed": false,
       "violation": true,
       "requirements": [
+        "wasi_snapshot_preview1 :: sock_recv",
+        "wasi_snapshot_preview1 :: sock_send"
+      ]
+    },
+    {
