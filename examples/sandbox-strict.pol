@@ -7,3 +7,5 @@ policy "sandbox-strict"
 default deny
 
 # Wall/monotonic clock is harmless for timing and logging.
+allow clock
+
