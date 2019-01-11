@@ -9,3 +9,5 @@ default deny
 # Wall/monotonic clock is harmless for timing and logging.
 allow clock
 
+# Standard streams for structured logging.
+allow stdio
