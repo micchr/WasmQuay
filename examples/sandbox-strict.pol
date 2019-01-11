@@ -13,3 +13,5 @@ allow clock
 allow stdio
 
 # Scratch filesystem, scoped to two directories.
+allow fs: /tmp, /var/cache/worker
+
