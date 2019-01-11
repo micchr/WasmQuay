@@ -11,3 +11,5 @@ allow clock
 
 # Standard streams for structured logging.
 allow stdio
+
+# Scratch filesystem, scoped to two directories.
