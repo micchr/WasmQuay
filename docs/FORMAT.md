@@ -18,3 +18,17 @@ decoder reads:
 | Header version       | little-endian `u32` (must be non-zero)                      |
 | Section              | `id:u8` `size:uleb128` `payload[size]`                      |
 | Import               | `module:name` `field:name` `kind:u8` `desc`                 |
+| Export               | `field:name` `kind:u8` `index:uleb128`                      |
+| `name` custom section| subsection `id:u8` `size:uleb128`; `0`=module, `1`=funcs    |
+
+`name` is a length-prefixed UTF-8 string: `len:uleb128` followed by `len` bytes.
+Integers use LEB128 (unsigned or signed as the grammar dictates).
+
+External `kind` bytes: `0x00` func, `0x01` table, `0x02` memory, `0x03` global.
+Any other byte is preserved as `other:0xNN`.
+
+**Scope note.** The decoder walks *all* sections structurally (id, offset,
+size) and deep-decodes the import, export and `name` sections — the pieces that
+determine a component's capability surface. It does not decode the code section
+body or component-model type definitions.
+
