@@ -75,3 +75,17 @@ world processor {
 
 ## 3. Capability policy (`.pol`)
 
+A line-oriented policy describing which capability domains a component may use.
+
+### Grammar
+
+```
+policy-file := (line)*
+line        := blank | comment | name | default | rule
+comment     := "#" .*                        ; also allowed at end of line
+name        := "policy" WS text              ; quotes optional, stripped
+default     := "default" WS ("allow" | "deny")
+rule        := ("allow" | "deny") WS domain (":" list)?
+domain      := "fs" | "env" | "clock" | "network" | "random" | "stdio" | "unknown"
+list        := token ("," token)*            ; resource allow-list
+```
