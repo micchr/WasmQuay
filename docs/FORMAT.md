@@ -89,3 +89,17 @@ rule        := ("allow" | "deny") WS domain (":" list)?
 domain      := "fs" | "env" | "clock" | "network" | "random" | "stdio" | "unknown"
 list        := token ("," token)*            ; resource allow-list
 ```
+
+* `default` sets the stance for any domain without an explicit rule. If absent,
+  the default is **deny**.
+* `network` and `net` are accepted aliases, as are `random`/`rand`.
+* The resource `list` (e.g. path prefixes, host names) is recorded on the rule
+  for auditing. The evaluator currently gates on the domain allow/deny bit;
+  resource-level matching is exposed in the parsed model for downstream tools.
+
+### Capability classification
+
+Imports are classified into domains as follows:
+
+| Import source                          | Domain     |
+|----------------------------------------|------------|
