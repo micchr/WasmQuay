@@ -46,3 +46,18 @@ manifest    := (line)*
 line        := blank | comment | package | world-open | world-close | decl
 comment     := "//" .*                      ; also allowed at end of line
 package     := "package" WS text
+world-open  := "world" WS name ("{")?
+world-close := "}"
+decl        := ("import" | "export") WS iref
+iref        := path (": " signature)?        ; ": " = colon + whitespace
+```
+
+* Blank lines and `//` comments are ignored anywhere.
+* A `:` that is **immediately followed by whitespace** introduces a signature
+  (e.g. `export process: func(...)`). A `:` inside a path
+  (`wasi:filesystem/types`) is part of the path.
+* A missing closing `}` at end of file is tolerated.
+* `import`/`export` outside a `world` is an error.
+
+### Example
+
