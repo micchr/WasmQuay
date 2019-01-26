@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" width="520" height="320" role="img" aria-labelledby="ct cd">
+  <title id="ct">capability crane</title>
+  <desc id="cd">An animated crane hoisting capability containers (fs, env, clock, network) and sorting them into allow and deny bins according to a policy.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#061726"/>
+      <stop offset="1" stop-color="#0b2036"/>
