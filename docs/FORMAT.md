@@ -146,3 +146,17 @@ order is stable across runs.
 `module_name` and `custom_name` are `null` when absent.
 
 ### 4.2 `wasmquay/policy@1`
+
+```json
+{
+  "schema": "wasmquay/policy@1",
+  "policy": "sandbox-strict",
+  "compliant": false,
+  "violations": ["network"],
+  "verdicts": [
+    { "domain": "network", "required": true, "allowed": false, "violation": true,
+      "requirements": ["wasi_snapshot_preview1 :: sock_recv"] }
+  ]
+}
+```
+
