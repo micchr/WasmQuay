@@ -117,3 +117,17 @@ Imports are classified into domains as follows:
 | anything else                           | `unknown`  |
 
 Non-function imports (memories, tables, globals) do not by themselves grant a
+host capability and are excluded from classification.
+
+---
+
+## 4. JSON reports
+
+All reports are UTF-8 JSON objects with a `schema` discriminator. Object key
+order is stable across runs.
+
+### 4.1 `wasmquay/inspection@1`
+
+```json
+{
+  "schema": "wasmquay/inspection@1",
