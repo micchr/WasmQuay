@@ -160,3 +160,17 @@ order is stable across runs.
 }
 ```
 
+A `verdict` exists for every domain; `required` marks the ones the component
+actually uses. `violation == required && !allowed`.
+
+### 4.3 `wasmquay/compat@1`
+
+```json
+{
+  "schema": "wasmquay/compat@1",
+  "baseline": "clock-service.wasm",
+  "candidate": "net-service.wasm",
+  "compatible": false,
+  "breaking_reasons": ["new capability required: network via wasi_snapshot_preview1"],
+  "export_diffs": [ { "change": "added", "name": "extra", "kind": "func" } ],
+  "capability_diffs": [ { "change": "added", "domain": "network", "source": "wasi_snapshot_preview1" } ]
