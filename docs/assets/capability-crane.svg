@@ -13,3 +13,10 @@
     </filter>
   </defs>
 
+  <rect width="520" height="320" fill="url(#bg2)"/>
+
+  <!-- crane mast + jib -->
+  <g stroke="#2f6f8a" stroke-width="4" fill="none">
+    <line x1="70" y1="40" x2="70" y2="270"/>
+    <line x1="70" y1="40" x2="420" y2="40"/>
+    <line x1="70" y1="70" x2="400" y2="40"/>
