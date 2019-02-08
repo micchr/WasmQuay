@@ -20,3 +20,11 @@
     <line x1="70" y1="40" x2="70" y2="270"/>
     <line x1="70" y1="40" x2="420" y2="40"/>
     <line x1="70" y1="70" x2="400" y2="40"/>
+    <line x1="70" y1="270" x2="120" y2="270"/>
+  </g>
+
+  <!-- trolley + cable + hook: travels along the jib -->
+  <g>
+    <g>
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0; 250 0; 250 0; 0 0; 0 0" keyTimes="0;0.3;0.55;0.85;1" dur="7s" repeatCount="indefinite"/>
