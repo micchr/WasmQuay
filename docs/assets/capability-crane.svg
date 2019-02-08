@@ -35,3 +35,11 @@
       <!-- hoisted capability container -->
       <g filter="url(#g2)">
         <animateTransform attributeName="transform" type="translate"
+          values="0 0;0 70;0 70;0 0;0 0" keyTimes="0;0.3;0.55;0.85;1" dur="7s" repeatCount="indefinite"/>
+        <rect x="112" y="120" width="42" height="30" rx="4" fill="#0f3350" stroke="#22e3c9" stroke-width="1.5"/>
+        <text x="133" y="140" font-family="monospace" font-size="11" fill="#8ff5e6" text-anchor="middle">net</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ALLOW bin (green) -->
