@@ -28,3 +28,10 @@
     <g>
       <animateTransform attributeName="transform" type="translate"
         values="0 0; 250 0; 250 0; 0 0; 0 0" keyTimes="0;0.3;0.55;0.85;1" dur="7s" repeatCount="indefinite"/>
+      <rect x="120" y="34" width="26" height="12" rx="2" fill="#3f8fb0"/>
+      <line x1="133" y1="46" x2="133" y2="120" stroke="#5fb6d6" stroke-width="2">
+        <animate attributeName="y2" values="120;190;190;120;120" keyTimes="0;0.3;0.55;0.85;1" dur="7s" repeatCount="indefinite"/>
+      </line>
+      <!-- hoisted capability container -->
+      <g filter="url(#g2)">
+        <animateTransform attributeName="transform" type="translate"
