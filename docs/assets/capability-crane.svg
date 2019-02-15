@@ -50,3 +50,10 @@
       <text x="168" y="256">clock ✓</text>
       <text x="168" y="276">stdio ✓</text>
       <text x="168" y="296">fs:/tmp ✓</text>
+    </g>
+  </g>
+
+  <!-- DENY bin (red) -->
+  <g filter="url(#g2)">
+    <rect x="330" y="230" width="150" height="70" rx="6" fill="#331414" stroke="#ff5d5d" stroke-width="1.5"/>
+    <text x="405" y="222" font-family="monospace" font-size="12" fill="#ff9a9a" text-anchor="middle">deny</text>
