@@ -57,3 +57,11 @@
   <g filter="url(#g2)">
     <rect x="330" y="230" width="150" height="70" rx="6" fill="#331414" stroke="#ff5d5d" stroke-width="1.5"/>
     <text x="405" y="222" font-family="monospace" font-size="12" fill="#ff9a9a" text-anchor="middle">deny</text>
+    <g font-family="monospace" font-size="11" fill="#ff6b6b">
+      <text x="350" y="256">network ✗</text>
+      <text x="350" y="276">env ✗</text>
+      <text x="350" y="296">unknown ✗</text>
+    </g>
+    <!-- alert pulse on the deny bin -->
+    <circle cx="405" cy="215" r="4" fill="#ff5d5d">
+      <animate attributeName="opacity" values="1;0.15;1" dur="1.3s" repeatCount="indefinite"/>
