@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260" role="img" aria-labelledby="title desc">
+  <title id="title">wasmquay: capability quay</title>
+  <desc id="desc">An animated terminal-style banner showing WebAssembly component modules docking at an inspection quay with a scanning beam.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#04121f"/>
+      <stop offset="1" stop-color="#0a2740"/>
+    </linearGradient>
