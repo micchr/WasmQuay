@@ -32,3 +32,12 @@
 
   <!-- scanning beam sweeping across the quay -->
   <rect x="-160" y="0" width="160" height="210" fill="url(#beam)">
+    <animate attributeName="x" values="-160;720" dur="4.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- docked component modules (each a .wasm crate) -->
+  <g font-family="'Consolas','SFMono-Regular',monospace" font-size="11">
+    <g filter="url(#glow)">
+      <rect x="70" y="120" width="110" height="80" rx="6" fill="#0e2f49" stroke="#22e3c9" stroke-width="1.5"/>
+      <text x="125" y="150" fill="#8ff5e6" text-anchor="middle">clock-svc</text>
+      <text x="125" y="170" fill="#4fb9c9" text-anchor="middle">clock · fs</text>
