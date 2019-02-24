@@ -24,3 +24,11 @@
   <g stroke="#123a55" stroke-width="1" opacity="0.55">
     <line x1="0" y1="210" x2="720" y2="210"/>
     <line x1="0" y1="232" x2="720" y2="232"/>
+    <line x1="120" y1="200" x2="120" y2="260"/>
+    <line x1="300" y1="200" x2="300" y2="260"/>
+    <line x1="480" y1="200" x2="480" y2="260"/>
+    <line x1="620" y1="200" x2="620" y2="260"/>
+  </g>
+
+  <!-- scanning beam sweeping across the quay -->
+  <rect x="-160" y="0" width="160" height="210" fill="url(#beam)">
