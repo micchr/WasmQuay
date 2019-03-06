@@ -361,3 +361,49 @@ mod tests {
         body.push(0x08);
         body.extend_from_slice(b"fd_write");
         body.push(0x00); // func kind
+        body.push(0x00); // typeidx
+        m.push(2);
+        m.push(body.len() as u8);
+        m.extend_from_slice(&body);
+
+        let parsed = parse(&m).unwrap();
+        assert_eq!(parsed.imports.len(), 1);
+        assert_eq!(parsed.imports[0].module, "wasi");
+        assert_eq!(parsed.imports[0].field, "fd_write");
+        assert_eq!(parsed.imports[0].kind, ExternalKind::Func);
+    }
+
+    #[test]
+    fn parses_export_and_name_sections() {
+        let mut m = minimal_header();
+        // export section id=7: count=1, field="run", kind=func, index=3
+        let mut ex = Vec::new();
+        ex.push(0x01);
+        ex.push(0x03);
+        ex.extend_from_slice(b"run");
+        ex.push(0x00);
+        ex.push(0x03);
+        m.push(7);
+        m.push(ex.len() as u8);
+        m.extend_from_slice(&ex);
+
+        // custom name section id=0: name="name", module subsection
+        let mut namesec = Vec::new();
+        namesec.push(0x04);
+        namesec.extend_from_slice(b"name");
+        // subsection 0 (module name)
+        let mut sub0 = Vec::new();
+        sub0.push(0x03);
+        sub0.extend_from_slice(b"app");
+        namesec.push(0x00);
+        namesec.push(sub0.len() as u8);
+        namesec.extend_from_slice(&sub0);
+        m.push(0);
+        m.push(namesec.len() as u8);
+        m.extend_from_slice(&namesec);
+
+        let parsed = parse(&m).unwrap();
+        assert_eq!(parsed.exports.len(), 1);
+        assert_eq!(parsed.exports[0].field, "run");
+        assert_eq!(parsed.exports[0].index, 3);
+        assert_eq!(parsed.module_name.as_deref(), Some("app"));
