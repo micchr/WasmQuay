@@ -66,3 +66,12 @@
     <g filter="url(#glow)">
       <rect x="592" y="138" width="96" height="62" rx="6" fill="#0e2f49" stroke="#b98cff" stroke-width="1.5"/>
       <text x="640" y="166" fill="#d8c4ff" text-anchor="middle">opaque</text>
+      <text x="640" y="184" fill="#a684e0" text-anchor="middle">unknown?</text>
+    </g>
+  </g>
+
+  <!-- title cluster -->
+  <g font-family="'Consolas','SFMono-Regular',monospace">
+    <text x="36" y="52" fill="#22e3c9" font-size="34" font-weight="700" filter="url(#glow)">wasmquay</text>
+    <text x="38" y="76" fill="#6fd3e6" font-size="13">offline wasm component inspection · capability policy</text>
+    <g font-size="12">
