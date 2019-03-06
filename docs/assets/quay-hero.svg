@@ -49,3 +49,12 @@
 
     <g filter="url(#glow)">
       <rect x="250" y="100" width="110" height="100" rx="6" fill="#0e2f49" stroke="#ff7a59" stroke-width="1.5"/>
+      <text x="305" y="132" fill="#ffc4b3" text-anchor="middle">net-svc</text>
+      <text x="305" y="152" fill="#ff9d86" text-anchor="middle">network!</text>
+      <circle cx="305" cy="176" r="7" fill="none" stroke="#ff7a59" stroke-width="1.5">
+        <animate attributeName="r" values="5;10;5" dur="1.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <g filter="url(#glow)">
