@@ -58,3 +58,11 @@
     </g>
 
     <g filter="url(#glow)">
+      <rect x="430" y="128" width="110" height="72" rx="6" fill="#0e2f49" stroke="#22e3c9" stroke-width="1.5"/>
+      <text x="485" y="158" fill="#8ff5e6" text-anchor="middle">fs-comp</text>
+      <text x="485" y="178" fill="#4fb9c9" text-anchor="middle">fs · clock</text>
+    </g>
+
+    <g filter="url(#glow)">
+      <rect x="592" y="138" width="96" height="62" rx="6" fill="#0e2f49" stroke="#b98cff" stroke-width="1.5"/>
+      <text x="640" y="166" fill="#d8c4ff" text-anchor="middle">opaque</text>
