@@ -31,3 +31,14 @@ export function riskScore(report) {
     let score = 0;
     for (const group of report.capabilities) {
         // Weight scales with the number of distinct entry points in a domain,
+        // with diminishing returns so one noisy domain cannot dominate.
+        const base = DOMAIN_WEIGHT[group.domain] ?? 0;
+        const breadth = 1 + Math.log2(1 + group.requirements.length);
+        score += base * breadth;
+    }
+    return Math.round(score * 10) / 10;
+}
+/** Bucket a raw score into a named band. */
+export function riskBand(score) {
+    if (score <= 0)
+        return "inert";
