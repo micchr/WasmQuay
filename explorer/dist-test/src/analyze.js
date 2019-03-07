@@ -20,3 +20,14 @@ export const DOMAIN_WEIGHT = {
 export const DOMAIN_RATIONALE = {
     network: "can open sockets / exfiltrate data",
     fs: "can read or modify files",
+    unknown: "imports an unrecognized host — treat as untrusted",
+    env: "can read environment variables and arguments",
+    random: "consumes a randomness source",
+    clock: "can read wall/monotonic clocks",
+    stdio: "uses standard input/output streams",
+};
+/** Sum the weighted risk of the required domains in an inspection. */
+export function riskScore(report) {
+    let score = 0;
+    for (const group of report.capabilities) {
+        // Weight scales with the number of distinct entry points in a domain,
