@@ -75,3 +75,14 @@ export function analyzeSurface(report) {
 }
 /**
  * Cross-check an inspection against a policy report for the same component.
+ *
+ * The policy report already contains the verdict, but reconciling the two
+ * documents lets the explorer produce richer, per-requirement guidance and
+ * surface disagreements (e.g. a domain required by the inspection but absent
+ * from the policy verdicts, which would indicate mismatched inputs).
+ */
+export function reconcile(inspection, policy) {
+    const requiredDomains = new Set(inspection.capabilities.map((g) => g.domain));
+    const findings = [];
+    for (const domain of ALL_DOMAINS) {
+        const verdict = policy.verdicts.find((v) => v.domain === domain);
