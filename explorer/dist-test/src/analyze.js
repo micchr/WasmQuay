@@ -64,3 +64,14 @@ export function analyzeSurface(report) {
     return {
         source: report.source,
         moduleName: report.header.module_name,
+        domains,
+        score,
+        band: riskBand(score),
+        counts,
+        hasUnknown: report.capabilities.some((g) => g.domain === "unknown"),
+        importCount: report.imports.length,
+        exportCount: report.exports.length,
+    };
+}
+/**
+ * Cross-check an inspection against a policy report for the same component.
