@@ -53,3 +53,14 @@ export function riskBand(score) {
 /** Build the full capability surface for an inspection report. */
 export function analyzeSurface(report) {
     const counts = {};
+    for (const group of report.capabilities) {
+        counts[group.domain] = group.requirements.length;
+    }
+    const domains = report.capabilities
+        .map((g) => g.domain)
+        .slice()
+        .sort((a, b) => (DOMAIN_WEIGHT[b] ?? 0) - (DOMAIN_WEIGHT[a] ?? 0));
+    const score = riskScore(report);
+    return {
+        source: report.source,
+        moduleName: report.header.module_name,
