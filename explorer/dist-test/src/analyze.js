@@ -42,3 +42,14 @@ export function riskScore(report) {
 export function riskBand(score) {
     if (score <= 0)
         return "inert";
+    if (score < 2)
+        return "low";
+    if (score < 6)
+        return "moderate";
+    if (score < 12)
+        return "elevated";
+    return "high";
+}
+/** Build the full capability surface for an inspection report. */
+export function analyzeSurface(report) {
+    const counts = {};
