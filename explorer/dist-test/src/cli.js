@@ -20,3 +20,13 @@ const USAGE = `wasmquay-explore — static capability explorer for wasmquay repo
 
 USAGE:
   wasmquay-explore surface <inspection.json> [policy.json] [--json]
+  wasmquay-explore rank <inspection.json> [more.json ...] [--json]
+
+FLAGS:
+  --json   emit a machine-readable summary
+  --help   show this help
+`;
+function fail(message, code) {
+    proc.stderr.write(`error: ${message}\n`);
+    proc.exit(code);
+}
