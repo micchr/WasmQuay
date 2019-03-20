@@ -51,3 +51,14 @@ function main() {
     try {
         if (command === "surface") {
             runSurface(rest, asJson);
+        }
+        else if (command === "rank") {
+            runRank(rest, asJson);
+        }
+        else {
+            fail(`unknown command '${String(command)}'\n\n${USAGE}`, 1);
+        }
+    }
+    catch (e) {
+        if (e instanceof ReportError) {
+            fail(e.message, 2);
