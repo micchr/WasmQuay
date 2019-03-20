@@ -30,3 +30,14 @@ function fail(message, code) {
     proc.stderr.write(`error: ${message}\n`);
     proc.exit(code);
 }
+function readReport(path) {
+    try {
+        return readFileSync(path, "utf8");
+    }
+    catch (e) {
+        fail(`cannot read '${path}': ${e.message}`, 2);
+    }
+}
+function main() {
+    const args = proc.argv.slice(2);
+    if (args.length === 0 || args.includes("--help")) {
