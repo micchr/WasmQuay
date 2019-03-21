@@ -1,1 +1,3 @@
 /**
+ * wasmquay-explorer — public API.
+ *
