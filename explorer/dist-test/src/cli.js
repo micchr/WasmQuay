@@ -83,3 +83,14 @@ function runSurface(rest, asJson) {
         if (policy) {
             proc.stdout.write(`\npolicy '${policy.policy}': ` +
                 (policy.compliant ? "COMPLIANT\n" : "VIOLATION\n"));
+            const summary = buildSummary(inspection, policy);
+            proc.stdout.write(renderFindings(summary.findings ?? []) + "\n");
+        }
+    }
+    if (policy && !policy.compliant) {
+        proc.exit(3);
+    }
+}
+function runRank(rest, asJson) {
+    if (rest.length === 0) {
+        fail("usage: rank <inspection.json> [more.json ...]", 1);
