@@ -73,3 +73,13 @@ function runSurface(rest, asJson) {
     }
     const inspection = parseInspection(readReport(inspectionPath));
     const policy = rest[1] ? parsePolicy(readReport(rest[1])) : undefined;
+    if (asJson) {
+        const summary = buildSummary(inspection, policy);
+        proc.stdout.write(JSON.stringify(summary, null, 2) + "\n");
+    }
+    else {
+        const surface = analyzeSurface(inspection);
+        proc.stdout.write(renderSurface(surface) + "\n");
+        if (policy) {
+            proc.stdout.write(`\npolicy '${policy.policy}': ` +
+                (policy.compliant ? "COMPLIANT\n" : "VIOLATION\n"));
