@@ -7,3 +7,5 @@
  *
  * It performs no WebAssembly execution and no I/O of its own (the CLI wrapper
  * in `cli.ts` handles file reading); every export here is a pure function of
+ * its inputs.
+ */
