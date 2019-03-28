@@ -17,3 +17,17 @@ export class ReportError extends Error {
 function isObject(v) {
     return typeof v === "object" && v !== null && !Array.isArray(v);
 }
+function requireString(obj, key) {
+    const v = obj[key];
+    if (typeof v !== "string") {
+        throw new ReportError(`expected string field '${key}'`);
+    }
+    return v;
+}
+function requireNumber(obj, key) {
+    const v = obj[key];
+    if (typeof v !== "number") {
+        throw new ReportError(`expected number field '${key}'`);
+    }
+    return v;
+}
