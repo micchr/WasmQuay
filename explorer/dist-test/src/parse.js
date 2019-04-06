@@ -31,3 +31,17 @@ function requireNumber(obj, key) {
     }
     return v;
 }
+function requireBool(obj, key) {
+    const v = obj[key];
+    if (typeof v !== "boolean") {
+        throw new ReportError(`expected boolean field '${key}'`);
+    }
+    return v;
+}
+function requireArray(obj, key) {
+    const v = obj[key];
+    if (!Array.isArray(v)) {
+        throw new ReportError(`expected array field '${key}'`);
+    }
+    return v;
+}
