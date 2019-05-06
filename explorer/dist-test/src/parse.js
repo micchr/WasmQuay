@@ -45,3 +45,18 @@ function requireArray(obj, key) {
     }
     return v;
 }
+function asDomain(v) {
+    if (typeof v === "string" && ALL_DOMAINS.includes(v)) {
+        return v;
+    }
+    throw new ReportError(`unknown capability domain '${String(v)}'`);
+}
+/** Parse and validate an inspection report from a JSON string. */
+export function parseInspection(text) {
+    const doc = parseJson(text);
+    if (!doc.schema || !String(doc.schema).startsWith("wasmquay/inspection")) {
+        throw new ReportError(`not an inspection report (schema='${String(doc.schema)}')`);
+    }
+    const header = doc.header;
+    if (!isObject(header)) {
+        throw new ReportError("inspection report missing 'header'");
