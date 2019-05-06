@@ -74,3 +74,17 @@ export function parseInspection(text) {
     // The parsed structure is validated field-by-field above; the cast is safe.
     return {
         schema: requireString(doc, "schema"),
+        source: requireString(doc, "source"),
+        header: {
+            magic: requireString(header, "magic"),
+            version: requireNumber(header, "version"),
+            byte_length: requireNumber(header, "byte_length"),
+            module_name: header.module_name === null ? null : String(header.module_name),
+        },
+        sections: requireArray(doc, "sections").map((s) => {
+            const so = asObject(s, "section");
+            return {
+                id: requireNumber(so, "id"),
+                name: requireString(so, "name"),
+                custom_name: so.custom_name === null ? null : String(so.custom_name),
+                offset: requireNumber(so, "offset"),
