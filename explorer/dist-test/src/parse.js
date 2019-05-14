@@ -131,3 +131,18 @@ export function parsePolicy(text) {
                 domain: asDomain(vo.domain),
                 required: requireBool(vo, "required"),
                 allowed: requireBool(vo, "allowed"),
+                violation: requireBool(vo, "violation"),
+                requirements: requireArray(vo, "requirements").map((r) => String(r)),
+            };
+        }),
+    };
+}
+/** Parse and validate a compatibility report. */
+export function parseCompat(text) {
+    const doc = parseJson(text);
+    if (!String(doc.schema).startsWith("wasmquay/compat")) {
+        throw new ReportError(`not a compat report (schema='${String(doc.schema)}')`);
+    }
+    return {
+        schema: requireString(doc, "schema"),
+        baseline: requireString(doc, "baseline"),
