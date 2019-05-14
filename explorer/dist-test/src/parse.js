@@ -146,3 +146,17 @@ export function parseCompat(text) {
     return {
         schema: requireString(doc, "schema"),
         baseline: requireString(doc, "baseline"),
+        candidate: requireString(doc, "candidate"),
+        compatible: requireBool(doc, "compatible"),
+        breaking_reasons: requireArray(doc, "breaking_reasons").map((r) => String(r)),
+        export_diffs: requireArray(doc, "export_diffs").map((d) => {
+            const do_ = asObject(d, "export_diff");
+            return {
+                change: asChange(do_.change),
+                name: requireString(do_, "name"),
+                kind: requireString(do_, "kind"),
+            };
+        }),
+        capability_diffs: requireArray(doc, "capability_diffs").map((d) => {
+            const do_ = asObject(d, "capability_diff");
+            return {
