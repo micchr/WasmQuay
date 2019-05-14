@@ -103,3 +103,17 @@ export function parseInspection(text) {
             const eo = asObject(e, "export");
             return {
                 field: requireString(eo, "field"),
+                kind: requireString(eo, "kind"),
+                index: requireNumber(eo, "index"),
+            };
+        }),
+        names: requireArray(doc, "names").map((n) => {
+            const no = asObject(n, "name");
+            return { index: requireNumber(no, "index"), name: requireString(no, "name") };
+        }),
+        capabilities,
+    };
+}
+/** Parse and validate a policy evaluation report. */
+export function parsePolicy(text) {
+    const doc = parseJson(text);
