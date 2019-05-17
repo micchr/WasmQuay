@@ -4,3 +4,11 @@
  */
 import { analyzeSurface, DOMAIN_RATIONALE, reconcile, } from "./analyze.js";
 const BAND_GLYPH = {
+    inert: "○",
+    low: "◔",
+    moderate: "◑",
+    elevated: "◕",
+    high: "●",
+};
+/** Render a capability surface as an aligned text block. */
+export function renderSurface(surface) {
