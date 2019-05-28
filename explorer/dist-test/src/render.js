@@ -34,3 +34,11 @@ export function renderFindings(findings) {
     if (findings.length === 0) {
         return "  (no capability findings)";
     }
+    const glyph = {
+        ok: "✓",
+        note: "…",
+        violation: "✗",
+    };
+    return findings
+        .map((f) => `  ${glyph[f.severity]} [${f.severity}] ${f.message}`)
+        .join("\n");
