@@ -19,3 +19,11 @@ export function renderSurface(surface) {
     lines.push(`  imports=${surface.importCount} exports=${surface.exportCount}`);
     if (surface.domains.length === 0) {
         lines.push("  capabilities: none — self-contained");
+    }
+    else {
+        lines.push("  capabilities:");
+        for (const domain of surface.domains) {
+            const count = surface.counts[domain] ?? 0;
+            lines.push(`    • ${domain.padEnd(8)} x${count}  — ${DOMAIN_RATIONALE[domain]}`);
+        }
+    }
