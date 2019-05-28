@@ -27,3 +27,10 @@ export function renderSurface(surface) {
             lines.push(`    • ${domain.padEnd(8)} x${count}  — ${DOMAIN_RATIONALE[domain]}`);
         }
     }
+    return lines.join("\n");
+}
+/** Render reconciliation findings between an inspection and policy. */
+export function renderFindings(findings) {
+    if (findings.length === 0) {
+        return "  (no capability findings)";
+    }
