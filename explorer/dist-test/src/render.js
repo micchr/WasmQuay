@@ -42,3 +42,11 @@ export function renderFindings(findings) {
     return findings
         .map((f) => `  ${glyph[f.severity]} [${f.severity}] ${f.message}`)
         .join("\n");
+}
+/** Build the JSON summary object for an inspection (+ optional policy). */
+export function buildSummary(inspection, policy) {
+    const surface = analyzeSurface(inspection);
+    const base = {
+        source: surface.source,
+        moduleName: surface.moduleName,
+        score: surface.score,
