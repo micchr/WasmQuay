@@ -3,3 +3,6 @@
  *
  * These mirror the schemas documented in `docs/FORMAT.md`. The explorer never
  * mutates a report; it only reads these shapes, so every field is `readonly`.
+ */
+/** All known capability domains in a stable order. */
+export const ALL_DOMAINS = [
