@@ -6,3 +6,5 @@
  */
 /** All known capability domains in a stable order. */
 export const ALL_DOMAINS = [
+    "fs",
+    "env",
