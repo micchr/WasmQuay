@@ -8,3 +8,5 @@
 export const ALL_DOMAINS = [
     "fs",
     "env",
+    "clock",
+    "network",
