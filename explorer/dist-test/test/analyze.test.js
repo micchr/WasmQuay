@@ -13,3 +13,11 @@ function inspection(source, caps) {
         capabilities: caps.map((c) => ({
             domain: c.domain,
             requirements: Array.from({ length: c.count }, (_, i) => ({
+                source: "src",
+                detail: `d${i}`,
+            })),
+        })),
+    };
+}
+test("riskBand thresholds", () => {
+    assert.equal(riskBand(0), "inert");
