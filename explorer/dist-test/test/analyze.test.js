@@ -21,3 +21,11 @@ function inspection(source, caps) {
 }
 test("riskBand thresholds", () => {
     assert.equal(riskBand(0), "inert");
+    assert.equal(riskBand(1), "low");
+    assert.equal(riskBand(4), "moderate");
+    assert.equal(riskBand(8), "elevated");
+    assert.equal(riskBand(20), "high");
+});
+test("network scores higher than clock", () => {
+    const net = riskScore(inspection("net", [{ domain: "network", count: 1 }]));
+    const clk = riskScore(inspection("clk", [{ domain: "clock", count: 1 }]));
