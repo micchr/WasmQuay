@@ -29,3 +29,11 @@ test("riskBand thresholds", () => {
 test("network scores higher than clock", () => {
     const net = riskScore(inspection("net", [{ domain: "network", count: 1 }]));
     const clk = riskScore(inspection("clk", [{ domain: "clock", count: 1 }]));
+    assert.ok(net > clk, `expected ${net} > ${clk}`);
+});
+test("analyzeSurface sorts domains by weight and flags unknown", () => {
+    const r = inspection("mix", [
+        { domain: "clock", count: 1 },
+        { domain: "network", count: 2 },
+        { domain: "unknown", count: 1 },
+    ]);
