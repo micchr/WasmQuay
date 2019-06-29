@@ -37,3 +37,11 @@ test("analyzeSurface sorts domains by weight and flags unknown", () => {
         { domain: "network", count: 2 },
         { domain: "unknown", count: 1 },
     ]);
+    const s = analyzeSurface(r);
+    // network (5) and unknown (5) outrank clock (1); network listed among first.
+    assert.ok(s.domains[0] === "network" || s.domains[0] === "unknown");
+    assert.equal(s.hasUnknown, true);
+    assert.equal(s.counts["network"], 2);
+});
+test("self-contained module is inert", () => {
+    const s = analyzeSurface(inspection("pure", []));
