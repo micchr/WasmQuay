@@ -45,3 +45,11 @@ test("analyzeSurface sorts domains by weight and flags unknown", () => {
 });
 test("self-contained module is inert", () => {
     const s = analyzeSurface(inspection("pure", []));
+    assert.equal(s.band, "inert");
+    assert.equal(s.score, 0);
+});
+test("rankSurfaces orders by descending score", () => {
+    const a = analyzeSurface(inspection("a", [{ domain: "clock", count: 1 }]));
+    const b = analyzeSurface(inspection("b", [{ domain: "network", count: 3 }]));
+    const ranked = rankSurfaces([a, b]);
+    assert.equal(ranked[0].source, "b");
