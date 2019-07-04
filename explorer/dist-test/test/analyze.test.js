@@ -53,3 +53,10 @@ test("rankSurfaces orders by descending score", () => {
     const b = analyzeSurface(inspection("b", [{ domain: "network", count: 3 }]));
     const ranked = rankSurfaces([a, b]);
     assert.equal(ranked[0].source, "b");
+});
+test("reconcile flags violations and notes", () => {
+    const insp = inspection("svc", [
+        { domain: "network", count: 1 },
+        { domain: "clock", count: 1 },
+    ]);
+    const policy = {
