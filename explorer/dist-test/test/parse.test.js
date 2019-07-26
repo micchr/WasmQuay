@@ -21,3 +21,11 @@ test("parseInspection accepts a valid report", () => {
 });
 test("parseInspection rejects wrong schema", () => {
     const bad = JSON.stringify({ schema: "other@1" });
+    assert.throws(() => parseInspection(bad));
+});
+test("parseInspection rejects invalid JSON", () => {
+    assert.throws(() => parseInspection("{not json"));
+});
+test("parseInspection rejects unknown domain", () => {
+    const bad = JSON.stringify({
+        schema: "wasmquay/inspection@1",
