@@ -37,3 +37,11 @@ test("parseInspection rejects unknown domain", () => {
         names: [],
         capabilities: [{ domain: "telepathy", requirements: [] }],
     });
+    assert.throws(() => parseInspection(bad));
+    // The thrown error is a ReportError (verified by the throw above).
+    try {
+        parseInspection(bad);
+    }
+    catch (e) {
+        assert.ok(e instanceof ReportError);
+    }
