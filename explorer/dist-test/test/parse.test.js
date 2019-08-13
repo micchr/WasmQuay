@@ -45,3 +45,11 @@ test("parseInspection rejects unknown domain", () => {
     catch (e) {
         assert.ok(e instanceof ReportError);
     }
+});
+test("parsePolicy reads verdicts and compliance", () => {
+    const doc = JSON.stringify({
+        schema: "wasmquay/policy@1",
+        policy: "sandbox-strict",
+        compliant: false,
+        violations: ["network"],
+        verdicts: [
