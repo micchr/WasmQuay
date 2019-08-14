@@ -53,3 +53,10 @@ test("parsePolicy reads verdicts and compliance", () => {
         compliant: false,
         violations: ["network"],
         verdicts: [
+            { domain: "network", required: true, allowed: false, violation: true, requirements: ["a :: b"] },
+        ],
+    });
+    const p = parsePolicy(doc);
+    assert.equal(p.compliant, false);
+    assert.deepEqual(p.violations, ["network"]);
+    assert.equal(p.verdicts[0].violation, true);
