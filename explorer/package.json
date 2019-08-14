@@ -1,2 +1,6 @@
 {
   "name": "wasmquay-explorer",
+  "version": "0.1.0",
+  "description": "Static capability explorer that consumes wasmquay JSON reports",
+  "license": "MIT",
+  "type": "module",
