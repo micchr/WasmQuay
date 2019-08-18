@@ -4,3 +4,7 @@
   "description": "Static capability explorer that consumes wasmquay JSON reports",
   "license": "MIT",
   "type": "module",
+  "bin": {
+    "wasmquay-explore": "dist/cli.js"
+  },
+  "main": "dist/index.js",
