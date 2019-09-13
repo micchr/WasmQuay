@@ -55,3 +55,17 @@ export interface CapabilitySurface {
   readonly importCount: number;
   readonly exportCount: number;
 }
+
+/** Sum the weighted risk of the required domains in an inspection. */
+export function riskScore(report: InspectionReport): number {
+  let score = 0;
+  for (const group of report.capabilities) {
+    // Weight scales with the number of distinct entry points in a domain,
+    // with diminishing returns so one noisy domain cannot dominate.
+    const base = DOMAIN_WEIGHT[group.domain] ?? 0;
+    const breadth = 1 + Math.log2(1 + group.requirements.length);
+    score += base * breadth;
+  }
+  return Math.round(score * 10) / 10;
+}
+
