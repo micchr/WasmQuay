@@ -42,3 +42,16 @@ export type RiskBand = "inert" | "low" | "moderate" | "elevated" | "high";
 export interface CapabilitySurface {
   readonly source: string;
   readonly moduleName: string | null;
+  /** Domains actually required, sorted by descending weight. */
+  readonly domains: readonly Domain[];
+  /** The raw additive risk score. */
+  readonly score: number;
+  /** The bucketed risk band derived from the score. */
+  readonly band: RiskBand;
+  /** Per-domain counts of distinct requirements. */
+  readonly counts: Readonly<Record<string, number>>;
+  /** True when any import could not be classified. */
+  readonly hasUnknown: boolean;
+  readonly importCount: number;
+  readonly exportCount: number;
+}
