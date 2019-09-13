@@ -69,3 +69,17 @@ export function riskScore(report: InspectionReport): number {
   return Math.round(score * 10) / 10;
 }
 
+/** Bucket a raw score into a named band. */
+export function riskBand(score: number): RiskBand {
+  if (score <= 0) return "inert";
+  if (score < 2) return "low";
+  if (score < 6) return "moderate";
+  if (score < 12) return "elevated";
+  return "high";
+}
+
+/** Build the full capability surface for an inspection report. */
+export function analyzeSurface(report: InspectionReport): CapabilitySurface {
+  const counts: Record<string, number> = {};
+  for (const group of report.capabilities) {
+    counts[group.domain] = group.requirements.length;
