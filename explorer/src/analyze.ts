@@ -96,3 +96,17 @@ export function analyzeSurface(report: InspectionReport): CapabilitySurface {
     moduleName: report.header.module_name,
     domains,
     score,
+    band: riskBand(score),
+    counts,
+    hasUnknown: report.capabilities.some((g) => g.domain === "unknown"),
+    importCount: report.imports.length,
+    exportCount: report.exports.length,
+  };
+}
+
+/** A single reconciliation finding between an inspection and a policy. */
+export interface Finding {
+  readonly domain: Domain;
+  readonly severity: "ok" | "note" | "violation";
+  readonly message: string;
+}
