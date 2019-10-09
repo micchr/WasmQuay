@@ -124,3 +124,16 @@ export function reconcile(
   policy: PolicyReport,
 ): Finding[] {
   const requiredDomains = new Set(inspection.capabilities.map((g) => g.domain));
+  const findings: Finding[] = [];
+
+  for (const domain of ALL_DOMAINS) {
+    const verdict = policy.verdicts.find((v) => v.domain === domain);
+    const requiredByInspection = requiredDomains.has(domain);
+
+    if (verdict === undefined) {
+      if (requiredByInspection) {
+        findings.push({
+          domain,
+          severity: "note",
+          message: `inspection requires '${domain}' but the policy report has no verdict for it (mismatched inputs?)`,
+        });
