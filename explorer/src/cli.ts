@@ -45,3 +45,14 @@ function readReport(path: string): string {
 
 function main(): void {
   const args = proc.argv.slice(2);
+  if (args.length === 0 || args.includes("--help")) {
+    proc.stdout.write(USAGE);
+    proc.exit(0);
+  }
+
+  const asJson = args.includes("--json");
+  const positional = args.filter((a) => !a.startsWith("--"));
+  const command = positional[0];
+  const rest = positional.slice(1);
+
+  try {
