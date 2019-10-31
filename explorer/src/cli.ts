@@ -56,3 +56,15 @@ function main(): void {
   const rest = positional.slice(1);
 
   try {
+    if (command === "surface") {
+      runSurface(rest, asJson);
+    } else if (command === "rank") {
+      runRank(rest, asJson);
+    } else {
+      fail(`unknown command '${String(command)}'\n\n${USAGE}`, 1);
+    }
+  } catch (e) {
+    if (e instanceof ReportError) {
+      fail(e.message, 2);
+    }
+    throw e;
