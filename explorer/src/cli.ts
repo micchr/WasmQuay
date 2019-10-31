@@ -33,3 +33,15 @@ FLAGS:
 function fail(message: string, code: number): never {
   proc.stderr.write(`error: ${message}\n`);
   proc.exit(code);
+}
+
+function readReport(path: string): string {
+  try {
+    return readFileSync(path, "utf8");
+  } catch (e) {
+    fail(`cannot read '${path}': ${(e as Error).message}`, 2);
+  }
+}
+
+function main(): void {
+  const args = proc.argv.slice(2);
