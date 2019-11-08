@@ -68,3 +68,14 @@ function main(): void {
       fail(e.message, 2);
     }
     throw e;
+  }
+}
+
+function runSurface(rest: string[], asJson: boolean): void {
+  const inspectionPath = rest[0];
+  if (!inspectionPath) {
+    fail("usage: surface <inspection.json> [policy.json]", 1);
+  }
+  const inspection = parseInspection(readReport(inspectionPath));
+  const policy = rest[1] ? parsePolicy(readReport(rest[1])) : undefined;
+
