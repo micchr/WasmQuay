@@ -428,3 +428,57 @@ mod tests {
             kind: ExternalKind::Memory,
         });
         let reqs = requirements_from_module(&m);
+        assert_eq!(reqs.len(), 1);
+        assert_eq!(reqs[0].domain, Domain::Clock);
+    }
+
+    #[test]
+    fn policy_parse_and_evaluate() {
+        let policy =
+            Policy::parse("policy \"strict\"\ndefault deny\nallow clock\nallow fs: /tmp\n")
+                .unwrap();
+        assert_eq!(policy.name, "strict");
+        assert!(!policy.default_allow);
+        assert!(policy.effective(Domain::Clock).allow);
+        assert_eq!(
+            policy.effective(Domain::Filesystem).allow_list,
+            vec!["/tmp".to_string()]
+        );
+
+        let reqs = vec![
+            Requirement {
+                domain: Domain::Clock,
+                source: "w".into(),
+                detail: "clock_time_get".into(),
+            },
+            Requirement {
+                domain: Domain::Network,
+                source: "w".into(),
+                detail: "sock_recv".into(),
+            },
+        ];
+        let eval = evaluate(&reqs, &policy);
+        assert!(!eval.is_compliant());
+        assert_eq!(eval.violations(), vec![Domain::Network]);
+    }
+
+    #[test]
+    fn default_allow_permits_everything() {
+        let policy = Policy::parse("policy \"open\"\ndefault allow\n").unwrap();
+        let reqs = vec![Requirement {
+            domain: Domain::Network,
+            source: "w".into(),
+            detail: "sock_recv".into(),
+        }];
+        assert!(evaluate(&reqs, &policy).is_compliant());
+    }
+
+    #[test]
+    fn unknown_import_violates_default_deny() {
+        let policy = Policy::default();
+        let mut m = Module::default();
+        m.imports.push(func_import("shady_host", "do_stuff"));
+        let reqs = requirements_from_module(&m);
+        let eval = evaluate(&reqs, &policy);
+        assert!(eval.violations().contains(&Domain::Unknown));
+    }
