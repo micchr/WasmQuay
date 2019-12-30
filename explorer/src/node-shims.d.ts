@@ -16,3 +16,8 @@ declare module "node:process" {
     exit(code?: number): never;
     readonly stdout: { write(s: string): boolean };
     readonly stderr: { write(s: string): boolean };
+  };
+  export default proc;
+}
+
+declare const console: {
