@@ -21,3 +21,8 @@ declare module "node:process" {
 }
 
 declare const console: {
+  log(...args: unknown[]): void;
+  error(...args: unknown[]): void;
+};
+
+declare module "node:test" {
