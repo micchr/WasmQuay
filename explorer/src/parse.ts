@@ -50,3 +50,18 @@ function requireBool(obj: Record<string, unknown>, key: string): boolean {
   }
   return v;
 }
+
+function requireArray(obj: Record<string, unknown>, key: string): unknown[] {
+  const v = obj[key];
+  if (!Array.isArray(v)) {
+    throw new ReportError(`expected array field '${key}'`);
+  }
+  return v;
+}
+
+function asDomain(v: unknown): Domain {
+  if (typeof v === "string" && (ALL_DOMAINS as readonly string[]).includes(v)) {
+    return v as Domain;
+  }
+  throw new ReportError(`unknown capability domain '${String(v)}'`);
+}
