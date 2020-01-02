@@ -18,3 +18,19 @@ import { ALL_DOMAINS } from "./types.js";
 /** Thrown when a report does not conform to its expected schema. */
 export class ReportError extends Error {
   constructor(message: string) {
+    super(message);
+    this.name = "ReportError";
+  }
+}
+
+function isObject(v: unknown): v is Record<string, unknown> {
+  return typeof v === "object" && v !== null && !Array.isArray(v);
+}
+
+function requireString(obj: Record<string, unknown>, key: string): string {
+  const v = obj[key];
+  if (typeof v !== "string") {
+    throw new ReportError(`expected string field '${key}'`);
+  }
+  return v;
+}
