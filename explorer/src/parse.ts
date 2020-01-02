@@ -65,3 +65,19 @@ function asDomain(v: unknown): Domain {
   }
   throw new ReportError(`unknown capability domain '${String(v)}'`);
 }
+
+/** Parse and validate an inspection report from a JSON string. */
+export function parseInspection(text: string): InspectionReport {
+  const doc = parseJson(text);
+  if (!doc.schema || !String(doc.schema).startsWith("wasmquay/inspection")) {
+    throw new ReportError(`not an inspection report (schema='${String(doc.schema)}')`);
+  }
+  const header = doc.header;
+  if (!isObject(header)) {
+    throw new ReportError("inspection report missing 'header'");
+  }
+  const capabilities = requireArray(doc, "capabilities").map((g) => {
+    if (!isObject(g)) throw new ReportError("capability group must be an object");
+    const reqs = requireArray(g, "requirements").map((r) => {
+      if (!isObject(r)) throw new ReportError("requirement must be an object");
+      return { source: requireString(r, "source"), detail: requireString(r, "detail") };
