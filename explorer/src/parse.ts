@@ -81,3 +81,18 @@ export function parseInspection(text: string): InspectionReport {
     const reqs = requireArray(g, "requirements").map((r) => {
       if (!isObject(r)) throw new ReportError("requirement must be an object");
       return { source: requireString(r, "source"), detail: requireString(r, "detail") };
+    });
+    return { domain: asDomain(g.domain), requirements: reqs };
+  });
+
+  // The parsed structure is validated field-by-field above; the cast is safe.
+  return {
+    schema: requireString(doc, "schema"),
+    source: requireString(doc, "source"),
+    header: {
+      magic: requireString(header, "magic"),
+      version: requireNumber(header, "version"),
+      byte_length: requireNumber(header, "byte_length"),
+      module_name:
+        header.module_name === null ? null : String(header.module_name),
+    },
