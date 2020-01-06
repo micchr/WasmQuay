@@ -112,3 +112,18 @@ export function parseInspection(text: string): InspectionReport {
         module: requireString(io, "module"),
         field: requireString(io, "field"),
         kind: requireString(io, "kind"),
+      };
+    }),
+    exports: requireArray(doc, "exports").map((e) => {
+      const eo = asObject(e, "export");
+      return {
+        field: requireString(eo, "field"),
+        kind: requireString(eo, "kind"),
+        index: requireNumber(eo, "index"),
+      };
+    }),
+    names: requireArray(doc, "names").map((n) => {
+      const no = asObject(n, "name");
+      return { index: requireNumber(no, "index"), name: requireString(no, "name") };
+    }),
+    capabilities,
