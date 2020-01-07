@@ -127,3 +127,19 @@ export function parseInspection(text: string): InspectionReport {
       return { index: requireNumber(no, "index"), name: requireString(no, "name") };
     }),
     capabilities,
+  };
+}
+
+/** Parse and validate a policy evaluation report. */
+export function parsePolicy(text: string): PolicyReport {
+  const doc = parseJson(text);
+  if (!String(doc.schema).startsWith("wasmquay/policy")) {
+    throw new ReportError(`not a policy report (schema='${String(doc.schema)}')`);
+  }
+  return {
+    schema: requireString(doc, "schema"),
+    policy: requireString(doc, "policy"),
+    compliant: requireBool(doc, "compliant"),
+    violations: requireArray(doc, "violations").map(asDomain),
+    verdicts: requireArray(doc, "verdicts").map((v) => {
+      const vo = asObject(v, "verdict");
