@@ -7,3 +7,13 @@ import type { InspectionReport, PolicyReport } from "./types.js";
 import {
   analyzeSurface,
   DOMAIN_RATIONALE,
+  reconcile,
+  type CapabilitySurface,
+  type Finding,
+} from "./analyze.js";
+
+const BAND_GLYPH: Record<string, string> = {
+  inert: "○",
+  low: "◔",
+  moderate: "◑",
+  elevated: "◕",
