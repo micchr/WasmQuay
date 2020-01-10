@@ -57,3 +57,13 @@ export function renderFindings(findings: readonly Finding[]): string {
   };
   return findings
     .map((f) => `  ${glyph[f.severity]} [${f.severity}] ${f.message}`)
+    .join("\n");
+}
+
+/** A machine-readable analysis summary for one component. */
+export interface AnalysisSummary {
+  readonly source: string;
+  readonly moduleName: string | null;
+  readonly score: number;
+  readonly band: string;
+  readonly domains: readonly string[];
