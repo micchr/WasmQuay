@@ -37,3 +37,13 @@ export function renderSurface(surface: CapabilitySurface): string {
     lines.push("  capabilities:");
     for (const domain of surface.domains) {
       const count = surface.counts[domain] ?? 0;
+      lines.push(
+        `    • ${domain.padEnd(8)} x${count}  — ${DOMAIN_RATIONALE[domain]}`,
+      );
+    }
+  }
+  return lines.join("\n");
+}
+
+/** Render reconciliation findings between an inspection and policy. */
+export function renderFindings(findings: readonly Finding[]): string {
