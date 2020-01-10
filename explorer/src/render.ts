@@ -47,3 +47,13 @@ export function renderSurface(surface: CapabilitySurface): string {
 
 /** Render reconciliation findings between an inspection and policy. */
 export function renderFindings(findings: readonly Finding[]): string {
+  if (findings.length === 0) {
+    return "  (no capability findings)";
+  }
+  const glyph: Record<string, string> = {
+    ok: "✓",
+    note: "…",
+    violation: "✗",
+  };
+  return findings
+    .map((f) => `  ${glyph[f.severity]} [${f.severity}] ${f.message}`)
