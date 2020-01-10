@@ -67,3 +67,13 @@ export interface AnalysisSummary {
   readonly score: number;
   readonly band: string;
   readonly domains: readonly string[];
+  readonly hasUnknown: boolean;
+  readonly findings?: readonly Finding[];
+  readonly compliant?: boolean;
+}
+
+/** Build the JSON summary object for an inspection (+ optional policy). */
+export function buildSummary(
+  inspection: InspectionReport,
+  policy?: PolicyReport,
+): AnalysisSummary {
