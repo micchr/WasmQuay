@@ -9,3 +9,15 @@
 export type Domain =
   | "fs"
   | "env"
+  | "clock"
+  | "network"
+  | "random"
+  | "stdio"
+  | "unknown";
+
+/** A single import entry from an inspection report. */
+export interface ImportEntry {
+  readonly module: string;
+  readonly field: string;
+  readonly kind: string;
+}
