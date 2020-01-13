@@ -21,3 +21,15 @@ export interface ImportEntry {
   readonly field: string;
   readonly kind: string;
 }
+
+/** A single export entry from an inspection report. */
+export interface ExportEntry {
+  readonly field: string;
+  readonly kind: string;
+  readonly index: number;
+}
+
+/** A decoded section header. */
+export interface SectionEntry {
+  readonly id: number;
+  readonly name: string;
