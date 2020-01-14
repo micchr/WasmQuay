@@ -33,3 +33,15 @@ export interface ExportEntry {
 export interface SectionEntry {
   readonly id: number;
   readonly name: string;
+  readonly custom_name: string | null;
+  readonly offset: number;
+  readonly size: number;
+}
+
+/** A single classified capability requirement. */
+export interface CapabilityRequirement {
+  readonly source: string;
+  readonly detail: string;
+}
+
+/** Requirements grouped by domain. */
