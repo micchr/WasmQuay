@@ -45,3 +45,15 @@ export interface CapabilityRequirement {
 }
 
 /** Requirements grouped by domain. */
+export interface CapabilityGroup {
+  readonly domain: Domain;
+  readonly requirements: readonly CapabilityRequirement[];
+}
+
+/** The `wasmquay/inspection@1` document. */
+export interface InspectionReport {
+  readonly schema: string;
+  readonly source: string;
+  readonly header: {
+    readonly magic: string;
+    readonly version: number;
