@@ -57,3 +57,15 @@ export interface InspectionReport {
   readonly header: {
     readonly magic: string;
     readonly version: number;
+    readonly byte_length: number;
+    readonly module_name: string | null;
+  };
+  readonly sections: readonly SectionEntry[];
+  readonly imports: readonly ImportEntry[];
+  readonly exports: readonly ExportEntry[];
+  readonly names: readonly { readonly index: number; readonly name: string }[];
+  readonly capabilities: readonly CapabilityGroup[];
+}
+
+/** A single per-domain verdict from a policy report. */
+export interface PolicyVerdict {
