@@ -69,3 +69,14 @@ export interface InspectionReport {
 
 /** A single per-domain verdict from a policy report. */
 export interface PolicyVerdict {
+  readonly domain: Domain;
+  readonly required: boolean;
+  readonly allowed: boolean;
+  readonly violation: boolean;
+  readonly requirements: readonly string[];
+}
+
+/** The `wasmquay/policy@1` document. */
+export interface PolicyReport {
+  readonly schema: string;
+  readonly policy: string;
