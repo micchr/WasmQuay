@@ -80,3 +80,15 @@ export interface PolicyVerdict {
 export interface PolicyReport {
   readonly schema: string;
   readonly policy: string;
+  readonly compliant: boolean;
+  readonly violations: readonly Domain[];
+  readonly verdicts: readonly PolicyVerdict[];
+}
+
+/** The `wasmquay/compat@1` document. */
+export interface CompatReport {
+  readonly schema: string;
+  readonly baseline: string;
+  readonly candidate: string;
+  readonly compatible: boolean;
+  readonly breaking_reasons: readonly string[];
