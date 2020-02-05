@@ -17,3 +17,12 @@ function inspection(
   return {
     schema: "wasmquay/inspection@1",
     source,
+    header: { magic: "\\0asm", version: 1, byte_length: 100, module_name: source },
+    sections: [],
+    imports: [],
+    exports: [],
+    names: [],
+    capabilities: caps.map((c) => ({
+      domain: c.domain as InspectionReport["capabilities"][number]["domain"],
+      requirements: Array.from({ length: c.count }, (_, i) => ({
+        source: "src",
