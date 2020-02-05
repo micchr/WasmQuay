@@ -26,3 +26,13 @@ function inspection(
       domain: c.domain as InspectionReport["capabilities"][number]["domain"],
       requirements: Array.from({ length: c.count }, (_, i) => ({
         source: "src",
+        detail: `d${i}`,
+      })),
+    })),
+  };
+}
+
+test("riskBand thresholds", () => {
+  assert.equal(riskBand(0), "inert");
+  assert.equal(riskBand(1), "low");
+  assert.equal(riskBand(4), "moderate");
