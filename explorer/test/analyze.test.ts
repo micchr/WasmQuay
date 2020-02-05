@@ -7,3 +7,13 @@ import {
   reconcile,
   riskBand,
   riskScore,
+  rankSurfaces,
+} from "../src/analyze.js";
+
+function inspection(
+  source: string,
+  caps: { domain: string; count: number }[],
+): InspectionReport {
+  return {
+    schema: "wasmquay/inspection@1",
+    source,
