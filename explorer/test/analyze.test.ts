@@ -46,3 +46,13 @@ test("network scores higher than clock", () => {
   assert.ok(net > clk, `expected ${net} > ${clk}`);
 });
 
+test("analyzeSurface sorts domains by weight and flags unknown", () => {
+  const r = inspection("mix", [
+    { domain: "clock", count: 1 },
+    { domain: "network", count: 2 },
+    { domain: "unknown", count: 1 },
+  ]);
+  const s = analyzeSurface(r);
+  // network (5) and unknown (5) outrank clock (1); network listed among first.
+  assert.ok(s.domains[0] === "network" || s.domains[0] === "unknown");
+  assert.equal(s.hasUnknown, true);
