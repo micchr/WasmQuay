@@ -65,3 +65,13 @@ test("self-contained module is inert", () => {
   assert.equal(s.score, 0);
 });
 
+test("rankSurfaces orders by descending score", () => {
+  const a = analyzeSurface(inspection("a", [{ domain: "clock", count: 1 }]));
+  const b = analyzeSurface(inspection("b", [{ domain: "network", count: 3 }]));
+  const ranked = rankSurfaces([a, b]);
+  assert.equal(ranked[0].source, "b");
+});
+
+test("reconcile flags violations and notes", () => {
+  const insp = inspection("svc", [
+    { domain: "network", count: 1 },
