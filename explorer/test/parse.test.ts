@@ -6,3 +6,12 @@ import { parseInspection, parsePolicy, parseCompat, ReportError } from "../src/p
 const INSPECTION = JSON.stringify({
   schema: "wasmquay/inspection@1",
   source: "net-service.wasm",
+  header: { magic: "\\0asm", version: 1, byte_length: 208, module_name: "net-service" },
+  sections: [{ id: 2, name: "import", custom_name: null, offset: 10, size: 90 }],
+  imports: [{ module: "wasi_snapshot_preview1", field: "sock_recv", kind: "func" }],
+  exports: [{ field: "run", kind: "func", index: 0 }],
+  names: [{ index: 0, name: "run" }],
+  capabilities: [
+    { domain: "network", requirements: [{ source: "wasi_snapshot_preview1", detail: "sock_recv" }] },
+  ],
+});
