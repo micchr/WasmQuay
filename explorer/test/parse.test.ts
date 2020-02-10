@@ -15,3 +15,11 @@ const INSPECTION = JSON.stringify({
     { domain: "network", requirements: [{ source: "wasi_snapshot_preview1", detail: "sock_recv" }] },
   ],
 });
+
+test("parseInspection accepts a valid report", () => {
+  const r = parseInspection(INSPECTION);
+  assert.equal(r.source, "net-service.wasm");
+  assert.equal(r.header.version, 1);
+  assert.equal(r.capabilities[0].domain, "network");
+});
+
