@@ -23,3 +23,12 @@ test("parseInspection accepts a valid report", () => {
   assert.equal(r.capabilities[0].domain, "network");
 });
 
+test("parseInspection rejects wrong schema", () => {
+  const bad = JSON.stringify({ schema: "other@1" });
+  assert.throws(() => parseInspection(bad));
+});
+
+test("parseInspection rejects invalid JSON", () => {
+  assert.throws(() => parseInspection("{not json"));
+});
+
