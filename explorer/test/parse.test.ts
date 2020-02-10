@@ -32,3 +32,11 @@ test("parseInspection rejects invalid JSON", () => {
   assert.throws(() => parseInspection("{not json"));
 });
 
+test("parseInspection rejects unknown domain", () => {
+  const bad = JSON.stringify({
+    schema: "wasmquay/inspection@1",
+    source: "x",
+    header: { magic: "\\0asm", version: 1, byte_length: 1, module_name: null },
+    sections: [],
+    imports: [],
+    exports: [],
