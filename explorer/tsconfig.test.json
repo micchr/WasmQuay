@@ -5,3 +5,4 @@
     "rootDir": ".",
     "noUnusedLocals": false,
     "declaration": false
+  },
