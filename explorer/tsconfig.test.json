@@ -3,3 +3,5 @@
   "compilerOptions": {
     "outDir": "dist-test",
     "rootDir": ".",
+    "noUnusedLocals": false,
+    "declaration": false
