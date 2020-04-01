@@ -6,3 +6,8 @@ executes or instantiates a module.
 
 ## Development setup
 
+- **Rust (stable, >= 1.74)** - the workspace lives in `crates/`:
+
+  ```sh
+  cargo build
+  cargo test
