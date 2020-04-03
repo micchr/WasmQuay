@@ -11,3 +11,8 @@ executes or instantiates a module.
   ```sh
   cargo build
   cargo test
+  cargo fmt --all -- --check
+  cargo clippy --all-targets -- -D warnings
+  ```
+
+- **Node 20+** - the TypeScript explorer lives in `explorer/`:
