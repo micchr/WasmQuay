@@ -21,3 +21,8 @@ executes or instantiates a module.
   cd explorer
   npm install
   npm run typecheck
+  npm run build
+  npm test
+  ```
+
+## Before you open a pull request
