@@ -26,3 +26,7 @@ executes or instantiates a module.
   ```
 
 ## Before you open a pull request
+
+1. `cargo fmt --all -- --check && cargo clippy --all-targets -- -D warnings && cargo test`
+2. `cd explorer && npm run typecheck && npm test`
+3. Add or update tests for any behavior change; the fixture encoder in
