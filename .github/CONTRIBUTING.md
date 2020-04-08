@@ -16,3 +16,8 @@ executes or instantiates a module.
   ```
 
 - **Node 20+** - the TypeScript explorer lives in `explorer/`:
+
+  ```sh
+  cd explorer
+  npm install
+  npm run typecheck
