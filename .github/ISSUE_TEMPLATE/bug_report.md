@@ -11,3 +11,6 @@ assignees: ""
 **What you expected**
 
 **Reproduce**
+
+Smallest `.wasm`/`.wit`/`.pol` input that triggers it, plus the command:
+
