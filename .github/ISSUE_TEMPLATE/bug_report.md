@@ -14,3 +14,7 @@ assignees: ""
 
 Smallest `.wasm`/`.wit`/`.pol` input that triggers it, plus the command:
 
+```console
+$ ./target/release/wasmquay inspect the-input.wasm
+```
+
