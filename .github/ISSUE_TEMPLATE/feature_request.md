@@ -8,3 +8,6 @@ assignees: ""
 
 **What problem does this solve**
 
+**Proposed behavior**
+
+**Does it change an existing report schema?**
