@@ -11,3 +11,6 @@ assignees: ""
 **Proposed behavior**
 
 **Does it change an existing report schema?**
+
+- [ ] Yes (describe the migration path)
+- [ ] No
