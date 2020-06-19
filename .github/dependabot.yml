@@ -5,3 +5,5 @@ updates:
     schedule:
       interval: weekly
   - package-ecosystem: npm
+    directory: "/explorer"
+    schedule:
