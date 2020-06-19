@@ -3,3 +3,5 @@ updates:
   - package-ecosystem: cargo
     directory: "/"
     schedule:
+      interval: weekly
+  - package-ecosystem: npm
