@@ -7,3 +7,4 @@ updates:
   - package-ecosystem: npm
     directory: "/explorer"
     schedule:
+      interval: weekly
