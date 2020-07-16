@@ -5,3 +5,11 @@ on:
     branches: [main]
   pull_request:
 
+# The whole toolkit is offline/stdlib-only, so CI needs no registry access
+# beyond installing the toolchains themselves.
+jobs:
+  rust:
+    name: rust (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
