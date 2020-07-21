@@ -36,3 +36,11 @@ jobs:
           ./target/release/wasmquay inspect fixtures/net-service.wasm --pretty
 
   typescript:
+    name: typescript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
