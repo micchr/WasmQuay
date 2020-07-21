@@ -28,3 +28,11 @@ jobs:
       - name: Build
         run: cargo build --release --verbose
       - name: Test
+        run: cargo test --verbose
+      - name: Regenerate fixtures and inspect
+        shell: bash
+        run: |
+          ./target/release/wasmquay gen-fixtures fixtures
+          ./target/release/wasmquay inspect fixtures/net-service.wasm --pretty
+
+  typescript:
