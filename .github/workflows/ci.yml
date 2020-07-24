@@ -44,3 +44,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      # No third-party runtime deps; only the TypeScript compiler is needed.
+      - name: Install devDependencies
+        run: cd explorer && npm install --no-audit --no-fund
+      - name: Type-check
+        run: cd explorer && npm run typecheck
+      - name: Build
+        run: cd explorer && npm run build
+      - name: Test
