@@ -52,3 +52,11 @@ jobs:
       - name: Build
         run: cd explorer && npm run build
       - name: Test
+        run: cd explorer && npm test
+
+  integration:
+    name: cross-language integration
+    runs-on: ubuntu-latest
+    needs: [rust, typescript]
+    steps:
+      - uses: actions/checkout@v4
