@@ -37,3 +37,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   tests, all passing.
 
 ### Notes
+
+- wasmquay performs **static inspection and policy analysis only**. It does not
+  execute or instantiate WebAssembly modules and makes no runtime enforcement
+  claims. See the README "Scope & honesty" section.
+
+[Unreleased]: https://github.com/micchr/wasmquay/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/micchr/wasmquay/releases/tag/v0.1.0
+
+<!-- draft note 106 -->
