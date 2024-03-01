@@ -337,3 +337,48 @@ pub fn bundled_fixtures() -> Vec<(&'static str, Vec<u8>)> {
         ),
         (
             // A module that imports an unrecognized host — flagged as unknown.
+            "opaque-host.wasm",
+            FixtureBuilder::new()
+                .module_name("opaque-host")
+                .import_func("mystery_host", "do_the_thing")
+                .export_func("run", 0)
+                .build(),
+        ),
+    ]
+}
+
+fn usage(spec: &str) -> String {
+    format!("usage: wasmquay {}", spec)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn bundled_fixtures_parse() {
+        for (name, bytes) in bundled_fixtures() {
+            let m = wasm::parse(&bytes).unwrap_or_else(|e| panic!("{} failed: {}", name, e));
+            assert_eq!(m.version, 1, "{}", name);
+        }
+    }
+
+    #[test]
+    fn net_service_requires_network() {
+        let bytes = &bundled_fixtures()[1].1;
+        let m = wasm::parse(bytes).unwrap();
+        let reqs = policy::requirements_from_module(&m);
+        assert!(reqs.iter().any(|r| r.domain == policy::Domain::Network));
+    }
+
+    #[test]
+    fn opaque_host_is_unknown() {
+        let bytes = &bundled_fixtures()[3].1;
+        let m = wasm::parse(bytes).unwrap();
+        let reqs = policy::requirements_from_module(&m);
+        assert!(reqs.iter().any(|r| r.domain == policy::Domain::Unknown));
+    }
+
+    #[test]
+    fn label_strips_directory() {
+        assert_eq!(label_of("a/b/c.wasm"), "c.wasm");
