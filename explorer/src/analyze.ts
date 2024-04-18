@@ -137,3 +137,30 @@ export function reconcile(
           severity: "note",
           message: `inspection requires '${domain}' but the policy report has no verdict for it (mismatched inputs?)`,
         });
+      }
+      continue;
+    }
+
+    if (verdict.violation) {
+      findings.push({
+        domain,
+        severity: "violation",
+        message: `'${domain}' is required but denied by policy '${policy.policy}' — ${DOMAIN_RATIONALE[domain]}`,
+      });
+    } else if (verdict.required) {
+      findings.push({
+        domain,
+        severity: "ok",
+        message: `'${domain}' required and allowed`,
+      });
+    }
+  }
+
+  return findings;
+}
+
+/** Rank several surfaces from most to least risky. */
+export function rankSurfaces(
+  surfaces: readonly CapabilitySurface[],
+): CapabilitySurface[] {
+  return surfaces.slice().sort((a, b) => b.score - a.score);
