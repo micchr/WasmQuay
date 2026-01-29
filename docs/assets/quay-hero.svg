@@ -75,3 +75,21 @@
     <text x="36" y="52" fill="#22e3c9" font-size="34" font-weight="700" filter="url(#glow)">wasmquay</text>
     <text x="38" y="76" fill="#6fd3e6" font-size="13">offline wasm component inspection · capability policy</text>
     <g font-size="12">
+      <text x="38" y="98" fill="#3f7f96">$</text>
+      <text x="52" y="98" fill="#c6f7ee">wasmquay policy net-svc.wasm sandbox.pol</text>
+      <rect x="360" y="88" width="7" height="13" fill="#22e3c9">
+        <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+  </g>
+
+  <!-- animated capability ticker -->
+  <g font-family="'Consolas',monospace" font-size="10" fill="#4fb9c9">
+    <text x="0" y="20">
+      fs  env  clock  network  random  stdio  · deny-by-default · substitutability · JSON reports ·
+      <animate attributeName="x" values="720;-360" dur="14s" repeatCount="indefinite"/>
+    </text>
+  </g>
+</svg>
+
+<!-- draft note 1052 -->
