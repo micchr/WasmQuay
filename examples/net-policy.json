@@ -53,3 +53,15 @@
       "required": false,
       "allowed": true,
       "violation": false,
+      "requirements": []
+    },
+    {
+      "domain": "unknown",
+      "required": false,
+      "allowed": false,
+      "violation": false,
+      "requirements": []
+    }
+  ]
+}
+<!-- draft note 1053 -->
