@@ -16,3 +16,10 @@
     "exactOptionalPropertyTypes": false,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "types": []
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["test", "dist", "dist-test", "node_modules"]
+}
+
+<!-- draft note 1054 -->
