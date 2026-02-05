@@ -47,3 +47,13 @@ ts-test: ## Type-check and run the explorer tests (offline, no install)
 fixtures: rust-build ## (Re)generate the binary .wasm fixtures
 	./target/release/wasmquay gen-fixtures $(FIXTURES_DIR)
 
+examples: rust-build ts-build ## Produce example JSON reports and analyze them
+	./target/release/wasmquay inspect $(FIXTURES_DIR)/net-service.wasm --pretty > examples/net-inspection.json
+	./target/release/wasmquay policy  $(FIXTURES_DIR)/net-service.wasm examples/sandbox-strict.pol --pretty > examples/net-policy.json
+	node explorer/dist/cli.js surface examples/net-inspection.json examples/net-policy.json || true
+
+clean: ## Remove build artifacts
+	$(CARGO) clean
+	rm -rf explorer/dist explorer/dist-test
+
+# draft note 1056
