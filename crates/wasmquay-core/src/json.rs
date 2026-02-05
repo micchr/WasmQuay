@@ -161,3 +161,30 @@ mod tests {
     }
 
     #[test]
+    fn escapes_control_and_quotes() {
+        let j = Json::s("line\n\"q\"\t\u{1}");
+        assert_eq!(j.to_compact(), r#""line\n\"q\"\t\u0001""#);
+    }
+
+    #[test]
+    fn integers_render_without_decimal() {
+        assert_eq!(Json::u(42).to_compact(), "42");
+        assert_eq!(Json::Num(3.5).to_compact(), "3.5");
+    }
+
+    #[test]
+    fn pretty_indents_nested() {
+        let j = Json::obj(vec![("k", Json::Arr(vec![Json::u(1), Json::u(2)]))]);
+        let pretty = j.to_pretty();
+        assert!(pretty.contains("\n  \"k\""));
+        assert!(pretty.contains("\n    1"));
+    }
+
+    #[test]
+    fn empty_containers() {
+        assert_eq!(Json::Arr(vec![]).to_pretty(), "[]");
+        assert_eq!(Json::Obj(vec![]).to_pretty(), "{}");
+    }
+}
+
+// draft note 1057
