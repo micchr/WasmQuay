@@ -15,3 +15,8 @@ path = "src/lib.rs"
 # Intentionally zero external dependencies: the whole crate is std-only so it
 # compiles fully offline with a stock toolchain. WebAssembly binary decoding,
 # JSON emission and the WIT-like manifest reader are all hand-written.
+[dependencies]
+
+[dev-dependencies]
+
+<!-- draft note 1059 -->
