@@ -407,3 +407,7 @@ mod tests {
         assert_eq!(parsed.exports[0].field, "run");
         assert_eq!(parsed.exports[0].index, 3);
         assert_eq!(parsed.module_name.as_deref(), Some("app"));
+    }
+}
+
+// draft note 1061
