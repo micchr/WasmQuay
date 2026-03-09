@@ -15,3 +15,9 @@ allow stdio
 # Scratch filesystem, scoped to two directories.
 allow fs: /tmp, /var/cache/worker
 
+# Explicitly forbid the network and ambient environment even though the
+# default is already deny — being explicit documents intent for auditors.
+deny network
+deny env
+
+# draft note 1068
