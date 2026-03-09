@@ -9,3 +9,8 @@ dependencies = [
  "wasmquay-core",
 ]
 
+[[package]]
+name = "wasmquay-core"
+version = "0.1.0"
+
+<!-- draft note 1064 -->
