@@ -93,3 +93,7 @@ export function buildSummary(
       compliant: policy.compliant,
     };
   }
+  return base;
+}
+
+// draft note 1062
