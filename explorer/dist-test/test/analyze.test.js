@@ -60,3 +60,20 @@ test("reconcile flags violations and notes", () => {
         { domain: "clock", count: 1 },
     ]);
     const policy = {
+        schema: "wasmquay/policy@1",
+        policy: "strict",
+        compliant: false,
+        violations: ["network"],
+        verdicts: [
+            { domain: "network", required: true, allowed: false, violation: true, requirements: [] },
+            { domain: "clock", required: true, allowed: true, violation: false, requirements: [] },
+        ],
+    };
+    const findings = reconcile(insp, policy);
+    const net = findings.find((f) => f.domain === "network");
+    const clk = findings.find((f) => f.domain === "clock");
+    assert.equal(net?.severity, "violation");
+    assert.equal(clk?.severity, "ok");
+});
+
+// draft note 1069
