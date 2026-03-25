@@ -16,3 +16,9 @@ description = "Offline WebAssembly component inspection and capability-policy to
 
 [profile.release]
 opt-level = 3
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+strip = true
+
+<!-- draft note 1072 -->
