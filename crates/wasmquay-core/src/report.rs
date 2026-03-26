@@ -314,3 +314,48 @@ mod tests {
     use crate::wasm::{ExternalKind, Import};
 
     fn sample_module() -> Module {
+        let mut m = Module {
+            version: 1,
+            byte_len: 42,
+            ..Module::default()
+        };
+        m.imports.push(Import {
+            module: "wasi_snapshot_preview1".into(),
+            field: "clock_time_get".into(),
+            kind: ExternalKind::Func,
+        });
+        m
+    }
+
+    #[test]
+    fn inspection_json_has_schema_and_capabilities() {
+        let m = sample_module();
+        let reqs = requirements_from_module(&m);
+        let j = inspection_json(&m, "sample.wasm", &reqs);
+        let s = j.to_compact();
+        assert!(s.contains(SCHEMA_VERSION));
+        assert!(s.contains("\"clock\""));
+    }
+
+    #[test]
+    fn evaluation_json_marks_violations() {
+        let m = sample_module();
+        let reqs = requirements_from_module(&m);
+        let eval = evaluate(&reqs, &Policy::default());
+        let j = evaluation_json(&eval);
+        let s = j.to_compact();
+        assert!(s.contains("\"compliant\":false"));
+        assert!(s.contains("\"clock\""));
+    }
+
+    #[test]
+    fn text_summary_lists_domains() {
+        let m = sample_module();
+        let reqs = requirements_from_module(&m);
+        let text = inspection_text(&m, "sample.wasm", &reqs);
+        assert!(text.contains("clock"));
+        assert!(text.contains("sample.wasm"));
+    }
+}
+
+// draft note 1077
