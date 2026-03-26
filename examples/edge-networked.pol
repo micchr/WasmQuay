@@ -11,4 +11,4 @@ allow stdio
 allow network: api.internal, cache.internal
 deny fs
 
-# draft note 1060
+# draft note 1074
