@@ -174,3 +174,36 @@ actually uses. `violation == required && !allowed`.
   "breaking_reasons": ["new capability required: network via wasi_snapshot_preview1"],
   "export_diffs": [ { "change": "added", "name": "extra", "kind": "func" } ],
   "capability_diffs": [ { "change": "added", "domain": "network", "source": "wasi_snapshot_preview1" } ]
+}
+```
+
+Compatibility rule: the candidate is a safe drop-in when **no export is
+removed** and **no new capability domain/source is added**.
+
+### 4.4 `wasmquay/manifest@1`
+
+Emitted by `wasmquay manifest --json`.
+
+```json
+{
+  "schema": "wasmquay/manifest@1",
+  "package": "acme:image-pipeline@1.4.0",
+  "worlds": [ { "name": "processor", "imports": ["wasi:filesystem/types"], "exports": ["process"] } ],
+  "capabilities": [ { "domain": "fs", "source": "wasi:filesystem/types" } ]
+}
+```
+
+---
+
+## 5. Exit codes
+
+Both CLIs share a convention so they compose in CI:
+
+| Code | Meaning                                   |
+|------|-------------------------------------------|
+| 0    | success / compliant / compatible          |
+| 1    | usage error                               |
+| 2    | parse or I/O error                        |
+| 3    | policy violation or incompatibility       |
+
+<!-- draft note 1078 -->
