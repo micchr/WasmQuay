@@ -18,3 +18,11 @@ Smallest `.wasm`/`.wit`/`.pol` input that triggers it, plus the command:
 $ ./target/release/wasmquay inspect the-input.wasm
 ```
 
+**Environment**
+
+- OS:
+- Rust version (`rustc --version`):
+- wasmquay version (`wasmquay --version`):
+- Explorer involved? (`node explorer/dist/cli.js ...`)
+
+<!-- draft note 1079 -->
