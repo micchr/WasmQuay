@@ -160,3 +160,35 @@ export function parseCompat(text) {
         capability_diffs: requireArray(doc, "capability_diffs").map((d) => {
             const do_ = asObject(d, "capability_diff");
             return {
+                change: asChange(do_.change),
+                domain: asDomain(do_.domain),
+                source: requireString(do_, "source"),
+            };
+        }),
+    };
+}
+function asChange(v) {
+    if (v === "added" || v === "removed")
+        return v;
+    throw new ReportError(`change must be 'added' or 'removed', got '${String(v)}'`);
+}
+function asObject(v, what) {
+    if (!isObject(v))
+        throw new ReportError(`${what} must be an object`);
+    return v;
+}
+function parseJson(text) {
+    let parsed;
+    try {
+        parsed = JSON.parse(text);
+    }
+    catch (e) {
+        throw new ReportError(`invalid JSON: ${e.message}`);
+    }
+    if (!isObject(parsed)) {
+        throw new ReportError("report must be a JSON object");
+    }
+    return parsed;
+}
+
+// draft note 1080
