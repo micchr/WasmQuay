@@ -19,3 +19,12 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
+  }
+}
+
+<!-- draft note 1083 -->
