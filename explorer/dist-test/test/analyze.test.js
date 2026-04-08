@@ -76,4 +76,4 @@ test("reconcile flags violations and notes", () => {
     assert.equal(clk?.severity, "ok");
 });
 
-// draft note 1069
+// draft note 1087
