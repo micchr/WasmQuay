@@ -482,3 +482,6 @@ mod tests {
         let eval = evaluate(&reqs, &policy);
         assert!(eval.violations().contains(&Domain::Unknown));
     }
+}
+
+// draft note 1088
