@@ -90,3 +90,20 @@ impl fmt::Display for Error {
                 self.message,
                 off
             ),
+            None => write!(f, "[{}] {}", self.kind.slug(), self.message),
+        }
+    }
+}
+
+impl std::error::Error for Error {}
+
+impl From<std::io::Error> for Error {
+    fn from(e: std::io::Error) -> Self {
+        Error::new(ErrorKind::Io, e.to_string())
+    }
+}
+
+/// The crate-wide result alias.
+pub type Result<T> = std::result::Result<T, Error>;
+
+// draft note 1085
