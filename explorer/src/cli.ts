@@ -102,3 +102,27 @@ function runRank(rest: string[], asJson: boolean): void {
   if (rest.length === 0) {
     fail("usage: rank <inspection.json> [more.json ...]", 1);
   }
+  const surfaces = rest.map((p) => analyzeSurface(parseInspection(readReport(p))));
+  const ranked = rankSurfaces(surfaces);
+
+  if (asJson) {
+    const rows = ranked.map((s) => ({
+      source: s.source,
+      score: s.score,
+      band: s.band,
+      domains: s.domains,
+    }));
+    proc.stdout.write(JSON.stringify(rows, null, 2) + "\n");
+  } else {
+    proc.stdout.write("capability risk ranking (highest first):\n");
+    ranked.forEach((s, i) => {
+      proc.stdout.write(
+        `  ${i + 1}. ${s.source.padEnd(24)} ${s.band.toUpperCase().padEnd(9)} score=${s.score}\n`,
+      );
+    });
+  }
+}
+
+main();
+
+// draft note 1090
