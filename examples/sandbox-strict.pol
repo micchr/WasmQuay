@@ -19,5 +19,3 @@ allow fs: /tmp, /var/cache/worker
 # default is already deny — being explicit documents intent for auditors.
 deny network
 deny env
-
-# draft note 1092
