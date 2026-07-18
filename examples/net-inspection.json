@@ -86,3 +86,21 @@
         {
           "source": "wasi_snapshot_preview1",
           "detail": "clock_time_get"
+        }
+      ]
+    },
+    {
+      "domain": "network",
+      "requirements": [
+        {
+          "source": "wasi_snapshot_preview1",
+          "detail": "sock_recv"
+        },
+        {
+          "source": "wasi_snapshot_preview1",
+          "detail": "sock_send"
+        }
+      ]
+    }
+  ]
+}
