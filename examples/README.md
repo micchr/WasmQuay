@@ -33,3 +33,10 @@ cargo build --release
 # 2. Evaluate the networked service against the strict sandbox policy.
 #    Exits 3 because it needs the network, which the policy denies.
 ./target/release/wasmquay policy fixtures/net-service.wasm examples/sandbox-strict.pol
+
+# 3. Feed a JSON report into the TypeScript explorer for a risk view.
+cd explorer && npm run build && cd ..
+./target/release/wasmquay inspect fixtures/net-service.wasm --json > net.json
+./target/release/wasmquay policy  fixtures/net-service.wasm examples/sandbox-strict.pol --json > pol.json
+node explorer/dist/cli.js surface net.json pol.json
+```
