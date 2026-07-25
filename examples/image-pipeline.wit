@@ -14,3 +14,7 @@ world processor {
     export describe: func() -> string
 }
 
+world thumbnailer {
+    import wasi:filesystem/types
+    export thumbnail: func(input: list<u8>, size: u32) -> list<u8>
+}
