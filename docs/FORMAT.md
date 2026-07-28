@@ -205,5 +205,3 @@ Both CLIs share a convention so they compose in CI:
 | 1    | usage error                               |
 | 2    | parse or I/O error                        |
 | 3    | policy violation or incompatibility       |
-
-<!-- draft note 1078 -->
