@@ -65,3 +65,17 @@
     <!-- alert pulse on the deny bin -->
     <circle cx="405" cy="215" r="4" fill="#ff5d5d">
       <animate attributeName="opacity" values="1;0.15;1" dur="1.3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- policy verdict readout -->
+  <g font-family="monospace" font-size="11">
+    <text x="70" y="300" fill="#3f7f96">policy: sandbox-strict</text>
+  </g>
+
+  <!-- moving evaluation scanline -->
+  <line x1="0" y1="0" x2="520" y2="0" stroke="#22e3c9" stroke-width="1" opacity="0.25">
+    <animate attributeName="y1" values="60;300;60" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="y2" values="60;300;60" dur="5s" repeatCount="indefinite"/>
+  </line>
+</svg>
