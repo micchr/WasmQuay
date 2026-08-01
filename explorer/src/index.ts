@@ -14,5 +14,3 @@ export * from "./types.js";
 export * from "./parse.js";
 export * from "./analyze.js";
 export * from "./render.js";
-
-// draft note 1084
