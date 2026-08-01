@@ -95,5 +95,3 @@ export function buildSummary(
   }
   return base;
 }
-
-// draft note 1076
