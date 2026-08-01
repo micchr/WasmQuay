@@ -124,5 +124,3 @@ function runRank(rest: string[], asJson: boolean): void {
 }
 
 main();
-
-// draft note 1090
