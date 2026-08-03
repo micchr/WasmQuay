@@ -66,3 +66,19 @@ test("parsePolicy reads verdicts and compliance", () => {
   assert.equal(p.compliant, false);
   assert.deepEqual(p.violations, ["network"]);
   assert.equal(p.verdicts[0].violation, true);
+});
+
+test("parseCompat reads diffs", () => {
+  const doc = JSON.stringify({
+    schema: "wasmquay/compat@1",
+    baseline: "a",
+    candidate: "b",
+    compatible: false,
+    breaking_reasons: ["new capability required: network"],
+    export_diffs: [{ change: "added", name: "extra", kind: "func" }],
+    capability_diffs: [{ change: "added", domain: "network", source: "wasi" }],
+  });
+  const c = parseCompat(doc);
+  assert.equal(c.compatible, false);
+  assert.equal(c.capability_diffs[0].domain, "network");
+});
