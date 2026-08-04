@@ -50,3 +50,16 @@ export function buildSummary(inspection, policy) {
         source: surface.source,
         moduleName: surface.moduleName,
         score: surface.score,
+        band: surface.band,
+        domains: surface.domains,
+        hasUnknown: surface.hasUnknown,
+    };
+    if (policy) {
+        return {
+            ...base,
+            findings: reconcile(inspection, policy),
+            compliant: policy.compliant,
+        };
+    }
+    return base;
+}
