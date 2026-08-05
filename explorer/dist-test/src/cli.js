@@ -114,5 +114,3 @@ function runRank(rest, asJson) {
     }
 }
 main();
-
-// draft note 1050
