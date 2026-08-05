@@ -164,3 +164,4 @@ export function rankSurfaces(
   surfaces: readonly CapabilitySurface[],
 ): CapabilitySurface[] {
   return surfaces.slice().sort((a, b) => b.score - a.score);
+}
