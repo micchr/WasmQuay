@@ -97,3 +97,24 @@ export function reconcile(inspection, policy) {
             }
             continue;
         }
+        if (verdict.violation) {
+            findings.push({
+                domain,
+                severity: "violation",
+                message: `'${domain}' is required but denied by policy '${policy.policy}' — ${DOMAIN_RATIONALE[domain]}`,
+            });
+        }
+        else if (verdict.required) {
+            findings.push({
+                domain,
+                severity: "ok",
+                message: `'${domain}' required and allowed`,
+            });
+        }
+    }
+    return findings;
+}
+/** Rank several surfaces from most to least risky. */
+export function rankSurfaces(surfaces) {
+    return surfaces.slice().sort((a, b) => b.score - a.score);
+}
