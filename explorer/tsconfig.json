@@ -21,5 +21,3 @@
   "include": ["src/**/*.ts"],
   "exclude": ["test", "dist", "dist-test", "node_modules"]
 }
-
-<!-- draft note 1091 -->
