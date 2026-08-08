@@ -9,3 +9,7 @@
  * in `cli.ts` handles file reading); every export here is a pure function of
  * its inputs.
  */
+export * from "./types.js";
+export * from "./parse.js";
+export * from "./analyze.js";
+export * from "./render.js";
