@@ -190,5 +190,3 @@ function parseJson(text) {
     }
     return parsed;
 }
-
-// draft note 1080
