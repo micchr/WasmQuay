@@ -10,3 +10,7 @@ export const ALL_DOMAINS = [
     "env",
     "clock",
     "network",
+    "random",
+    "stdio",
+    "unknown",
+];
