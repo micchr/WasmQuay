@@ -92,3 +92,25 @@ export interface CompatReport {
   readonly candidate: string;
   readonly compatible: boolean;
   readonly breaking_reasons: readonly string[];
+  readonly export_diffs: readonly {
+    readonly change: "added" | "removed";
+    readonly name: string;
+    readonly kind: string;
+  }[];
+  readonly capability_diffs: readonly {
+    readonly change: "added" | "removed";
+    readonly domain: Domain;
+    readonly source: string;
+  }[];
+}
+
+/** All known capability domains in a stable order. */
+export const ALL_DOMAINS: readonly Domain[] = [
+  "fs",
+  "env",
+  "clock",
+  "network",
+  "random",
+  "stdio",
+  "unknown",
+];
