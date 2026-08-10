@@ -75,5 +75,3 @@ test("parseCompat reads diffs", () => {
     assert.equal(c.compatible, false);
     assert.equal(c.capability_diffs[0].domain, "network");
 });
-
-// draft note 1081
