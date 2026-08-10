@@ -174,3 +174,36 @@ export function parseCompat(text: string): CompatReport {
         kind: requireString(do_, "kind"),
       };
     }),
+    capability_diffs: requireArray(doc, "capability_diffs").map((d) => {
+      const do_ = asObject(d, "capability_diff");
+      return {
+        change: asChange(do_.change),
+        domain: asDomain(do_.domain),
+        source: requireString(do_, "source"),
+      };
+    }),
+  };
+}
+
+function asChange(v: unknown): "added" | "removed" {
+  if (v === "added" || v === "removed") return v;
+  throw new ReportError(`change must be 'added' or 'removed', got '${String(v)}'`);
+}
+
+function asObject(v: unknown, what: string): Record<string, unknown> {
+  if (!isObject(v)) throw new ReportError(`${what} must be an object`);
+  return v;
+}
+
+function parseJson(text: string): Record<string, unknown> {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(text);
+  } catch (e) {
+    throw new ReportError(`invalid JSON: ${(e as Error).message}`);
+  }
+  if (!isObject(parsed)) {
+    throw new ReportError("report must be a JSON object");
+  }
+  return parsed;
+}
