@@ -12,3 +12,7 @@ description = "Command-line front end for the wasmquay WASM inspection toolkit"
 name = "wasmquay"
 path = "src/main.rs"
 
+# The CLI depends only on the core crate — still zero third-party deps, so the
+# whole workspace compiles offline.
+[dependencies]
+wasmquay-core = { path = "../wasmquay-core" }
