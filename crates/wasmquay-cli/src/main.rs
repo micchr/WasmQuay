@@ -382,3 +382,5 @@ mod tests {
     #[test]
     fn label_strips_directory() {
         assert_eq!(label_of("a/b/c.wasm"), "c.wasm");
+    }
+}
