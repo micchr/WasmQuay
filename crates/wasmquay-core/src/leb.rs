@@ -166,3 +166,28 @@ mod tests {
         let mut r = Reader::new(&[0x7f]); // -1
         assert_eq!(r.sleb128().unwrap(), -1);
     }
+
+    #[test]
+    fn name_reads_utf8() {
+        let mut r = Reader::new(&[0x03, b'a', b'b', b'c']);
+        assert_eq!(r.name().unwrap(), "abc");
+    }
+
+    #[test]
+    fn eof_is_reported() {
+        let mut r = Reader::new(&[0x80]); // continuation bit but no more bytes
+        assert_eq!(r.uleb128().unwrap_err().kind(), ErrorKind::UnexpectedEof);
+    }
+
+    #[test]
+    fn take_beyond_end_errors() {
+        let mut r = Reader::new(&[1, 2]);
+        assert!(r.take(3).is_err());
+    }
+
+    #[test]
+    fn u32_le_roundtrip() {
+        let mut r = Reader::new(&[0x01, 0x00, 0x00, 0x00]);
+        assert_eq!(r.u32_le().unwrap(), 1);
+    }
+}
