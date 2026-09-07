@@ -409,5 +409,3 @@ mod tests {
         assert_eq!(parsed.module_name.as_deref(), Some("app"));
     }
 }
-
-// draft note 1070
