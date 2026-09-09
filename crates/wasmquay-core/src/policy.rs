@@ -483,5 +483,3 @@ mod tests {
         assert!(eval.violations().contains(&Domain::Unknown));
     }
 }
-
-// draft note 1088
