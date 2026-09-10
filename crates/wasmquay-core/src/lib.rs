@@ -90,3 +90,18 @@ mod integration {
         let ma = wasm::parse(&a).unwrap();
         let mb = wasm::parse(&b).unwrap();
 
+        let reqs_a = policy::requirements_from_module(&ma);
+        assert_eq!(reqs_a.len(), 1);
+
+        let pol = policy::Policy::parse("policy \"p\"\ndefault deny\nallow clock\n").unwrap();
+        assert!(policy::evaluate(&reqs_a, &pol).is_compliant());
+
+        // b adds a network capability -> not a safe replacement for a.
+        let comp = compat::compare_modules(&ma, "a", &mb, "b");
+        assert!(!comp.is_compatible());
+
+        // Reports serialize without panicking and carry a schema.
+        let insp = report::inspection_json(&ma, "a", &reqs_a).to_compact();
+        assert!(insp.contains(report::SCHEMA_VERSION));
+    }
+}
