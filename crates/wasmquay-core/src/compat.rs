@@ -245,3 +245,38 @@ mod tests {
     fn added_export_is_compatible() {
         let a = module_with(vec![export("run")], vec![]);
         let b = module_with(vec![export("run"), export("extra")], vec![]);
+        let c = compare_modules(&a, "a", &b, "b");
+        assert!(c.is_compatible());
+    }
+
+    #[test]
+    fn new_capability_breaks_compatibility() {
+        let a = module_with(vec![export("run")], vec![]);
+        let b = module_with(
+            vec![export("run")],
+            vec![Import {
+                module: "wasi_snapshot_preview1".into(),
+                field: "sock_recv".into(),
+                kind: ExternalKind::Func,
+            }],
+        );
+        let c = compare_modules(&a, "a", &b, "b");
+        assert!(!c.is_compatible());
+        assert!(c.breaking_reasons().iter().any(|r| r.contains("network")));
+    }
+
+    #[test]
+    fn dropped_capability_is_compatible() {
+        let a = module_with(
+            vec![export("run")],
+            vec![Import {
+                module: "wasi_snapshot_preview1".into(),
+                field: "clock_time_get".into(),
+                kind: ExternalKind::Func,
+            }],
+        );
+        let b = module_with(vec![export("run")], vec![]);
+        let c = compare_modules(&a, "a", &b, "b");
+        assert!(c.is_compatible());
+    }
+}
