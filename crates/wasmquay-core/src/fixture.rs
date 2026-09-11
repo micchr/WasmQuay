@@ -188,3 +188,30 @@ mod tests {
     #[test]
     fn round_trips_through_parser() {
         let bytes = FixtureBuilder::new()
+            .module_name("demo")
+            .import_func("wasi_snapshot_preview1", "clock_time_get")
+            .import_func("wasi_snapshot_preview1", "fd_write")
+            .import_memory("env", "memory")
+            .export_func("run", 3)
+            .function_name(3, "run")
+            .build();
+
+        let m = parse(&bytes).unwrap();
+        assert_eq!(m.module_name.as_deref(), Some("demo"));
+        assert_eq!(m.imports.len(), 3);
+        assert_eq!(m.imported_functions(), 2);
+        assert_eq!(m.imported_memories(), 1);
+        assert_eq!(m.exports.len(), 1);
+        assert_eq!(m.exports[0].field, "run");
+        assert_eq!(m.function_names, vec![(3, "run".to_string())]);
+    }
+
+    #[test]
+    fn large_uleb_length_prefixes_round_trip() {
+        // Build a module with an import whose field name forces a 2-byte uleb.
+        let long = "x".repeat(200);
+        let bytes = FixtureBuilder::new().import_func("host", &long).build();
+        let m = parse(&bytes).unwrap();
+        assert_eq!(m.imports[0].field.len(), 200);
+    }
+}
