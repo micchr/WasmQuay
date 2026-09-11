@@ -105,5 +105,3 @@ impl From<std::io::Error> for Error {
 
 /// The crate-wide result alias.
 pub type Result<T> = std::result::Result<T, Error>;
-
-// draft note 1085
