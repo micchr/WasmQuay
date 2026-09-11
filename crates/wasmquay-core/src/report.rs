@@ -357,5 +357,3 @@ mod tests {
         assert!(text.contains("sample.wasm"));
     }
 }
-
-// draft note 1077
