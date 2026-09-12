@@ -18,5 +18,3 @@ path = "src/lib.rs"
 [dependencies]
 
 [dev-dependencies]
-
-<!-- draft note 1082 -->
