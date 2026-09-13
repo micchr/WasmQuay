@@ -251,3 +251,38 @@ mod tests {
     }
 
     #[test]
+    fn export_signature_captured() {
+        let m = parse(SAMPLE).unwrap();
+        let exp = &m.worlds[0].exports[0];
+        assert_eq!(exp.path, "process");
+        assert_eq!(
+            exp.signature.as_deref(),
+            Some("func(input: list<u8>) -> list<u8>")
+        );
+    }
+
+    #[test]
+    fn aggregates_imports_sorted() {
+        let m = parse(SAMPLE).unwrap();
+        assert_eq!(
+            m.all_imports(),
+            vec![
+                "wasi:clocks/wall-clock".to_string(),
+                "wasi:filesystem/types".to_string()
+            ]
+        );
+    }
+
+    #[test]
+    fn rejects_directive_outside_world() {
+        let err = parse("import wasi:x/y").unwrap_err();
+        assert_eq!(err.kind(), ErrorKind::BadManifest);
+    }
+
+    #[test]
+    fn tolerates_missing_close_brace() {
+        let m = parse("world w {\n  import a:b/c").unwrap();
+        assert_eq!(m.worlds.len(), 1);
+        assert_eq!(m.worlds[0].imports.len(), 1);
+    }
+}
