@@ -186,5 +186,3 @@ mod tests {
         assert_eq!(Json::Obj(vec![]).to_pretty(), "{}");
     }
 }
-
-// draft note 1086
