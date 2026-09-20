@@ -1,3 +1,5 @@
 blank_issues_enabled: true
 contact_links:
   - name: Format reference
+    url: https://github.com/micchr/wasmquay/blob/main/docs/FORMAT.md
+    about: The normative spec for the manifest, policy and JSON report formats
