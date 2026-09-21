@@ -401,3 +401,53 @@ and the core crate compiles with `#![forbid(unsafe_code)]`.
 ---
 
 ## `0x09` — Layout
+
+```text
+wasmquay/
+├── Cargo.toml                     # workspace
+├── Makefile                       # build/test orchestration
+├── crates/
+│   ├── wasmquay-core/             # std-only engine
+│   │   └── src/{leb,wasm,wit,policy,compat,report,json,fixture,error}.rs
+│   └── wasmquay-cli/              # the `wasmquay` binary
+├── explorer/                      # TypeScript static explorer
+│   ├── src/{types,parse,analyze,render,index,cli}.ts
+│   └── test/{parse,analyze}.test.ts
+├── fixtures/                      # generated .wasm binaries
+├── examples/                      # policies, a .wit manifest, captured JSON
+├── docs/
+│   ├── FORMAT.md                  # normative format spec
+│   └── assets/{quay-hero,capability-crane}.svg
+└── .github/workflows/ci.yml
+```
+
+---
+
+## `0x0A` — Design notes
+
+- **Zero dependencies, on purpose.** A security-adjacent tool that ships a
+  supply chain of transitive crates is working against its own thesis. The JSON
+  emitter, the LEB128 reader, the argument parser — all hand-written std.
+- **Total parsing.** The decoder is bounds-checked everywhere and returns a
+  typed `Error` (with a byte offset) instead of panicking on malformed input.
+  See `leb::tests::eof_is_reported` and `wasm::tests::rejects_bad_magic`.
+- **Deny by default.** A policy with no `default` line denies everything. You
+  opt *in* to capabilities, never out.
+- **Stable wire format.** Object key order is deterministic and every document
+  carries a `schema` discriminator, so report diffs are readable and the
+  TypeScript guards can reject the wrong shape early.
+
+---
+
+## `0x0B` — License
+
+Released under the [MIT License](LICENSE). See [`CHANGELOG.md`](CHANGELOG.md)
+for release history.
+
+<div align="center">
+
+```text
+── end of transmission ──  the quay is quiet.  the components are accounted for.
+```
+
+</div>
