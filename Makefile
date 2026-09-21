@@ -55,5 +55,3 @@ examples: rust-build ts-build ## Produce example JSON reports and analyze them
 clean: ## Remove build artifacts
 	$(CARGO) clean
 	rm -rf explorer/dist explorer/dist-test
-
-# draft note 1056
