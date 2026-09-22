@@ -14,3 +14,8 @@ assignees: ""
 
 - [ ] Yes (describe the migration path)
 - [ ] No
+
+**Would it stay dependency-free?**
+
+- [ ] Yes
+- [ ] No (explain why a dependency is unavoidable)
