@@ -24,5 +24,3 @@ $ ./target/release/wasmquay inspect the-input.wasm
 - Rust version (`rustc --version`):
 - wasmquay version (`wasmquay --version`):
 - Explorer involved? (`node explorer/dist/cli.js ...`)
-
-<!-- draft note 1079 -->
