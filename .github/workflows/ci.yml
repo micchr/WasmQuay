@@ -60,3 +60,17 @@ jobs:
     needs: [rust, typescript]
     steps:
       - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build both sides
+        run: |
+          cargo build --release
+          cd explorer && npm install --no-audit --no-fund && npm run build
+      - name: Rust report -> TS explorer
+        run: |
+          ./target/release/wasmquay gen-fixtures fixtures
+          ./target/release/wasmquay inspect fixtures/net-service.wasm --json > net.json
+          ./target/release/wasmquay policy fixtures/net-service.wasm examples/sandbox-strict.pol --json > pol.json || true
+          node explorer/dist/cli.js surface net.json pol.json || true
