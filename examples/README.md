@@ -14,6 +14,9 @@ here was produced by the tools in this repository — nothing is hand-edited.
 The binary modules live in `../fixtures/` and are regenerated with
 `wasmquay gen-fixtures`.
 
+After `make build`, `make examples` regenerates every captured report in
+this directory and runs it through the explorer.
+
 ## Captured reports (JSON)
 
 | File                     | Command that produced it                                          |
