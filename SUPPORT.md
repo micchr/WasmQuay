@@ -11,5 +11,7 @@ wasmquay is maintained in the open on GitHub.
   and use the private "Report a vulnerability" flow on the Security tab; do
   not open a public issue for security problems.
 - **Commercial support** - not offered at this time.
+- **Chat** - join the `#wasmquay` channel on the community Matrix server for
+  quick questions.
 
 There is no chat server and no mailing list; GitHub is the only channel.
