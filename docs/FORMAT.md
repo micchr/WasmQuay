@@ -206,3 +206,5 @@ Both CLIs share a convention so they compose in CI:
 | 1    | usage error                               |
 | 2    | parse or I/O error                        |
 | 3    | policy violation or incompatibility       |
+
+A report produced with `--json` is stable enough to diff between runs; when a field changes shape, the changelog names it so downstream gates can pin the version they read.
