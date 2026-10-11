@@ -13,3 +13,5 @@ wasmquay is maintained in the open on GitHub.
 - **Commercial support** - not offered at this time.
 
 There is no chat server and no mailing list; GitHub is the only channel.
+
+When filing an inspection question, attach the component bytes or the failing report excerpt - both make the answer faster and keep the discussion reproducible.
