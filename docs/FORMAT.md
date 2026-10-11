@@ -25,7 +25,8 @@ decoder reads:
 Integers use LEB128 (unsigned or signed as the grammar dictates).
 
 External `kind` bytes: `0x00` func, `0x01` table, `0x02` memory, `0x03` global.
-Any other byte is preserved as `other:0xNN`.
+Any other byte is preserved as `other:0xNN` so nothing is silently
+dropped from the section table.
 
 **Scope note.** The decoder walks *all* sections structurally (id, offset,
 size) and deep-decodes the import, export and `name` sections — the pieces that
