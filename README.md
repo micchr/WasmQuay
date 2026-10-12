@@ -392,6 +392,8 @@ $ cd explorer && npm test
 
 CI (`.github/workflows/ci.yml`) runs three jobs: the Rust matrix
 (fmt + clippy `-D warnings` + build + test on Linux/macOS/Windows), the
+repository also keeps Dependabot updates, vulnerability alerts and code
+scanning enabled on the default branch, and the
 TypeScript job (typecheck + build + test), and a **cross-language integration**
 job that pipes a real Rust-generated report into the TypeScript explorer.
 
