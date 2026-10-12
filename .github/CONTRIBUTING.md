@@ -39,3 +39,10 @@ executes or instantiates a module.
 - One topic per PR, conventional commit titles (`feat:`, `fix:`, `docs:`...).
 - Describe the motivation, not just the diff.
 - By participating you agree to the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Release process
+
+1. Update `CHANGELOG.md`, then tag `vX.Y.Z` and push the tag.
+2. The GitHub release is created from the tag with notes copied from the
+   changelog entry.
+3. Nothing is published to a registry - releases are tags plus notes only.
