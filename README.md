@@ -51,6 +51,8 @@ $ echo $?
 
 That last exit code is the point: **wasmquay is designed to gate CI**. A
 component that reaches for a capability its policy forbids fails the build.
+Drop the `policy` invocation into a pre-commit hook or a CI step and the
+capability floor of every pull request is checked before it can merge.
 
 ---
 
