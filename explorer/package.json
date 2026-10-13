@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "tsc -p tsconfig.test.json && node --test \"dist-test/test/*.test.js\"",
+    "test": "tsc -p tsconfig.test.json && node --test dist-test/test/analyze.test.js dist-test/test/parse.test.js",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "engines": {
